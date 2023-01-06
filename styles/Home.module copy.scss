@@ -1,0 +1,186 @@
+@import "../styles/Global.scss";
+
+.BackgroundPrincipal{
+  background-color:$secondary-color;
+}
+.BackgroundCounters{
+  background-color: $tertiary-color_2_5;
+}
+.BackgroundSecondary{
+  background-color: $tertiary-color;
+}
+.FontPrincipalSize{
+  font-size: 3vw;
+  color:$tertiary-color;
+  /*font-family: 'Poppins', sans-serif;*/
+  font-family: 'Open Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  line-height: 2.8vw;
+  margin: 0;
+}
+
+.FontSecondarySize{
+  font-size: 1.5rem;
+  color: $font-primary-light;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  margin: 0;
+}
+
+.FontTertiarySize{
+  font-size: 1rem;
+  color: $font-primary-light;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  margin: 0;
+  opacity: 0.9;
+  margin-top: 10px;
+}
+
+.CounterNumber{
+  color: $tertiary-color;
+  font-weight: 800;
+  font-family: 'Poppins', sans-serif;
+  font-size: 3.5rem;
+  line-height: 3.5rem;
+}
+
+.CounterDescription{
+  color: $tertiary-color_a;
+  font-weight: 800;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.3rem;
+  line-height: 1.3rem;
+}
+
+.CounterContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.LightBackground{
+  background-color: $light-color;
+}
+/*Background Morado de la Seccion Principal*/
+.BackgroundPrincipalVector{
+  background-image: url('../public/images/background_principal_landing.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+}
+
+
+.BackgroundItem{
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  
+}
+
+.Item1{
+  background-image: url('../public/images/background_item_1.svg');
+}
+.Item2{
+  background-image: url('../public/images/background_item_2.svg');
+}
+.Item3{
+  background-image: url('../public/images/background_item_3.svg');
+}
+
+.ItemTitle{
+  color:$primary-color_a;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  font-size: 2rem;
+  line-height: 2rem;
+}
+
+
+.ItemDescription{
+  color:$dark-color;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+}
+
+.ItemDivisor{
+  height:8px;
+  border-radius:4px;
+  background-color: $gray-color;
+  display: inline-block;
+  margin:0 auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+
+.InfoTitle{
+  color:$light-color;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+
+  font-size: 2rem;
+  line-height: 2rem;
+  
+  margin:0;
+  /*padding-top: 20px;
+  padding-bottom: 10px;*/
+}
+
+.InfoDescription{
+  color:$light-color;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+ 
+  font-size: 1.2rem;
+  
+  margin:0;
+  /*padding-top: 20px;
+  padding-bottom: 20px;*/
+}
+
+.TextColorSecondary{
+  color:$tertiary-color_a;
+}
+
+.SecondaryTitle_1{
+  color:$light-color;
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+  margin-top: 1.5rem;
+}
+.SecondaryTitle_2{
+  color:$light-color;
+  opacity: 0.9;
+  font-weight: 400;
+  font-family: 'Open Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+  margin-top: 1rem;
+}
+
+.BackgroundText_1{
+  background-image: url('../public/images/text_background_1.svg');
+  background-repeat: no-repeat;
+  background-position: -20% 50%;
+  background-size: contain;
+}
+.BackgroundText_2{
+  background-image: url('../public/images/text_background_2.svg');
+  background-repeat: no-repeat;
+  background-position: 110% 50%;
+  background-size: contain;
+}
+

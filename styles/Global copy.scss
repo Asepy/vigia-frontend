@@ -1,0 +1,1127 @@
+@import "../styles/variables.scss";
+
+.ColorTextGreenA{
+    color:$green_a;
+}
+.ColorTextYellowA{
+    color:$yellow_a;
+}
+.ColorTextGrayA{
+    color:$gray_a;
+}
+.ColorDanger{
+    color: red;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+
+
+.TitleContainerGray{
+color:$gray-tertiary;
+font-size: 2rem;
+ font-family: 'Poppins', sans-serif;
+ font-weight: 700;
+ line-height: 2rem;
+ margin: 0;
+ text-align: center;
+ padding-top: 1rem;
+ padding-bottom: 1rem;
+}
+.TitleContainerFormGray{
+   
+    color:$gray-tertiary;
+    font-size: 1.6rem;
+     font-family: 'Poppins', sans-serif;
+     font-weight: 700;
+     line-height: 1.6rem;
+     margin: 0;
+     padding-top: 1rem;
+     padding-bottom: 1rem;
+    }
+/*
+.InputText{
+    border-radius: 15px;
+    border:2px solid $primary-color;
+    background-color: $light-color;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}*/
+/*Inputs*/
+.InputText {
+    display: block;
+     padding:"0!important";
+}
+.InputText input{
+    
+    line-height: 2rem;
+    /*border-radius: 2rem;
+    border:3px solid $primary-color;
+    background-color: $light-color; */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    padding: 15px 2rem 10px 2rem!important;
+    
+}
+.InputText textarea{
+    
+    line-height: 2rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    padding: 15px 2rem 10px 2rem;
+    
+}
+.InputText label{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    padding-left: 2rem;
+}
+.InputText .MuiInputBase-root{
+    
+}
+
+
+.InputTextSmall {
+    display: block;
+}
+.InputTextSmall input{
+   
+    line-height: 1rem;
+    border:none;
+    border-radius: 2rem;
+    background-color: $gray-quaternary; 
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 15px 2rem 10px 2rem;
+    
+}
+.InputTextSmall label{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    padding-left: 2rem;
+    line-height: 1rem;
+}
+.InputTitle{
+ font-size: 1.1rem;
+ font-family: 'Poppins', sans-serif;
+ font-weight: 700;
+ line-height: 1.2rem;
+ color:$gray-tertiary;
+ margin-bottom: 0.5rem;
+ margin-top: 0.8rem;
+}
+.InputTitle.Light{
+
+    color:$light-color;
+   }
+.UserContainer{
+    max-width: 500px;
+    display: block;
+    margin:0 auto;
+    background-color: $light-color;
+    border-radius: 20px;
+    padding: 1.5rem;
+   
+}
+.FormContainer{
+    max-width: 1300px;
+    display: block;
+    margin:0 auto;
+    background-color: $light-color;
+    border-radius: 20px;
+    padding: 1.5rem;
+   
+}
+
+.ProcessContainer{
+    max-width: 900px;
+    display: block;
+    margin:0 auto;
+    background-color: $light-color;
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    position: relative;
+}
+
+.ButtonPrincipal{
+    font-size: 1.2rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    line-height: 1.2rem;
+    background-color: $primary-color_a;
+    color:$light-color;
+    border-radius: 25px;
+    padding: .8rem 2rem .8rem 2rem;
+    text-transform: capitalize;
+}
+
+.TitleProcess{
+    font-size: 1.5rem;
+    line-height: 1.6rem;
+    font-family: 'Poppins', sans-serif;
+    color:$primary-color;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 0.5rem;
+}
+.ProcessEntity{
+    font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color:$gray-primary;
+    margin: 0;
+}
+.LineDivisor{
+    height: 0.7rem;
+    width: 0.7rem;
+    background-color: $primary-color_2;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 50%;
+
+}
+.ButtonPrincipal:hover{
+
+    background-color: $secondary-color;
+    color:$light-color;
+}
+.ButtonContrast:hover{
+    background-color: $light-color;
+    color:$primary-color_a;
+}
+.ButtonContrast_3:hover{
+    background-color: $primary-color_2;
+    color:$light-color;
+}
+.ButtonContrast_4{
+    background-color: $secondary-color;
+    color:$light-color;
+}
+.ButtonContrast_4:hover{
+    background-color: $primary-color_2;
+    color:$light-color;
+}
+.ButtonGray{
+    background-color: $gray-tertiary;
+    color:$light-color;
+}
+.ButtonGray:hover{
+    background-color: $gray-secondary;
+    color:$light-color;
+}
+.ButtonText{
+    font-size: 1.2rem;
+    font-family: 'Poppins', sans-serif;
+    color:$light-color;
+    font-weight: 600;
+    padding: .8rem .5rem .8rem .5rem;
+    cursor: pointer;
+}
+.ButtonText:hover{
+    color:$primary-color_a;
+}
+.MultipleButtons button{
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+.BigButton{
+
+}
+
+
+.UserContainerText{
+    font-size: 1.2rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: $gray-tertiary;
+}
+.FontColorSecondary{
+    color:$primary-color;
+}
+
+
+.FontColorSecondary{
+    color:$primary-color;
+}
+
+.StartActionTitle{
+    font-size: 2rem;
+    font-family: 'Poppins', sans-serif;
+    color:$light-color;
+    font-weight: 700;
+}
+
+.StartActionSubTitle{
+    font-size: 1.3rem;
+    font-family: 'Poppins', sans-serif;
+    color:$light-color;
+    font-weight: 500;
+    opacity: 0.9;
+}
+.ButtonContrast_2{
+    background-color: $light-color;
+    color:$primary-color_a;
+}
+
+.ButtonContrast_2:hover{
+    background-color: $primary-color_a;
+    color:$light-color;
+}
+
+
+.StartActionSubTitle_2{
+    font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    color:$light-color;
+    font-weight: 700;
+    opacity: 0.8;
+}
+.StartActionSubTitle_3{
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    color:$light-color;
+    font-weight: 400;
+    opacity: 0.8;
+}
+.IconStartAction{
+    opacity: 0.8;
+    display: inline-block;
+    width: 3rem;
+    margin-left: 10px;
+}
+
+.FormDescription{
+    font-size: 1.2rem;
+    font-family: 'Poppins', sans-serif;
+    color:$gray-tertiary;
+    font-weight: 400;
+}
+.FormDescription2{
+    font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+    color:$gray-tertiary;
+    font-weight: 600;
+}
+
+.SelectionImageItem {
+    width: 200px;
+    border: 3px solid $primary-color_4;
+    padding: 1rem;
+    border-radius: 15px;
+    display: inline-block;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    vertical-align: top;
+    min-height: 220px;
+    position: relative;
+}
+.SelectionImageItem2 {
+ 
+    min-height: 180px;
+}
+
+.SelectionImageItem:hover{
+    border: 3px solid $primary-color_a;
+    cursor: pointer;
+}
+.SelectionImageItem img{
+    width: 8rem;
+    display: block;
+    margin : 0 auto;
+}
+.SelectionImageItem .Title{
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    font-family: 'Poppins', sans-serif;
+    color:$gray-tertiary;
+    font-weight: 700;
+    text-align: center;
+}
+.SelectionImageItemActive{
+    border: 3px solid $primary-color_a;
+}
+.SelectionImageNumber{
+width: 40px;
+height: 40px;
+background-color: $secondary-color_2;
+border: 3px solid $primary-color_a;
+border-radius: 50%;
+color: $light-color;
+font-weight: 700;
+font-family: 'Poppins', sans-serif;
+position: absolute;
+top: -20px;
+right: -20px;
+/*line-height: 39px;*/
+font-size: 25px;
+text-align: center;
+}
+
+.NotificationNumber{
+min-width: 40px;
+height: 40px;
+background-color: $red;
+border-radius: 50%;
+color: $light-color;
+font-weight: 700;
+font-family: 'Poppins', sans-serif;
+position: absolute;
+top: -20px;
+right: -20px;
+/*line-height: 39px;*/
+font-size: 25px;
+text-align: center;
+}
+.FontBold{
+    font-family: 'Poppins', sans-serif;;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    border-radius: 25px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: $gray-tertiary;
+}
+
+.LikeButton{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: block;
+    font-size: 1.8rem;
+    cursor: pointer;
+    
+    fill: $light-color;
+    stroke: $primary-color_2;
+    stroke-width: 2px;
+}
+.LikeButton:hover{
+
+    fill: $primary-color_2;
+    stroke: $primary-color_2;
+    stroke-width: 2px;
+}
+.LikeButton svg path{
+    /*outline: 2px solid $primary-color_2;
+    outline-offset: 2px;*/
+ 
+}
+.ModalStyle{
+position: absolute;
+top:50%;
+left:50%;
+transform: translate(-50%, -50%);
+width: 80%;
+max-width: 700px;
+background-color: $light-color;
+padding: 2rem;
+border-radius: 20px;
+border: none;
+outline: none;
+/*border: 2px solid #000,
+    boxShadow: 24,
+    p: 4,*/
+}
+.CloseModalButton{
+    position: absolute;
+    top: -1.5rem;
+    right: -1.5rem;
+    display: block;
+    font-size:3rem;
+    cursor: pointer;
+    
+    fill: $primary-color_2;
+}
+.CloseModalButton{
+    position: absolute;
+    top: -1.5rem;
+    right: -1.5rem;
+    display: block;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    background-color: $primary-color_2;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out,background-color 0.3s ease-in-out;
+    
+}
+.CloseModalButton:hover{
+
+    background-color: $primary-color;
+    
+}
+.CloseModalButton .IconCloseModalButton{
+    font-size:2.5rem;
+    fill: $light-color;
+   
+    display: block;
+    margin:auto auto;
+    margin-top: 0.25rem;
+}
+.ImageLike{
+    width: 80%;
+    max-width: 120px;
+    display: block;
+    margin:0 auto;
+}
+.ImageLikeDescription{
+    font-family: 'Poppins', sans-serif;;
+    font-weight: 400;
+    font-size: 1rem;
+    color: $gray-primary;
+}
+.LinkText{
+    text-decoration: underline;
+}
+
+.ImageProcessProperty{
+    width: 60px;
+    max-width: 90%;
+    margin:0 auto;
+    display: block;
+
+}
+.StatusFaceProcessImage{
+    width: 50px;
+    max-width: 90%;
+    margin:0 auto;
+    display: block;
+}
+.StatusFaceProcess{
+    background-color: #4806C1;
+    border-radius: 50%;
+    padding: 1rem;
+    /*width: 60px;
+    height: 60px;*/
+}
+.SuccessStatus{
+  background-color:#00AA6D;
+}
+.ProcessPropertyText{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: $gray-primary;
+    vertical-align: middle;
+    max-width: 100%;
+}
+.LinkedText{
+    color:$primary-color_2;
+    text-decoration: underline;
+}
+.LinkedText:hover{
+    color:$secondary-color;
+}
+.ItemsContainer{
+    background-color: $gray-quaternary;
+    border-radius: 20px;
+    padding: 1.5rem;
+    display: block;
+    width: calc(100% - 0.2rem);
+   
+}
+.ItemsContainerTitle{
+    color:$dark-color;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+.ItemsContainerText{
+    color:$gray-tertiary;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+}
+.ItemsContainerTextAmount{
+    color:$gray-tertiary;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+.ItemsContainerTextAmountTotal{
+    color:$secondary-color_2;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+.ItemsContainerDivisor{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 3px;
+    height: 5px;
+    background-color:$secondary-color_2 ;
+}
+.Currency{
+    color:$primary-color;
+}
+.ItemsSubContainer{
+    
+    overflow-x: auto;
+}
+.ItemsSubContainer2{
+    min-width: 600px;
+}
+
+.RadioText > span{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color:$gray-tertiary;
+}
+.ChecksContainer{
+    max-height: 300px;
+    overflow-y: auto;
+}
+.TabTitle{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color:$gray-tertiary;
+}
+.FinishImage{
+    display: block;
+    margin: 0 auto;
+    max-width: 140px;
+    width: 80%;
+}
+
+.BiggerText{
+    font-size: 1.5rem;
+}
+
+/*
+.SearchIconContainer{
+    position: relative;
+}
+.SearchIconText{
+    fill: $gray-tertiary;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: block;
+    font-size: 1rem;
+}*/
+
+.ChipAutoComplete{
+    background-color: $secondary-color_2;
+    color:$light-color;
+    border: none;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    height: 28px;
+}
+
+.ProccessMiniContainer{
+    max-width: 350px;
+    min-height: 200px;
+    background-color: $light-color;
+    border-radius: 15px;
+    padding: 1rem;
+    border: 3px solid $light-color;
+    margin-bottom: 2rem;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color,border 0.3s ease-in-out,background-color,border 0.3s ease-in-out;
+}
+.ProccessMiniContainer:hover{
+    border: 3px solid $primary-color;
+}
+
+.ProccessMiniContainer:hover .MiniProcessTitle{
+    color: $primary-color;
+}
+.MiniProcessTitle{
+    font-size: 1.5rem;
+    font-weight: 700;
+    transition: color 0.3s ease-in-out,color 0.3s ease-in-out;
+}
+.MiniProcessText{
+    font-size: 0.9rem;
+}
+.MiniProcessEntity{
+    font-size: 1rem;
+}
+.MiniProcessImage{
+    max-width: 75%;
+}
+.ResultProcessImage{
+    max-width: 40px;
+    width: 80%;
+}
+.MiniProcessAmount{
+    font-size: 1.7rem;
+}
+.ResultProcessAmount{
+    font-size: 1.2rem;
+}
+.ResultProcessTitle{
+    font-size: 1.2rem;
+    font-weight: 700;
+    color:$gray-tertiary;
+    transition: color 0.3s ease-in-out,color 0.3s ease-in-out;
+}   
+.BackgroundSecondaryColor{
+    background-color:$secondary-color;
+}
+.BackgroundLightColor{
+    background-color: $light-color;
+}
+.BackgroundPreColor{
+    background-color: #f9f6ff;
+}
+.ColorTextGray{
+    color: $gray-tertiary;
+}
+.ColorText{
+    color:$primary-color_2
+}
+.ColorTextPrimaryA{
+    color:$primary-color_a
+}
+.ColorTextTertiaryA{
+    color:$tertiary-color_a
+}
+.SearchContainerResult{
+    border-radius: 18px;
+    background-color: $light-color;
+    padding: 1rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+
+}
+.SearchContainerResult:hover .ResultProcessTitle{
+    color: $primary-color;
+}
+.SearchContainerFilter{
+    border-radius: 18px;
+    background-color: $light-color;
+    overflow: hidden;
+    
+    margin-bottom: 1rem;
+}
+.ResultProcessDescription{
+    font-size: 0.9rem;
+}
+
+.InputTextFilterSearch{
+    display: block;
+}
+.InputTextFilterSearch input{
+   
+    line-height: 0.9rem;
+    border:none;
+    border-radius: 2rem;
+    background-color: $gray-quaternary; 
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 15px 1.5rem 10px 1.5rem;
+    
+}
+.WhiteInputText input{
+   
+    line-height: 0.9rem;
+    border:none;
+    border-radius: 2rem;
+    background-color: $light-color; 
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 15px 1.5rem 10px 1.5rem;
+    
+}
+.InputTextFilterSearch label{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding-left: 1.4rem;
+    line-height: 1rem;
+}
+.FilterOptionSearch{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    transition: background-color,color 0.3s ease-in-out,background-color,color 0.3s ease-in-out;
+   cursor: pointer;
+   color:$gray-tertiary
+
+}
+.FilterOptionSearch:hover{
+    background-color: $secondary-color;
+    color:$light-color;
+}
+.FilterOptionsContainerSearch{
+    max-height: 200px;
+    overflow-y: auto;
+}
+.ElementContainer{
+    background-color: $light-color;
+    border-radius: 15px;
+    padding: 1rem;
+    position: relative;
+}
+.ImageItemUOC{
+    width: 90%;
+    max-width: 100px;
+}
+.ItemTitleElement{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    line-height: 1.6rem;
+}
+.ItemTitleTime{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 3rem;
+    line-height: 3rem;
+}
+
+.ItemTitleTimeUnit{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    line-height: 2rem;
+    padding-left: 0.5rem;
+}
+.ItemDescriptionElement{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+}
+.SearchButtonText{
+    transform: scale(1.3,1.3);
+    background-color: $secondary-color;
+    color:$light-color;
+}
+.SearchButtonText:hover{
+    background-color: $primary-color;
+}
+
+.tableData{
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+}
+.tableData *{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    
+}
+.tableData th{
+    color:$gray-primary;
+}
+.tableData td{
+    color:$gray-primary;
+    padding: 1rem;
+}
+.tableData th{
+    font-weight: 700;
+    padding: 0.2rem;
+}
+.ButtonSmall{
+    font-size: 0.8rem;
+    padding:0.5rem 1rem 0.5rem 1rem;
+    font-weight: 700;
+}
+.tableCenter *{
+    text-align: center;
+}
+
+.tableData thead{
+    border-bottom: 3px solid #D9D9D9;
+}
+.tableData tbody tr{
+    border-bottom: 2px solid #F6F6F6;
+}
+@media screen and (max-width: 767px) {
+
+ .tableData thead {
+			border: none;
+			clip: rect(0 0 0 0);
+			height: 1px;
+			margin: -1px;
+			overflow: hidden;
+			padding: 0;
+			position: absolute;
+			width: 1px;
+ }
+ .tableData tr {
+		 /* border-bottom: 3px solid #ddd;
+			*/
+			display: block;
+			margin-bottom: .625em;
+ }
+ .tableData >tr > td {
+		 /* border-bottom: 1px solid #ddd;
+			*/
+			display: block;
+			text-align: right;
+ }
+ .tableData > tbody >tr > td {
+	/* border-bottom: 1px solid #ddd;
+	 */
+	 display: block;
+	 text-align: right;
+}
+.tableData td::before {
+		 /* * aria-label has no advantage, it won't be read inside a table content: attr(aria-label);
+			*/
+			content: attr(data-label);
+			float: left;
+			font-weight: bold;
+			text-transform: uppercase;
+ }
+ .tableData td:last-child {
+			border-bottom: 0;
+ }
+ /*
+	.tituloTablaGeneral{
+ }
+ .tablaGeneral.mostrarEncabezados > thead > th{
+	display: block;
+	}
+	.tablaGeneral.mostrarEncabezados > thead > tr > th{
+		display: block;
+		}
+	table.tablaGeneral.mostrarEncabezados > thead{
+		position: static;
+	}*/
+}
+.PaginationBefore, .PaginationNumber,.PaginationNext{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    display: inline-block;
+    
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 1.1rem;
+    color:$secondary-color;
+    vertical-align: top;
+    cursor: pointer;
+}
+.PaginationNumber.Active{
+    color:$light-color;
+    background-color: $primary-color;
+}
+.PaginationBefore *,.PaginationNext *{
+    fill: $secondary-color;
+    font-size: 2rem;
+    line-height: 2rem;
+}
+.ImagenPanelItem{
+    display: block;
+    margin:0 auto;
+    width: 90%;
+    max-width: 120px;
+}
+.ClickItem{
+    cursor: pointer;
+    border: 3px solid $light-color;
+    transition: border 0.3s ease-in-out,border 0.3s ease-in-out;
+}
+.ClickItem:hover{
+    border: 3px solid $primary-color;
+
+}
+.ClickItem2:hover{
+    border: 3px solid $tertiary-color;
+
+}
+.FilterTableBox{
+    border-radius: 5px;
+    background-color: $light-color;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    color:$gray-primary;
+    font-size: 1rem;
+    vertical-align: top;
+margin-right: 1rem;
+margin-bottom: 0.5rem;
+}
+.FilterTableIcon{
+fill: $gray-primary;
+line-height: 1rem;
+cursor: pointer;
+vertical-align: top;
+}
+
+.ProcessSelectionContainer{
+    /*max-width: 500px;*/
+    border-radius: 30px;
+    background-color: $light-color;
+    text-align: center;
+   /* padding: 1rem 1rem 1rem 1rem;*/
+}
+.ProcessSelectionOption{
+    color: $gray-primary;
+    display: inline-block;
+    background-color: $light-color;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    transition: background-color 0.3s ease-in-out,border-color 0.3s ease-in-out;
+    cursor: pointer;
+    border-radius: 30px;
+    font-size: 1.1rem;
+}
+.ProcessSelectionOption.Active{
+    color:$light-color;
+    background-color: $secondary-color;
+    
+}
+.ProcessSelectionContainer:hover .ProcessSelectionOption.Active{
+    color: $gray-primary;
+    background-color: $light-color;
+}
+.ProcessSelectionOption:hover,.ProcessSelectionContainer:hover .ProcessSelectionOption.Active:hover{
+    color:$light-color;
+    background-color: $secondary-color;
+}
+.ResultActionText{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    vertical-align: top;
+    transition: color 0.3s ease-in-out,color 0.3s ease-in-out;
+}
+.ResultActionIcon{
+   fill:$gray-tertiary; 
+   vertical-align: top;
+   transition: fill 0.3s ease-in-out,fill 0.3s ease-in-out;
+}
+.ResultAction{
+    display: inline-block;
+    margin-left: 1rem;
+    cursor: pointer;
+    
+}
+.ResultAction:hover .ResultActionText{
+    color:$gray-secondary;
+}
+.ResultAction:hover .ResultActionIcon{
+    fill:$gray-secondary;
+}
+/*
+.SearchContainerResult2{
+    display: inline-block;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    max-width: calc(50% - 2rem);
+}*/
+
+.ColorTextGreen{
+    color:$green;
+}
+.ItemDescriptionElementText{
+    font-weight: 400;
+    font-size: 1rem;
+}
+.BacgroundColorRed{
+   background-color: $red; 
+}
+
+.ResolutionNameText{
+    color: $gray-primary;
+    background-color: $light-color;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1rem;
+    display: block;
+}
+.ResolutionClaimImage{
+    width: 90%;
+    margin:0 auto;
+    display: block;
+    max-width: 100px;
+}
+.ResolutionContainer{
+    max-width: 150px;
+    margin-right:0.5rem;
+    display:inline-block;
+}
+.ResolutionsContainer{
+    min-height: 145px;
+    overflow-x: auto;
+    display: block;
+    white-space: nowrap;
+}
+.PublicationBox{
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: $secondary_color_4;
+}
+.PublicationBox p{
+    
+    text-align: left!important;
+}
+
+.BorderNone{
+    border-bottom: none!important;
+}
+.ButtonMini{
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+.CounterReport{
+    text-align: center;
+    border-radius: 1rem;
+    display: inline-block;
+    min-width: 88px;
+    height: 88px;
+    background-color: $light-color;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+}
+
+.ReportCounterNumber{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 2.5rem;
+}
+
+.ReportCounterDescription{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1rem;
+}
+.LoadingPrimary{
+    background-color: $secondary-color_3!important;
+}
+.LoadingPrimary > span{
+    background-color: $primary-color!important;
+}
+.MessageText > *{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+}
+.SearchButtonTextAdornment{
+    margin-right: 0.1rem;
+}
+.SearchIconTextAdornment{
+    color:$gray_a;
+}

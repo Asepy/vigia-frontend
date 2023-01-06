@@ -1,0 +1,1277 @@
+@import "../styles/variables.scss";
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+
+.Block {
+  display: block;
+}
+.TitleContainerGray {
+  color: $gray-tertiary !important;
+  font-size: 1.8rem !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+  line-height: 1.8rem !important;
+  margin: 0 !important;
+  text-align: center !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+.TitleContainerFormGray {
+  color: $gray-tertiary !important;
+  font-size: 1.6rem !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+  line-height: 1.6rem !important;
+  margin: 0 !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+.TitleContainerData {
+  font-size: 1.2rem !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+  line-height: 1.2rem !important;
+  margin: 0 !important;
+}
+/*
+.InputText{
+    border-radius: 15px!important;
+    border:2px solid $primary-color!important;
+    background-color: $light-color!important;
+    font-family: 'Poppins', sans-serif!important;
+    font-weight: 500!important;
+}*/
+/*Inputs*/
+.InputText {
+  display: block !important;
+  padding: "0!important" !important;
+}
+.InputText input {
+  line-height: 2rem !important;
+  /*border-radius: 2rem!important;
+    border:3px solid $primary-color!important;
+    background-color: $light-color!important; */
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 500 !important;
+  padding: 15px 2rem 10px 2rem !important; /*este es important*/
+}
+.InputText textarea {
+  line-height: 2rem !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 500 !important;
+  padding: 15px 2rem 10px 1.2rem !important;
+}
+.InputText label {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 500 !important;
+  padding-left: 2rem !important;
+}
+.InputText .MuiInputBase-root {
+}
+
+.InputTextKeywords input {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 500 !important;
+}
+
+.InputTextKeywords label {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 500 !important;
+  padding-left: 2rem !important;
+}
+.InputTextSmall {
+  display: block !important;
+}
+.InputTextSmall input {
+  line-height: 1rem !important;
+  border: none !important;
+  border-radius: 2rem !important;
+  background-color: $gray-quaternary !important;
+  font-family: "Poppins", sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  padding: 15px 2rem 10px 2rem !important;
+}
+.InputTextSmall label {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 500 !important;
+  padding-left: 2rem !important;
+  line-height: 1rem !important;
+}
+.InputTitle {
+  font-size: 1rem !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+  line-height: 1rem !important;
+  color: $gray-tertiary !important;
+  margin-bottom: 0.5rem !important;
+  margin-top: 0.9rem !important;
+}
+.InputTitle.Light {
+  color: $light-color !important;
+}
+.UserContainer {
+  max-width: 500px !important;
+  display: block !important;
+  margin: 0 auto !important;
+  background-color: $light-color !important;
+  border-radius: 20px !important;
+  padding: 1.5rem !important;
+}
+.FormContainer {
+  max-width: 1300px !important;
+  display: block !important;
+  margin: 0 auto !important;
+  background-color: $light-color !important;
+  border-radius: 20px !important;
+  padding: 1.5rem !important;
+}
+
+.ProcessContainer {
+  max-width: 900px !important;
+  display: block !important;
+  margin: 0 auto !important;
+  background-color: $light-color !important;
+  border-radius: 20px !important;
+  padding: 1.5rem !important;
+  margin-top: 1rem !important;
+  position: relative !important;
+}
+
+.ButtonPrincipal {
+  font-size: 1.1rem !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+  line-height: 1rem !important;
+  background-color: $primary-color_a !important;
+  color: $light-color !important;
+  border-radius: 25px !important;
+  padding: 0.8rem 1.8rem 0.8rem 1.8rem !important;
+  text-transform: capitalize !important;
+}
+
+.ButtonPrincipalBanner {
+  font-size: 1.2rem !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+  line-height: 1.2rem !important;
+  background-color: $primary-color_a !important;
+  color: $light-color !important;
+  border-radius: 25px !important;
+  padding: 0.8rem 2rem 0.8rem 2rem !important;
+  text-transform: capitalize !important;
+}
+
+.TitleProcess {
+  font-size: 1.3rem !important;
+  line-height: 1.4rem !important;
+  font-family: "Poppins", sans-serif !important;
+  color: $primary-color !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+  margin-bottom: 0.5rem !important;
+}
+.ProcessEntity {
+  font-size: 1rem !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 400 !important;
+  color: $gray-primary !important;
+  margin: 0 !important;
+}
+.LineDivisor {
+  height: 0.7rem !important;
+  width: 0.7rem !important;
+  background-color: $primary-color_2 !important;
+  margin-left: 0.5rem !important;
+  margin-right: 0.5rem !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  border-radius: 50% !important;
+}
+.ButtonPrincipal:hover {
+  background-color: $secondary-color !important;
+  color: $light-color !important;
+}
+.ButtonContrast:hover {
+  background-color: $light-color !important;
+  color: $primary-color_a !important;
+}
+.ButtonContrast_3:hover {
+  background-color: $primary-color_2 !important;
+  color: $light-color !important;
+}
+.ButtonContrast_4 {
+  background-color: $secondary-color !important;
+  color: $light-color !important;
+}
+.ButtonContrast_4:hover {
+  background-color: $primary-color_2 !important;
+  color: $light-color !important;
+}
+.ButtonGray {
+  background-color: $gray-tertiary !important;
+  color: $light-color !important;
+}
+.ButtonGray:hover {
+  background-color: $gray-secondary !important;
+  color: $light-color !important;
+}
+.ButtonText {
+  font-size: 1.2rem !important;
+  font-family: "Poppins", sans-serif !important;
+  color: $light-color !important;
+  font-weight: 600 !important;
+  padding: 0.8rem 0.5rem 0.8rem 0.5rem !important;
+  cursor: pointer !important;
+}
+.ButtonText:hover {
+  color: $primary-color_a !important;
+}
+.MultipleButtons button {
+  margin-left: 1rem !important;
+  margin-top: 1rem !important;
+}
+.BigButton {
+}
+
+.UserContainerText {
+  font-size: 1.2rem !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 500 !important;
+  color: $gray-tertiary !important;
+}
+.FontColorSecondary {
+  color: $primary-color !important;
+}
+
+.FontColorSecondary {
+  color: $primary-color !important;
+}
+
+.StartActionTitle {
+  font-size: 1.8rem !important;
+  font-family: "Poppins", sans-serif !important;
+  color: $light-color !important;
+  font-weight: 700 !important;
+}
+
+.StartActionSubTitle {
+  font-size: 1.1rem !important;
+  font-family: "Poppins", sans-serif !important;
+  color: $light-color !important;
+  font-weight: 500 !important;
+  opacity: 0.9 !important;
+}
+.ButtonContrast_2 {
+  background-color: $light-color !important;
+  color: $primary-color_a !important;
+}
+
+.ButtonContrast_2:hover {
+  background-color: $primary-color_a !important;
+  color: $light-color !important;
+}
+
+.StartActionSubTitle_2 {
+  font-size: 1.5rem !important;
+  font-family: "Poppins", sans-serif !important;
+  color: $light-color !important;
+  font-weight: 700 !important;
+  opacity: 0.8 !important;
+}
+.StartActionSubTitle_3 {
+  font-size: 1rem !important;
+  font-family: "Poppins", sans-serif !important;
+  color: $light-color !important;
+  font-weight: 400 !important;
+  opacity: 0.8 !important;
+}
+.IconStartAction {
+  opacity: 0.8 !important;
+  display: inline-block !important;
+  width: 3rem !important;
+  margin-left: 10px !important;
+}
+
+.FormDescription {
+  font-size: 1.2rem !important;
+  font-family: "Poppins", sans-serif !important;
+  color: $gray-tertiary !important;
+  font-weight: 400 !important;
+}
+.FormDescription2 {
+  font-size: 1.1rem !important;
+  font-family: "Poppins", sans-serif !important;
+  color: $gray-tertiary !important;
+  font-weight: 600 !important;
+}
+
+.SelectionImageItem {
+  width: 200px !important;
+  border: 3px solid $primary-color_4 !important;
+  padding: 1rem !important;
+  border-radius: 15px !important;
+  display: inline-block !important;
+  margin-left: 0.5rem !important;
+  margin-right: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  vertical-align: top !important;
+  min-height: 220px !important;
+  position: relative !important;
+  margin-top: 20px;
+}
+.SelectionImageItem2 {
+  min-height: 180px !important;
+}
+
+.SelectionImageItem:hover {
+  border: 3px solid $primary-color_a !important;
+  cursor: pointer !important;
+}
+.SelectionImageItem img {
+  width: 8rem !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+.SelectionImageItem .Title {
+  font-size: 1.2rem !important;
+  line-height: 1.2rem !important;
+  font-family: "Poppins", sans-serif !important;
+  color: $gray-tertiary !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+}
+.SelectionImageItemActive {
+  border: 3px solid $primary-color_a !important;
+}
+.SelectionImageNumber {
+  width: 40px !important;
+  height: 40px !important;
+  background-color: $secondary-color_2 !important;
+  border: 3px solid $primary-color_a !important;
+  border-radius: 50% !important;
+  color: $light-color !important;
+  font-weight: 700 !important;
+  font-family: "Poppins", sans-serif !important;
+  position: absolute !important;
+  top: -20px !important;
+  right: -20px !important;
+  /*line-height: 39px!important;*/
+  font-size: 25px !important;
+  text-align: center !important;
+}
+
+.NotificationNumber {
+  min-width: 40px !important;
+  height: 40px !important;
+  background-color: $red !important;
+  border-radius: 50% !important;
+  color: $light-color !important;
+  font-weight: 700 !important;
+  font-family: "Poppins", sans-serif !important;
+  position: absolute !important;
+  top: -20px !important;
+  right: -20px !important;
+  /*line-height: 39px!important;*/
+  font-size: 25px !important;
+  text-align: center !important;
+}
+.FontBold {
+  font-family: "Poppins", sans-serif !important; /*este es important*/
+  font-weight: 700 !important;
+  font-size: 1.2rem !important;
+  text-transform: capitalize !important;
+  border-radius: 25px !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  color: $gray-tertiary !important;
+}
+
+.LikeButton {
+  position: absolute !important;
+  top: 1rem !important;
+  right: 1rem !important;
+  display: block !important;
+  font-size: 1.8rem !important;
+  cursor: pointer !important;
+
+  fill: $light-color !important;
+  stroke: $primary-color_2 !important;
+  stroke-width: 2px !important;
+}
+.LikeButton:hover {
+  fill: $primary-color_2 !important;
+  stroke: $primary-color_2 !important;
+  stroke-width: 2px !important;
+}
+.LikeButton.Liked {
+  fill: $primary-color_2 !important;
+  stroke: $primary-color_2 !important;
+  stroke-width: 2px !important;
+}
+.LikeButton.Liked:hover {
+  fill: $light-color !important;
+  stroke: $primary-color_2 !important;
+  stroke-width: 2px !important;
+}
+.LikeButton svg path {
+  /*outline: 2px solid $primary-color_2!important;
+    outline-offset: 2px!important;*/
+}
+.ModalStyle {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 80% !important;
+  max-width: 700px !important;
+  background-color: $light-color !important;
+  padding: 2rem !important;
+  border-radius: 20px !important;
+  border: none !important;
+  outline: none !important;
+  /*border: 2px solid #000,
+    boxShadow: 24,
+    p: 4,*/
+}
+.CloseModalButton {
+  position: absolute !important;
+  top: -1.5rem !important;
+  right: -1.5rem !important;
+  display: block !important;
+  font-size: 3rem !important;
+  cursor: pointer !important;
+
+  fill: $primary-color_2 !important;
+}
+.CloseModalButton {
+  position: absolute !important;
+  top: -1.5rem !important;
+  right: -1.5rem !important;
+  display: block !important;
+  border-radius: 50% !important;
+  width: 3rem !important;
+  height: 3rem !important;
+  background-color: $primary-color_2 !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s ease-in-out,
+    background-color 0.3s ease-in-out !important;
+}
+.CloseModalButton:hover {
+  background-color: $primary-color !important;
+}
+.CloseModalButton .IconCloseModalButton {
+  font-size: 2.5rem !important;
+  fill: $light-color !important;
+
+  display: block !important;
+  margin: auto auto !important;
+  margin-top: 0.25rem !important;
+}
+.ImageLike {
+  width: 80% !important;
+  max-width: 120px !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+.ImageLikeDescription {
+  font-family: "Poppins", sans-serif !important; /*este es important*/
+  font-weight: 400 !important;
+  font-size: 1rem !important;
+  color: $gray-primary !important;
+}
+.LinkText {
+  text-decoration: underline !important;
+}
+
+.ImageProcessProperty {
+  width: 50px !important;
+  max-width: 90% !important;
+  margin: 0 auto !important;
+  display: block !important;
+}
+.StatusFaceProcessImage {
+  width: 50px !important;
+  max-width: 90% !important;
+  margin: 0 auto !important;
+  display: block !important;
+}
+.StatusFaceProcess {
+  background-color: #4806c1 !important;
+  border-radius: 50% !important;
+  padding: 1rem !important;
+  /*width: 60px!important;
+    height: 60px!important;*/
+}
+.SuccessStatus {
+  background-color: #00aa6d !important;
+}
+.ProcessPropertyText {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 1rem !important;
+  color: $gray-primary !important;
+  vertical-align: middle !important;
+  max-width: 100% !important;
+}
+.LinkedText {
+  color: $primary-color_2 !important;
+  text-decoration: underline !important;
+}
+.LinkedText:hover {
+  color: $secondary-color !important;
+}
+.ItemsContainer {
+  background-color: $gray-quaternary !important;
+  border-radius: 20px !important;
+  padding: 1.5rem !important;
+  display: block !important;
+  width: calc(100% - 0.2rem) !important;
+}
+.ItemsContainerTitle {
+  color: $dark-color !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+}
+.ItemsContainerText {
+  color: $gray-tertiary !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 0.9rem !important;
+}
+.ItemsContainerTextAmount {
+  color: $gray-tertiary !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 0.9rem !important;
+}
+.ItemsContainerTextAmountTotal {
+  color: $secondary-color_2 !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 1rem !important;
+}
+.ItemsContainerDivisor {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+  border-radius: 3px !important;
+  height: 5px !important;
+  background-color: $secondary-color_2 !important;
+}
+.Currency {
+  color: $primary-color !important;
+}
+.ItemsSubContainer {
+  overflow-x: auto !important;
+}
+.ItemsSubContainer2 {
+  min-width: 600px !important;
+}
+
+.RadioText > span {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+  color: $gray-tertiary !important;
+}
+.ChecksContainer {
+  max-height: 300px !important;
+  overflow-y: auto !important;
+}
+.TabTitle {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+  color: $gray-tertiary !important;
+}
+.FinishImage {
+  display: block !important;
+  margin: 0 auto !important;
+  max-width: 140px !important;
+  width: 80% !important;
+}
+
+.BiggerText {
+  font-size: 1.5rem !important;
+}
+
+/*
+.SearchIconContainer{
+    position: relative!important;
+}
+.SearchIconText{
+    fill: $gray-tertiary!important;
+    position: absolute!important;
+    top: 0.5rem!important;
+    right: 0.5rem!important;
+    display: block!important;
+    font-size: 1rem!important;
+}*/
+
+.ChipAutoComplete {
+  background-color: $secondary-color_2 !important;
+  color: $light-color !important;
+  border: none !important;
+  margin-right: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  font-family: "Poppins", sans-serif !important;
+  font-size: 1rem !important;
+  padding-right: 0.5rem !important;
+  padding-left: 0.5rem !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  height: 28px !important;
+}
+
+.ProccessMiniContainer {
+  max-width: 350px !important;
+  min-height: 200px !important;
+  background-color: $light-color !important;
+  border-radius: 15px !important;
+  padding: 1rem !important;
+  border: 3px solid $light-color !important;
+  margin-bottom: 2rem !important;
+  display: inline-block !important;
+  cursor: pointer !important;
+  transition: background-color, border 0.3s ease-in-out, background-color,
+    border 0.3s ease-in-out !important;
+}
+.ProccessMiniContainer:hover {
+  border: 3px solid $primary-color !important;
+}
+
+.ProccessMiniContainer:hover .MiniProcessTitle {
+  color: $primary-color !important;
+}
+.MiniProcessTitle {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  transition: color 0.3s ease-in-out, color 0.3s ease-in-out !important;
+}
+.MiniProcessText {
+  font-size: 1rem !important;
+}
+.MiniProcessEntity {
+  font-size: 1rem !important;
+}
+.MiniProcessImage {
+  max-width: 75% !important;
+}
+.ResultProcessImage {
+  max-width: 40px !important;
+  width: 80% !important;
+}
+.MiniProcessAmount {
+  font-size: 1.7rem !important;
+}
+.ResultProcessAmount {
+  font-size: 1.2rem !important;
+}
+.ResultProcessTitle {
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  color: $gray-tertiary !important;
+  transition: color 0.3s ease-in-out, color 0.3s ease-in-out !important;
+}
+.BackgroundSecondaryColor {
+  background-color: $secondary-color !important;
+}
+.BackgroundLightColor {
+  background-color: $light-color !important;
+}
+.BackgroundPreColor {
+  background-color: #f9f6ff !important;
+}
+
+.SearchContainerResult {
+  border-radius: 18px !important;
+  background-color: $light-color !important;
+  padding: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+.SearchContainerResult .ResultProcessTitle:hover {
+  color: $primary-color !important;
+}
+.SearchContainerResult .ResultProcessTitle:hover .ProcessID {
+  text-decoration: underline;
+}
+
+.SearchContainerFilter {
+  border-radius: 18px !important;
+  background-color: $light-color !important;
+  overflow: hidden !important;
+
+  margin-bottom: 1rem !important;
+}
+.ResultProcessDescription {
+  font-size: 1rem !important;
+}
+
+.InputTextFilterSearch {
+  display: block !important;
+}
+.InputTextFilterSearch input {
+  line-height: 1rem !important;
+  border: none !important;
+  border-radius: 2rem !important;
+  background-color: $gray-quaternary !important;
+  font-family: "Poppins", sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  padding: 15px 1.5rem 10px 1.5rem !important;
+}
+.WhiteInputText input {
+  line-height: 1rem !important;
+  border: none !important;
+  border-radius: 2rem !important;
+  background-color: $light-color !important;
+  font-family: "Poppins", sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  padding: 15px 1.5rem 10px 1.5rem !important;
+}
+.InputTextFilterSearch label {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+  padding-left: 1.4rem !important;
+  line-height: 1rem !important;
+}
+.FilterOptionSearch {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+  padding: 0.5rem 1rem 0.5rem 1rem !important;
+  //transition: background-color,color 0.3s ease-in-out,background-color,color 0.3s ease-in-out!important;
+  cursor: pointer !important;
+  color: $gray-tertiary;
+  /*order:2;*/
+}
+.FilterOptionSearch:hover {
+  background-color: $secondary-color !important;
+  color: $light-color !important;
+}
+.FilterOptionSearchSelected {
+  background-color: $secondary-color !important;
+  color: $light-color !important;
+  /*order:1;*/
+}
+.FilterOptionsContainerSearch {
+  max-height: 200px !important;
+  overflow-y: auto !important;
+  display: flex;
+  flex-flow: column;
+}
+.ElementContainer {
+  background-color: $light-color !important;
+  border-radius: 15px !important;
+  padding: 1rem !important;
+  position: relative !important;
+}
+.ImageItemUOC {
+  width: 90% !important;
+  max-width: 100px !important;
+}
+.ItemTitleElement {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 1.5rem !important;
+  line-height: 1.6rem !important;
+}
+.ItemTitleTime {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 3rem !important;
+  line-height: 3rem !important;
+}
+.hola {
+}
+.ItemTitleTimeUnit {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 2rem !important;
+  line-height: 2rem !important;
+  padding-left: 0.5rem !important;
+}
+.ItemDescriptionElement {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 1.2rem !important;
+  line-height: 1.2rem !important;
+}
+.SearchButtonText {
+  transform: scale(1.3, 1.3) !important;
+  background-color: $secondary-color !important;
+  color: $light-color !important;
+}
+.SearchButtonText:hover {
+  background-color: $primary-color !important;
+}
+
+.tableData {
+  border-collapse: collapse !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  table-layout: fixed !important;
+}
+.tableData * {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 500 !important;
+}
+.tableData th {
+  color: $gray-primary !important;
+}
+.tableData td {
+  color: $gray-primary !important;
+  padding: 1rem !important;
+}
+.tableData th {
+  font-weight: 700 !important;
+  padding: 0.2rem !important;
+}
+.ButtonSmall {
+  font-size: 0.9rem !important;
+  padding: 0.5rem 1rem 0.5rem 1rem !important;
+  font-weight: 700 !important;
+}
+.tableCenter * {
+  text-align: center !important;
+}
+
+.tableData thead {
+  border-bottom: 3px solid #d9d9d9 !important;
+}
+.tableData tbody tr {
+  border-bottom: 2px solid #f6f6f6 !important;
+}
+@media screen and (max-width: 767px) {
+  .tableData thead {
+    border: none !important;
+    clip: rect(0 0 0 0) !important;
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important;
+  }
+  .tableData tr {
+    /* border-bottom: 3px solid #ddd!important;
+			*/
+    display: block !important;
+    margin-bottom: 0.625em !important;
+  }
+  .tableData > tr > td {
+    /* border-bottom: 1px solid #ddd!important;
+			*/
+    display: block !important;
+    text-align: right !important;
+  }
+  .tableData > tbody > tr > td {
+    /* border-bottom: 1px solid #ddd!important;
+	 */
+    display: block !important;
+    text-align: right !important;
+  }
+  .tableData td::before {
+    /* * aria-label has no advantage, it won't be read inside a table content: attr(aria-label)!important;
+			*/
+    content: attr(data-label) !important;
+    float: left !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+  }
+  .tableData td:last-child {
+    border-bottom: 0 !important;
+  }
+  /*
+	.tituloTablaGeneral{
+ }
+ .tablaGeneral.mostrarEncabezados > thead > th{
+	display: block!important;
+	}
+	.tablaGeneral.mostrarEncabezados > thead > tr > th{
+		display: block!important;
+		}
+	table.tablaGeneral.mostrarEncabezados > thead{
+		position: static!important;
+	}*/
+}
+.PaginationBefore,
+.PaginationNumber,
+.PaginationNext {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 800 !important;
+  display: inline-block !important;
+
+  width: 2rem !important;
+  height: 2rem !important;
+  line-height: 2rem !important;
+  border-radius: 50% !important;
+  text-align: center !important;
+  font-size: 1.1rem !important;
+  color: $secondary-color !important;
+  vertical-align: top !important;
+  cursor: pointer !important;
+}
+
+.PaginationInvert .PaginationBefore,
+.PaginationInvert .PaginationNumber,
+.PaginationInvert .PaginationNext {
+  color: white !important;
+}
+.PaginationNumber.Active {
+  color: $light-color !important;
+  background-color: $primary-color !important;
+}
+
+.PaginationInvert .PaginationNumber.Active {
+  color: $primary-color !important;
+  background-color: $light-color !important;
+}
+
+.PaginationBefore *,
+.PaginationNext * {
+  fill: $secondary-color !important;
+  font-size: 2rem !important;
+  line-height: 2rem !important;
+}
+
+.PaginationInvert .PaginationBefore *,
+.PaginationInvert .PaginationNext * {
+  fill: $light-color !important;
+}
+.ImagenPanelItem {
+  display: block !important;
+  margin: 0 auto !important;
+  width: 90% !important;
+  max-width: 120px !important;
+}
+.ClickItem {
+  cursor: pointer !important;
+  border: 3px solid $light-color !important;
+  transition: border 0.3s ease-in-out, border 0.3s ease-in-out !important;
+}
+.ClickItem:hover {
+  border: 3px solid $primary-color !important;
+}
+.ClickItem2:hover {
+  border: 3px solid $tertiary-color !important;
+}
+.FilterTableBox {
+  border-radius: 5px !important;
+  background-color: $light-color !important;
+  padding: 0.5rem 1rem 0.5rem 1rem !important;
+  display: inline-block !important;
+  font-family: "Poppins", sans-serif !important;
+  color: $gray-primary !important;
+  font-size: 1rem !important;
+  vertical-align: top !important;
+  margin-right: 1rem !important;
+  margin-bottom: 0.5rem !important;
+}
+.FilterTableIcon {
+  fill: $gray-primary !important;
+  line-height: 1rem !important;
+  cursor: pointer !important;
+  vertical-align: top !important;
+}
+
+.ProcessSelectionContainer {
+  /*max-width: 500px!important;*/
+  border-radius: 30px !important;
+  background-color: $light-color !important;
+  text-align: center !important;
+  /* padding: 1rem 1rem 1rem 1rem!important;*/
+}
+.ProcessSelectionOption {
+  color: $gray-primary !important;
+  display: inline-block !important;
+  background-color: $light-color !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+  padding: 0.5rem 1rem 0.5rem 1rem !important;
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out !important;
+  cursor: pointer !important;
+  border-radius: 30px !important;
+  font-size: 1.1rem !important;
+}
+.ProcessSelectionOption.Active {
+  color: $light-color !important;
+  background-color: $secondary-color !important;
+}
+.ProcessSelectionContainer:hover .ProcessSelectionOption.Active {
+  color: $gray-primary !important;
+  background-color: $light-color !important;
+}
+.ProcessSelectionOption:hover,
+.ProcessSelectionContainer:hover .ProcessSelectionOption.Active:hover {
+  color: $light-color !important;
+  background-color: $secondary-color !important;
+}
+.ResultActionText {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  vertical-align: top !important;
+  transition: color 0.3s ease-in-out, color 0.3s ease-in-out !important;
+}
+.ResultActionIcon {
+  fill: $gray-tertiary !important;
+  vertical-align: top !important;
+  transition: fill 0.3s ease-in-out, fill 0.3s ease-in-out !important;
+}
+.ResultAction {
+  display: inline-block !important;
+  margin-left: 1rem !important;
+  cursor: pointer !important;
+}
+.ResultAction:hover .ResultActionText {
+  color: $gray-secondary !important;
+}
+.ResultAction:hover .ResultActionIcon {
+  fill: $gray-secondary !important;
+}
+/*
+.SearchContainerResult2{
+    display: inline-block!important;
+    margin-right: 1rem!important;
+    margin-bottom: 1rem!important;
+    max-width: calc(50% - 2rem)!important;
+}*/
+
+.ColorTextGreen {
+  color: $green !important;
+}
+.ItemDescriptionElementText {
+  font-weight: 400 !important;
+  font-size: 1rem !important;
+}
+.BacgroundColorRed {
+  background-color: $red !important;
+}
+
+.ResolutionNameText {
+  color: $gray-primary !important;
+  background-color: $light-color !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 1rem !important;
+  line-height: 1rem !important;
+  display: block !important;
+}
+.ResolutionClaimImage {
+  width: 90% !important;
+  margin: 0 auto !important;
+  display: block !important;
+  max-width: 100px !important;
+}
+.ResolutionContainer {
+  max-width: 150px !important;
+  margin-right: 0.5rem !important;
+  display: inline-block !important;
+}
+.ResolutionsContainer {
+  min-height: 145px !important;
+  overflow-x: auto !important;
+  display: block !important;
+  white-space: nowrap !important;
+}
+.PublicationBox {
+  padding: 1rem !important;
+  border-radius: 1rem !important;
+  background-color: $secondary_color_4 !important;
+}
+.PublicationBox p {
+  text-align: left !important; /*este es important*/
+}
+
+.BorderNone {
+  border-bottom: none !important; /*este es important*/
+}
+.ButtonMini {
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  padding: 0.5rem 1rem 0.5rem 1rem !important;
+}
+.CounterReport {
+  text-align: center !important;
+  border-radius: 1rem !important;
+  display: inline-block !important;
+  min-width: 88px !important;
+  height: 88px !important;
+  background-color: $light-color !important;
+  padding: 1rem !important;
+  margin-bottom: 1rem !important;
+  margin-right: 1rem !important;
+}
+
+.ReportCounterNumber {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 3rem !important;
+  line-height: 2.5rem !important;
+}
+
+.ReportCounterDescription {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  line-height: 1rem !important;
+}
+.CircularProgressButton {
+  color: white;
+}
+.LoadingPrimaryButton {
+  padding: 0.05rem 1.8rem !important;
+}
+.LoadingPrimary {
+  background-color: $secondary-color_3 !important; /*este es important*/
+}
+.LoadingPrimary > span {
+  background-color: $primary-color !important; /*este es important*/
+}
+.MessageText > * {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+}
+.SearchButtonTextAdornment {
+  margin-right: 0.1rem !important;
+}
+.SearchIconTextAdornment {
+  color: $gray_a !important;
+}
+
+.ColorTextGreenA {
+  color: $green_a !important;
+}
+.ColorTextYellowA {
+  color: $yellow_a !important;
+}
+.ColorTextRed {
+  color: $red !important;
+}
+.ColorTextGrayA {
+  color: $gray_a !important;
+}
+.ColorDanger {
+  color: red !important;
+}
+.ColorTextGray {
+  color: $gray-tertiary !important;
+}
+.ColorText {
+  color: $primary-color_2 !important;
+}
+.ColorTextPrimaryA {
+  color: $primary-color_a !important;
+}
+.ColorTextTertiaryA {
+  color: $tertiary-color_a !important;
+}
+.ColorTextDark {
+  color: $dark-color !important;
+}
+.ItemsScroll {
+  overflow-y: auto;
+  max-height: 200px;
+}
+.ItemsDivisor {
+  background-color: $secondary-color_4;
+  height: 2px;
+  border-radius: 2px;
+  width: 90%;
+  margin: 5px;
+  display: block;
+  margin: 0 auto;
+}
+
+.ItemMenuFilters {
+  font-family: "Poppins", sans-serif !important;
+  color: #4d4d53 !important;
+  font-size: 1rem !important;
+  font-weight: 700;
+}
+.AddFilters {
+  cursor: pointer;
+  transition: box-shadow 0.3s ease-in-out !important;
+}
+.AddFilters:hover {
+  box-shadow: 0px 3px 14px 2px rgb(0 0 0 / 12%);
+}
+
+.MuiButtonBase-root.MuiPickersDay-root.Mui-selected {
+  background-color: #6817ff !important;
+}
+
+.FiltersContainerMenu {
+  width: 370px;
+  display: inline-block;
+  vertical-align: top;
+  background-color: #f9f6ff !important;
+}
+.ResultsContainerMenu {
+  width: calc(100% - 390px);
+  display: inline-block;
+  vertical-align: top;
+  padding-left: 20px;
+}
+.FiltersCloseIcon {
+  display: none !important;
+}
+.ResultActionFilterButton {
+  display: none !important;
+}
+
+@media screen and (max-width: 950px) {
+  .FiltersCloseIcon {
+    float: right;
+    display: inline-block !important;
+    cursor: pointer;
+  }
+  .FiltersContainer {
+    overflow-y: scroll;
+    max-height: calc(100% - 20px);
+  }
+  .FiltersContainerMenu {
+    max-width: 100%;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    height: calc(100vh - 64px);
+    padding: 20px 10px;
+    z-index: 99;
+    box-shadow: 0px 3px 14px 2px rgb(0 0 0 / 12%);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out !important;
+  }
+  .ShowFiltersContainerMenu {
+    transform: translateX(0%);
+  }
+  .ResultsContainerMenu {
+    width: calc(100%);
+    display: block;
+    vertical-align: top;
+    padding: 0;
+  }
+  .ResultActionFilterButton {
+    display: inline-block !important;
+  }
+}
+@media screen and (max-width: 599px) {
+  .FiltersContainerMenu {
+    top: 56px;
+    height: calc(100vh - 56px);
+  }
+}
+.OportunitiesCategoryContainer {
+  max-width: 100%;
+  height: 300px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.OportunitiesCategoryContainer * {
+  white-space: normal;
+}

@@ -1,0 +1,186 @@
+@import "../styles/Global.scss";
+
+.BackgroundPrincipal{
+  background-color:$secondary-color!important;
+}
+.BackgroundCounters{
+  background-color: $tertiary-color_2_5!important;
+}
+.BackgroundSecondary{
+  background-color: $tertiary-color!important;
+}
+.FontPrincipalSize{
+  font-size: 3vw!important;
+  color:$tertiary-color!important;
+  /*font-family: 'Poppins', sans-serif!important;*/
+  font-family: 'Open Sans', sans-serif!important;
+  font-family: 'Poppins', sans-serif!important;
+  font-weight: 700!important;
+  line-height: 2.8vw!important;
+  margin: 0!important;
+}
+
+.FontSecondarySize{
+  font-size: 1.5rem!important;
+  color: $font-primary-light!important;
+  font-family: 'Poppins', sans-serif!important;
+  font-weight: 400!important;
+  margin: 0!important;
+}
+
+.FontTertiarySize{
+  font-size: 1rem!important;
+  color: $font-primary-light!important;
+  font-family: 'Poppins', sans-serif!important;
+  font-weight: 400!important;
+  margin: 0!important;
+  opacity: 0.9!important;
+  margin-top: 10px!important;
+}
+
+.CounterNumber{
+  color: $tertiary-color!important;
+  font-weight: 800!important;
+  font-family: 'Poppins', sans-serif!important;
+  font-size: 3.5rem!important;
+  line-height: 3.5rem!important;
+}
+
+.CounterDescription{
+  color: $tertiary-color_a!important;
+  font-weight: 800!important;
+  font-family: 'Poppins', sans-serif!important;
+  font-size: 1.3rem!important;
+  line-height: 1.3rem!important;
+}
+
+.CounterContainer{
+  display: flex!important;
+  flex-direction: column!important;
+  justify-content: center!important;
+}
+
+.LightBackground{
+  background-color: $light-color!important;
+}
+/*Background Morado de la Seccion Principal*/
+.BackgroundPrincipalVector{
+  background-image: url('../public/images/background_principal_landing.svg')!important;
+  background-repeat: no-repeat!important;
+  background-position: 50% 50%!important;
+  background-size: contain!important;
+}
+
+
+.BackgroundItem{
+  background-repeat: no-repeat!important;
+  background-position: 50% 50%!important;
+  background-size: contain!important;
+  
+}
+
+.Item1{
+  background-image: url('../public/images/background_item_1.svg')!important;
+}
+.Item2{
+  background-image: url('../public/images/background_item_2.svg')!important;
+}
+.Item3{
+  background-image: url('../public/images/background_item_3.svg')!important;
+}
+
+.ItemTitle{
+  color:$primary-color_a!important;
+  font-weight: 700!important;
+  font-family: 'Poppins', sans-serif!important;
+  text-align: center!important;
+  font-size: 1.8rem!important;
+  line-height: 1.8rem!important;
+}
+
+
+.ItemDescription{
+  color:$dark-color!important;
+  font-weight: 500!important;
+  font-family: 'Poppins', sans-serif!important;
+  text-align: center!important;
+  font-size: 1.2rem!important;
+  line-height: 1.2rem!important;
+}
+
+.ItemDivisor{
+  height:8px!important;
+  border-radius:4px!important;
+  background-color: $gray-color!important;
+  display: inline-block!important;
+  margin:0 auto!important;
+  margin-top: 2rem!important;
+  margin-bottom: 2rem!important;
+  margin-left: 10px!important;
+  margin-right: 10px!important;
+}
+
+
+
+.InfoTitle{
+  color:$light-color!important;
+  font-weight: 700!important;
+  font-family: 'Poppins', sans-serif!important;
+
+  font-size: 2rem!important;
+  line-height: 2rem!important;
+  
+  margin:0!important;
+  /*padding-top: 20px!important;
+  padding-bottom: 10px!important;*/
+}
+
+.InfoDescription{
+  color:$light-color!important;
+  font-weight: 400!important;
+  font-family: 'Poppins', sans-serif!important;
+ 
+  font-size: 1.2rem!important;
+  
+  margin:0!important;
+  /*padding-top: 20px!important;
+  padding-bottom: 20px!important;*/
+}
+
+.TextColorSecondary{
+  color:$tertiary-color_a!important;
+}
+
+.SecondaryTitle_1{
+  color:$light-color!important;
+  font-weight: 600!important;
+  font-family: 'Open Sans', sans-serif!important;
+  font-family: 'Poppins', sans-serif!important;
+  font-size: 1.4rem!important;
+  line-height: 1.6rem!important;
+  margin-top: 1.5rem!important;
+}
+.SecondaryTitle_2{
+  color:$light-color!important;
+  opacity: 0.9!important;
+  font-weight: 400!important;
+  font-family: 'Open Sans', sans-serif!important;
+  font-family: 'Poppins', sans-serif!important;
+  font-size: 1.2rem!important;
+  line-height: 1.4rem!important;
+  margin-top: 1rem!important;
+}
+
+.BackgroundText_1{
+  background-image: url('../public/images/text_background_1.svg')!important;
+  background-repeat: no-repeat!important;
+  background-position: -20% 50%!important;
+  background-size: contain!important;
+}
+.BackgroundText_2{
+  background-image: url('../public/images/text_background_2.svg')!important;
+  background-repeat: no-repeat!important;
+  background-position: 110% 50%!important;
+  background-size: contain!important;
+}
+

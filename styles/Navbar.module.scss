@@ -1,0 +1,57 @@
+@import "../styles/Global.scss";
+
+.NavbarBackground{
+    background-color:$secondary-color!important;
+    box-shadow: none!important;
+}
+.Font{
+    font-family: 'Poppins', sans-serif!important;
+}
+.FontNavbar{
+    font-weight: 700!important;
+    font-size: 16px!important;
+    text-transform: capitalize!important;
+    padding-left: 20px!important;
+    padding-right: 20px!important;
+    margin-right: 5px!important;
+    border-radius: 20px!important;
+}
+
+
+.FontNavbarButton{
+    background-color: $primary-color!important;
+    border-radius: 20px!important;
+    color:$font-primary-light!important;
+}
+.FontNavbarButton:hover{
+    background-color: $primary-color_2!important;
+    border-radius: 20px!important;
+    color:$font-primary-light!important;
+}
+
+.PrincipalMenu {
+    
+}
+
+.ItemMenu{
+    font-size: 16px!important;
+    color:white!important;
+    font-family: 'Poppins', sans-serif!important;
+    font-weight: 700!important;
+}
+.ItemMenu2{
+    font-size: 16px!important;
+    color:$tertiary-color_4!important;
+    font-family: 'Poppins', sans-serif!important;
+    font-weight: 700!important;
+}
+
+.NavbarLogoIcon{
+    display: inline-block!important;
+    height: 35px!important;
+}
+.NavbarLogoText{
+    display: inline-block!important;
+    height: 30px!important;
+    margin-left: 10px!important;
+}
