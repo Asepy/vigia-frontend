@@ -74,7 +74,7 @@ const FinishQuestion: NextPage = () => {
     <>
     
     <Head>
-        <title>VigiA</title>
+        <title>VigiA - Consulta Enviada</title>
         <meta name="description" content="Iniciar Sesión" />
         <link rel="icon" href="/favicon.ico" />
          

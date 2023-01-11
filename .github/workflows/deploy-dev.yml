@@ -28,6 +28,7 @@ jobs:
           NEXT_PUBLIC_COGNITO_USER_POOL_ID: ${{ secrets.NEXT_PUBLIC_COGNITO_USER_POOL_ID}}
           NEXT_PUBLIC_COGNITO_REGION: ${{ secrets.NEXT_PUBLIC_COGNITO_REGION}}
           NEXT_PUBLIC_COGNITO_IDENTITY_POOL_ID: ${{ secrets.NEXT_PUBLIC_COGNITO_IDENTITY_POOL_ID}}
+          NEXT_PUBLIC_GOOGLE_TAG: ${{ secrets.NEXT_PUBLIC_GOOGLE_TAG}}
       - uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}

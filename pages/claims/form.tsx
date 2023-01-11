@@ -482,7 +482,7 @@ const ClaimsForm: NextPage = () => {
   return (
     <>
       <Head>
-        <title>VigiA - Formulario de Reclamos</title>
+        <title>VigiA - Formulario de Reclamo</title>
         <meta name="description" content="Formulario de Reclamos" />
         <link rel="icon" href="/favicon.ico" />
         

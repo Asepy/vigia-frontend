@@ -23,7 +23,7 @@ const AppPublicationFinishAgent: NextPage = () => {
   const url = shortUrl ? decodeURIComponent(shortUrl.toString()) : "";
   const tweetText = tweet ? decodeURIComponent(tweet.toString()) : "";
   return (
-    <Layout>
+    <Layout titleDescription="VigiA - Publicación Realizada">
       <Box
         sx={{ minHeight: { xs: "unset", sm: "calc( 100vh - 259px)" } }}
         className={styles.BackgroundSecondaryColor}

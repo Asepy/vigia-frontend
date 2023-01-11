@@ -132,7 +132,7 @@ const Questions: NextPage = () => {
   return (
     <>
       <Head>
-        <title>VigiA</title>
+        <title>VigiA - Consultar</title>
         <meta name="description" content="Iniciar Sesión" />
         <link rel="icon" href="/favicon.ico" />
          

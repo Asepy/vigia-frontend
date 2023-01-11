@@ -7,13 +7,16 @@ import Navbar from "./Navbar";
 type LayoutProps = {
   children: ReactNode;
   metaDescription?: string;
+  titleDescription?:string;
 };
 
-const Layout = ({ children, metaDescription }: LayoutProps) => {
+const Layout = ({ children, metaDescription,titleDescription }: LayoutProps) => {
   return (
     <>
       <Head>
-        <title>VigiA</title>
+        {
+          titleDescription&&<title>{titleDescription}</title>
+        }
         <meta name="description" content={metaDescription ?? ""} />
         <link rel="icon" href="/favicon.ico" />
          

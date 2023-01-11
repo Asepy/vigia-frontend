@@ -5,7 +5,7 @@ import Layout from "../../components/ui/Layout/Layout";
 
 const Login: NextPage = () => {
   return (
-    <Layout>
+    <Layout titleDescription="VigiA - Perfil de Usuairo">
       <Profile />
     </Layout>
   );

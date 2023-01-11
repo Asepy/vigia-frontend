@@ -4,7 +4,7 @@ import Layout from "../components/ui/Layout/Layout";
 
 const ForgotPassword: NextPage = () => {
   return (
-    <Layout metaDescription="Olvidaste tu contraseña">
+    <Layout metaDescription="Olvidaste tu contraseña" titleDescription="VigiA - Recuperación de Contraseña">
       <ForgotPasswordForm />
     </Layout>
   );

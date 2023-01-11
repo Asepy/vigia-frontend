@@ -4,7 +4,7 @@ import Panel from "../../components/panel-agent/PanelAgent";
 
 const PanelAgent: NextPage = () => {
   return (
-    <Layout>
+    <Layout titleDescription="VigiA - Panel de Agente">
       <Panel />
     </Layout>
   );

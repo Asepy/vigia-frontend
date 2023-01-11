@@ -4,7 +4,7 @@ import Layout from "../../components/ui/Layout/Layout";
 
 const Panel: NextPage = () => {
   return (
-    <Layout>
+    <Layout titleDescription="VigiA - Panel de Usuario">
       <Panl />
     </Layout>
   );

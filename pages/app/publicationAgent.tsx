@@ -8,7 +8,7 @@ const AppPublicationAgent: NextPage = () => {
   const router = useRouter();
   const { enlace, llamado, tipo } = router.query;
   return (
-    <Layout>
+    <Layout titleDescription="VigiA - Realizar Publicación">
       <PublicationAgent
         enlace={enlace as string}
         llamado={llamado as string}

@@ -1,5 +1,6 @@
 import "animate.css";
 import Amplify from 'aws-amplify';
+import React, { useEffect } from "react";
 //import awsconfig from '../src/aws-exports.js';
 Amplify.configure({
   "aws_project_region": process.env.NEXT_PUBLIC_COGNITO_REGION,
@@ -35,10 +36,24 @@ import AlertProvider from "../src/contexts/alert-context";
 import DialogProvider from "../src/contexts/dialog-context";
 import AuthProvider from "../src/contexts/auth-context";
 import LoadingProvider from "../src/contexts/loading-context";
+import TagManager from "react-gtm-module";
+
+
 import "../styles/globals.css";
 
+
+
 function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    if (process.env.NEXT_PUBLIC_GOOGLE_TAG) {
+      TagManager.initialize({
+        gtmId: process.env.NEXT_PUBLIC_GOOGLE_TAG
+      });
+    }
+  }, []);
   return (
+    <>
+    
     <AlertProvider>
       <DialogProvider>
       <AuthProvider>
@@ -53,6 +68,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </AuthProvider>
       </DialogProvider>
     </AlertProvider>
+    </>
   );
 }
 

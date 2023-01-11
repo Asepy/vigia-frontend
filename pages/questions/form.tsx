@@ -450,7 +450,7 @@ const QuestionsForm: NextPage = () => {
   return (
     <>
       <Head>
-        <title>VigiA</title>
+        <title>VigiA - Formulario de Consulta</title>
         <meta name="description" content="Iniciar Sesión" />
         <link rel="icon" href="/favicon.ico" />
        

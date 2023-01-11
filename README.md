@@ -87,6 +87,9 @@ NEXT_PUBLIC_COGNITO_REGION=""
 
 # Id del identity pool de cognito
 NEXT_PUBLIC_COGNITO_IDENTITY_POOL_ID=""
+
+# Tag de Google Analytics
+NEXT_PUBLIC_GOOGLE_TAG=""
 ```
 ## VII. Correr el proyecto
 ```sh
