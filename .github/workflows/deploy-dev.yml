@@ -23,13 +23,12 @@ jobs:
           NEXT_PUBLIC_BACKEND_URL: ${{ secrets.DEV_NEXT_PUBLIC_BACKEND_URL}}
           NEXT_PUBLIC_FRONTEND_URL: ${{ secrets.DEV_NEXT_PUBLIC_FRONTEND_URL }}
           NEXT_PUBLIC_TWITTER_USER: ${{ secrets.DEV_NEXT_PUBLIC_TWITTER_USER}}
-          NEXT_PUBLIC_API_KEY: ""
+          NEXT_PUBLIC_API_KEY: ${{ secrets.NEXT_PUBLIC_API_KEY}}
           NEXT_PUBLIC_COGNITO_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_COGNITO_CLIENT_ID}}
           NEXT_PUBLIC_COGNITO_USER_POOL_ID: ${{ secrets.NEXT_PUBLIC_COGNITO_USER_POOL_ID}}
           NEXT_PUBLIC_COGNITO_REGION: ${{ secrets.NEXT_PUBLIC_COGNITO_REGION}}
           NEXT_PUBLIC_COGNITO_IDENTITY_POOL_ID: ${{ secrets.NEXT_PUBLIC_COGNITO_IDENTITY_POOL_ID}}
           NEXT_PUBLIC_GOOGLE_TAG: ${{ secrets.NEXT_PUBLIC_GOOGLE_TAG}}
-          NEXT_PUBLIC_API_KEY: ${{ secrets.NEXT_PUBLIC_API_KEY}}
       - uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
