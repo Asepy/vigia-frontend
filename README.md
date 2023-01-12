@@ -90,6 +90,9 @@ NEXT_PUBLIC_COGNITO_IDENTITY_POOL_ID=""
 
 # Tag de Google Analytics
 NEXT_PUBLIC_GOOGLE_TAG=""
+
+# API key para manejar un plan de uso segun la configuracion del backend
+NEXT_PUBLIC_API_KEY=""
 ```
 ## VII. Correr el proyecto
 ```sh
