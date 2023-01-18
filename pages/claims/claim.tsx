@@ -212,9 +212,9 @@ const Claim: NextPage = () => {
     setIsLoading(true);
     try {
       const data = await fetchData("getClaim",{ link: link },"POST",false);
-      if (!data.error && data?.data) {
-        setClaimData(data?.data);
-        getProcess(data?.data?.ocid);
+      if (!data.error) {
+        setClaimData(data);
+        getProcess(data?.ocid);
       
       } else {
         setMessage("Reclamo no encontrado");

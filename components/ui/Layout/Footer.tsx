@@ -51,12 +51,16 @@ const Footer: NextPage = () => {
         <Box className={styles.BackgroundSecondary}>
            <Container>
             <Box sx={{paddingTop:"0.8rem",paddingBottom:"0.8rem", textAlign:{xs:"center",sm:"right"}}}>
-              <a href="https://cds.com.py/">
+            
+              
               <span className={styles.DeveloperText}>
-              Código fuente abierto desarrollado por &nbsp;
+              Código fuente abierto (<a href="https://github.com/Asepy/vigia-backend">Back-End</a>,&nbsp; 
+              <a href="https://github.com/Asepy/vigia-frontend">Front-End</a>) desarrollado por &nbsp;
               </span>
+              <a href="https://cds.com.py/">
               <img src="/images/logos/cds_gray.svg" alt="Logo CDS" className={styles.DeveloperLogo}/>
               </a>
+              
               
             </Box>
            </Container>

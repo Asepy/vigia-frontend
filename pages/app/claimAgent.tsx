@@ -252,14 +252,14 @@ const Claim: NextPage = () => {
     setIsLoading(true);
     try {
       const data = await fetchData("getClaim",{ link: link },"POST",false);
-      if (!data.error && data?.data) {
-        setClaimData(data?.data);
-        getSimilarClaims(data?.data);
-        getUserClaims(data?.data, {
+      if (!data.error ) {
+        setClaimData(data);
+        getSimilarClaims(data);
+        getUserClaims(data, {
           page: 1,
           pageSize: 5,
         });
-        getProcess(data?.data?.ocid);
+        getProcess(data?.ocid);
 
       } else {
         setMessage("Reclamo no encontrado");

@@ -351,8 +351,8 @@ const Question: NextPage = () => {
       const data = await fetchData("getQuestion",{ link: link },"POST",false);
       if (!data.error) {
         setQuestionData(data);
-        getSimilarClaims(data?.data);
-        getUserClaims(data?.data, {
+        getSimilarClaims(data);
+        getUserClaims(data, {
           page: 1,
           pageSize: 5,
         });
