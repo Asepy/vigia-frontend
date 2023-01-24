@@ -36,8 +36,8 @@ import AlertProvider from "../src/contexts/alert-context";
 import DialogProvider from "../src/contexts/dialog-context";
 import AuthProvider from "../src/contexts/auth-context";
 import LoadingProvider from "../src/contexts/loading-context";
-import TagManager from "react-gtm-module";
-import ReactGA from 'react-ga';
+//import TagManager from "react-gtm-module";
+//import ReactGA from 'react-ga';
 
 import "../styles/globals.css";
 
@@ -46,9 +46,9 @@ import "../styles/globals.css";
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if (process.env.NEXT_PUBLIC_GOOGLE_TAG) {
-      ReactGA.initialize(process.env.NEXT_PUBLIC_GOOGLE_TAG);
+      /*ReactGA.initialize(process.env.NEXT_PUBLIC_GOOGLE_TAG);
       
-      /*TagManager.initialize({
+      TagManager.initialize({
         gtmId: process.env.NEXT_PUBLIC_GOOGLE_TAG
       });*/
       
