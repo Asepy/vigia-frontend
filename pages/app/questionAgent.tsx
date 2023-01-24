@@ -357,6 +357,7 @@ const Question: NextPage = () => {
           pageSize: 5,
         });
         getProcess(data?.ocid);
+        updateQuestionVisualization(data);
 
       } else {
         setMessage("Consulta no encontrada");
@@ -368,6 +369,24 @@ const Question: NextPage = () => {
       console.dir(error);
     } finally {
       setIsPreLoading(false);
+    }
+  }
+  async function updateQuestionVisualization(question:any) {
+
+    if((!question.fecha_visualizacion===null)||!((user?.roles.includes('ASEPY'))||(user?.roles.includes('SUPERASEPY')))){
+     
+      return;
+    }
+    try {
+      const data = await fetchData("updateQuestionStatusVisualization",{ link: question.enlace },"POST",true);
+      if (!data.error ) {
+        
+      } else {
+        console.dir(data)
+      }
+    } catch (error) {
+      console.dir(error);
+    } finally {
     }
   }
   async function addClaimStatus() {

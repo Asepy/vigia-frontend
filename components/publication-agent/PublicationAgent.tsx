@@ -25,7 +25,7 @@ const PublicationAgent = ({
   const shortUrl = `${FRONTEND_URL}/${sourceUrl}/?id=${enlace}`;
   const router = useRouter();
   const { setAlertMessage } = useAlertContext();
-  const { setLoading } = useLoading();
+  const { setLoading, loading} = useLoading();
   const [form, setForm] = React.useState({
     tweet: "",
   });
@@ -36,6 +36,9 @@ const PublicationAgent = ({
 
   async function createTweet() {
     if (!validateSchema(publicationAgentSchema, form, setAlertMessage)) {
+      return;
+    }
+    if(loading){
       return;
     }
     setLoading(true);

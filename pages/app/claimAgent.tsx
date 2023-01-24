@@ -260,6 +260,7 @@ const Claim: NextPage = () => {
           pageSize: 5,
         });
         getProcess(data?.ocid);
+        updateClaimVisualization(data)
 
       } else {
         setMessage("Reclamo no encontrado");
@@ -271,6 +272,25 @@ const Claim: NextPage = () => {
       console.dir(error);
     } finally {
       setIsPreLoading(false);
+    }
+  }
+
+  async function updateClaimVisualization(claim:any) {
+
+    if((!claim.fecha_visualizacion===null)||!((user?.roles.includes('ASEPY'))||(user?.roles.includes('SUPERASEPY')))){
+     
+      return;
+    }
+    try {
+      const data = await fetchData("updateClaimStatusVisualization",{ link: claim.enlace },"POST",true);
+      if (!data.error ) {
+        
+      } else {
+        console.dir(data)
+      }
+    } catch (error) {
+      console.dir(error);
+    } finally {
     }
   }
   async function getSimilarClaims(claimData: Claim | null) {

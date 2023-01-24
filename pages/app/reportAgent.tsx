@@ -470,9 +470,9 @@ function assignValues(parameters:any){
       if(data){
         
        setTotal(getNumber(data?.total));
-       setTotalRequests(getNumber(data?.resueltos));
-       setTotalBack(getNumber(data?.pendientes));
-       setTotalResolved(getNumber(data?.devueltos));
+       setTotalRequests(getNumber(data?.pendientes));
+       setTotalBack(getNumber(data?.devueltos));
+       setTotalResolved(getNumber(data?.resueltos));
       }else{
        setTotal(0);
        setTotalRequests(0);
@@ -676,6 +676,7 @@ function assignValues(parameters:any){
         </Typography>
           </Box>
 
+
           <Box className={styles.CounterReport}>
         <Typography variant="inherit" component="h2"  className={styles.ReportCounterNumber+" "+styles.ColorTextYellowA}>
         <CountUp
@@ -690,6 +691,9 @@ function assignValues(parameters:any){
         </Typography>
           </Box>
 
+
+
+
           <Box className={styles.CounterReport}>
         <Typography variant="inherit" component="h2"  className={styles.ReportCounterNumber+" "+styles.ColorTextPGrayA}>
         <CountUp
@@ -703,6 +707,10 @@ function assignValues(parameters:any){
         <span  >Devueltos</span>
         </Typography>
           </Box>
+
+
+
+
 
           <Box className={styles.CounterReport}>
         <Typography variant="inherit" component="h2"  className={styles.ReportCounterNumber+" "+styles.ColorText}>

@@ -123,7 +123,8 @@ const OpportunitiesForm: NextPage = () => {
     });
   }
   const [CategoriesState, setCategoriesState]: any = React.useState([]);
-  const [KeywordsState, setKeywordsState]: any = React.useState([]);
+  const [KeywordsState, setKeywordsState] = React.useState<Array<any>>([]);
+  const [KeywordsInputState, setKeywordsInputState] = React.useState("");
   const [isLoadingRUC, setIsLoadingRUC]: any = React.useState(false);
   const [isLoadingSaveConfig, setIsLoadingSaveConfig]: any =
     React.useState(false);
@@ -605,7 +606,7 @@ const OpportunitiesForm: NextPage = () => {
                           component="p"
                           className={styles.ItemsContainerText}
                         >
-                          Ingresa nombres de productos o servicios que ofrezcas
+                          Ingresa nombres de productos o servicios que ofrezcas, separados por espacio, coma, o enter
                           (max. 10)
                         </Typography>
                         <Box sx={{ marginTop: "1rem", marginBottom: "1rem" }}>
@@ -617,8 +618,55 @@ const OpportunitiesForm: NextPage = () => {
         */}
                           <Autocomplete
                             onChange={(event, newValue) => {
-                             
-                              setKeywordsState(newValue);
+                              if(!(newValue.length>10)){
+                                setKeywordsState(newValue);
+                                setKeywordsInputState("");
+                              }
+                              
+                              
+                            }}
+                            inputValue={KeywordsInputState}
+                            onInputChange={(event, newInputValue) => {
+                              const options = newInputValue.split(/[\s,]+/).filter((x:string) => {return (!KeywordsState.includes(x))&&x!=='';});
+                     
+                              if (options.length > 1 || (options.length==1 && /[\s,]+/g.test(newInputValue))) {
+                                let keywords=KeywordsState
+                                .concat(options)
+                                .map((x:string) =>{ return x.trim()})
+                                .filter((x:string) => {return x;});
+
+                                if(keywords.length<=10){
+                                  setKeywordsState(
+                                    keywords
+                                  );
+                                  
+                                }
+                                setKeywordsInputState("");
+                              } else {
+                                
+                                  setKeywordsInputState(newInputValue.replace(/[\s,]+/g,""));
+                                
+                                
+                              }
+                            }}
+                            onBlur={(event) => {
+                              
+                              const options = KeywordsInputState.split(/[\s,]+/).filter((x:string) => {return (!KeywordsState.includes(x))&&x!=='';});
+                            
+                              if (options.length >= 1 ) {
+                                let keywords=KeywordsState
+                                .concat(options)
+                                .map((x:string) =>{ return x.trim()})
+                                .filter((x:string) => {return x;});
+                                if(keywords.length<=10){
+                                  setKeywordsState(
+                                    keywords
+                                  );
+                                  
+                                }
+                                setKeywordsInputState("");
+                                
+                              } 
                             }}
                             value={KeywordsState}
                             multiple
@@ -665,7 +713,7 @@ const OpportunitiesForm: NextPage = () => {
 
                         <Box className={styles.InputTitle}>
                           <span className={styles.ColorDanger}>*</span>
-                          <span>&nbsp;Ingresa al menos una </span>
+                          <span>&nbsp;Ingresa al menos una, <b>{KeywordsState.length}/10 </b></span>
                         </Box>
                       </>
                     )}
