@@ -87,6 +87,7 @@ const Claim: NextPage = () => {
   }, [isReady]);
 
   const [isLoading, setIsLoading] = React.useState(false);
+  const [notFound, setNotFound] = React.useState(false);
   const [isLoadingAddClaim, setIsLoadingAddClaim] = React.useState(false);
   const [isPreLoading, setIsPreLoading] = React.useState(false);
   const [openMessage, setOpenMessage] = React.useState(false);
@@ -263,12 +264,10 @@ const Claim: NextPage = () => {
         updateClaimVisualization(data)
 
       } else {
-        setMessage("Reclamo no encontrado");
-        setOpenMessage(true);
+        setNotFound(true);
       }
     } catch (error) {
-      setMessage("Reclamo no encontrado");
-      setOpenMessage(true);
+      setNotFound(true);
       console.dir(error);
     } finally {
       setIsPreLoading(false);
@@ -423,7 +422,7 @@ const Claim: NextPage = () => {
   return (
     <>
       <Head>
-        <title>VigiA - Reclamo</title>
+        <title>VigiA - Revisión Reclamo</title>
         <meta name="description" content="Reclamo" />
         <link rel="icon" href="/favicon.ico" />
 
@@ -582,7 +581,7 @@ onChange={(event, newValue) => {
           <Container
             sx={{ paddingTop: { xs: "3rem" }, paddingBottom: { xs: "3rem" } }}
           >
-            <Grid container spacing={2}>
+            {(!notFound)&&<Grid container spacing={2}>
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <Box
                   className={styles.ElementContainer}
@@ -839,7 +838,7 @@ onChange={(event, newValue) => {
               </Grid>
               {claimData &&
                 getObjectProperty(claimData, "extraQuestions") &&
-                getObjectProperty(claimData, "extraQuestions").length && (
+                getObjectProperty(claimData, "extraQuestions").length>0 && (
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <Box
                       className={styles.ElementContainer}
@@ -1652,7 +1651,7 @@ onChange={(event, newValue) => {
                                   </Grid>
                                 </Grid>
                               ) : null}
-                              {getProcessItems(processData).length ? (
+                              {getProcessItems(processData).length>0 ? (
                                 <Grid container>
                                   <Grid
                                     item
@@ -2303,7 +2302,7 @@ onChange={(event, newValue) => {
                               </Box>
                             </td>
                           </tr>
-                        ) : !userClaims.length && !isLoading ? (
+                        ) : !(userClaims.length>0) && !isLoading ? (
                           <tr>
                             <td data-label="" colSpan={6}>
                               <b>No se encontraron resultados</b>
@@ -2534,7 +2533,87 @@ onChange={(event, newValue) => {
                   Estado
                 </Button>
               </Grid>
-            </Grid>
+            </Grid>}
+            {
+              (notFound)&&<Grid container spacing={2}>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <Box
+               
+                  sx={{ height: "100%" }}
+                >
+                  <Grid container>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography
+                        variant="inherit"
+                        component="h1"
+                        className={
+                          styles.ItemTitleElement +
+                          " " +
+                          styles.ColorTextPrimaryA
+                        }
+                        sx={{
+                          textAlign:"center"
+                        }}
+                      >
+                        Reclamo no Encontrado
+                      </Typography>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={12}
+                      md={12}
+                      lg={12}
+                      xl={12}
+                      sx={{ textAlign:"center",marginTop:"1rem" }}
+                    >
+                      
+                       <img
+                src="/images/icons/reclamos.svg"
+                alt=""
+                className={styles.ImagenPanelItem}
+              />
+                    </Grid>
+
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography
+                        variant="inherit"
+                        component="h2"
+                        className={
+                          styles.ItemDescriptionElement + " " + styles.ColorText
+                        }
+                        sx={{
+                          marginBottom: "0.5rem",
+                          marginTop: "1rem",
+                          textAlign:"center"
+                        }}
+                      >
+                      #{query['id']}
+                      </Typography>
+                    </Grid>
+                    
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography
+                        variant="inherit"
+                        component="h2"
+                        className={
+                          styles.ItemDescriptionElement +
+                          " " +
+                          styles.ColorTextGray
+                        }
+                        sx={{
+                          marginBottom: "0.5rem",
+                          textAlign:"center"
+                        }}
+                      >
+                       Verifica que el identificador ha sido ingresado correctamente
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Grid>
+              </Grid>
+            }
           </Container>
         </Box>
       </Layout>

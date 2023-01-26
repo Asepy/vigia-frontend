@@ -501,6 +501,7 @@ const QuestionsForm: NextPage = () => {
                               className={styles.InputText}
                               onChange={onChange}
                               value={formState.question}
+                              inputProps={{ maxLength: 1000 }}
                             />
                           </ThemeProvider>
                           <Box className={styles.InputTitle}>
@@ -522,6 +523,7 @@ const QuestionsForm: NextPage = () => {
                               className={styles.InputText}
                               onChange={onChange}
                               value={formState.better}
+                              inputProps={{ maxLength: 1000 }}
                             />
                           </ThemeProvider>
                           <Box className={styles.InputTitle}>

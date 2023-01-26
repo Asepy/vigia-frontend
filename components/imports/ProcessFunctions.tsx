@@ -104,6 +104,9 @@ export function getProcuringEntityId(processData:any){
   export function getProcessPliego(processData:any){
     return (processData?.tender?.id)?`https://www.contrataciones.gov.py/licitaciones/convocatoria/${(processData?.tender?.id)}.html#pliego`:'';
   }
+  export function getProcessURL(processData:any){
+    return (processData?.tender?.id)?`https://www.contrataciones.gov.py/licitaciones/convocatoria/${(processData?.tender?.id)}.html`:'';
+  }
   export function getCurrencyAmount(digit:number){
     return new Intl.NumberFormat('es-PY', { style: 'currency', currency: 'PYG',minimumFractionDigits: 2,
     maximumFractionDigits: 2, currencyDisplay: 'code'}).format(digit).replace('PYG','').trim();

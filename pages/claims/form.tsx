@@ -906,6 +906,7 @@ const ClaimsForm: NextPage = () => {
                               className={styles.InputText}
                               onChange={onChange}
                               value={formState.claim}
+                              inputProps={{ maxLength: 1000 }}
                             />
                           </ThemeProvider>
                           <Box className={styles.InputTitle}>
@@ -926,6 +927,7 @@ const ClaimsForm: NextPage = () => {
                               className={styles.InputText}
                               onChange={onChange}
                               value={formState.condition}
+                              inputProps={{ maxLength: 1000 }}
                             />
                           </ThemeProvider>
                           <Box className={styles.InputTitle}>

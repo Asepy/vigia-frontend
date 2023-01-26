@@ -31,7 +31,8 @@ import {
   getCurrencyAmount,
   getProcessFaceClaim,
   checkProcessClaim,
-  checkProcessEnquiry
+  checkProcessEnquiry,
+  getProcessURL
 } from "../components/imports/ProcessFunctions";
 //import {} from '@formatjs/intl-numberformat/polyfill';
 
@@ -271,14 +272,24 @@ const IdentifiedProcess: NextPage = () => {
                     sx={{ mt: 2 }}
                     className={styles.ImageLikeDescription}
                   >
-                    Puedes participar directamente ingresando al sitio de la
-                    DNCP{" "}
-                    <a
-                      href="https://www.contrataciones.gov.py/licitaciones/convocatoria/410129-adquisicion-productos-papel-carton-1.html"
-                      className={styles.LinkText}
-                    >
-                      Click Aquí
-                    </a>
+                    {getProcessURL(processData) ? (
+                      <>
+                        Puedes participar directamente ingresando al sitio de la
+                        DNCP{" "}
+                        <a
+                          href={getProcessURL(processData)}
+                          className={styles.LinkText}
+                          target="_blank"
+                        >
+                          Click Aquí
+                        </a>
+                      </>
+                        
+                      ) : (
+                        "Enlace al proceso en el portal de la DNCP no disponible"
+                      )}
+
+                    
                   </Typography>
                 </Grid>
               </Grid>
@@ -912,6 +923,7 @@ const IdentifiedProcess: NextPage = () => {
                         <a
                           href={getProcessPliego(processData)}
                           className={styles.LinkedText}
+                          target="_blank"
                         >
                           <span>
                             Pliego de Bases y Condiciones, Requisitos

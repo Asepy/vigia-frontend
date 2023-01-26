@@ -80,6 +80,7 @@ const Question: NextPage = () => {
   }, [isReady]);
   const { setAlertMessage } = useAlertContext();
   const [isLoading, setIsLoading] = React.useState(false);
+  const [notFound, setNotFound] = React.useState(false);
   const [isLoadingAddClaim, setIsLoadingAddClaim] = React.useState(false);
 
   const [isPreLoading, setIsPreLoading] = React.useState(false);
@@ -360,12 +361,10 @@ const Question: NextPage = () => {
         updateQuestionVisualization(data);
 
       } else {
-        setMessage("Consulta no encontrada");
-        setOpenMessage(true);
+        setNotFound(true);
       }
     } catch (error) {
-      setMessage("Consulta no encontrada");
-      setOpenMessage(true);
+      setNotFound(true);
       console.dir(error);
     } finally {
       setIsPreLoading(false);
@@ -422,7 +421,7 @@ const Question: NextPage = () => {
   return (
     <>
       <Head>
-        <title>VigiA - Consulta</title>
+        <title>VigiA - Revisión Consulta</title>
         <meta name="description" content="Consulta" />
         <link rel="icon" href="/favicon.ico" />
 
@@ -540,7 +539,7 @@ const Question: NextPage = () => {
           <Container
             sx={{ paddingTop: { xs: "3rem" }, paddingBottom: { xs: "3rem" } }}
           >
-            <Grid container spacing={2}>
+            {(!notFound)&&<Grid container spacing={2}>
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <Box
                   className={styles.ElementContainer}
@@ -2120,7 +2119,87 @@ const Question: NextPage = () => {
                   Estado
                 </Button>
               </Grid>
-            </Grid>
+            </Grid>}
+            {
+              (notFound)&&<Grid container spacing={2}>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <Box
+               
+                  sx={{ height: "100%" }}
+                >
+                  <Grid container>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography
+                        variant="inherit"
+                        component="h1"
+                        className={
+                          styles.ItemTitleElement +
+                          " " +
+                          styles.ColorTextPrimaryA
+                        }
+                        sx={{
+                          textAlign:"center"
+                        }}
+                      >
+                        Consulta no Encontrada
+                      </Typography>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={12}
+                      md={12}
+                      lg={12}
+                      xl={12}
+                      sx={{ textAlign:"center",marginTop:"1rem" }}
+                    >
+                      
+                       <img
+                src="/images/icons/consultas.svg"
+                alt=""
+                className={styles.ImagenPanelItem}
+              />
+                    </Grid>
+
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography
+                        variant="inherit"
+                        component="h2"
+                        className={
+                          styles.ItemDescriptionElement + " " + styles.ColorText
+                        }
+                        sx={{
+                          marginBottom: "0.5rem",
+                          marginTop: "1rem",
+                          textAlign:"center"
+                        }}
+                      >
+                      #{query['id']}
+                      </Typography>
+                    </Grid>
+                    
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography
+                        variant="inherit"
+                        component="h2"
+                        className={
+                          styles.ItemDescriptionElement +
+                          " " +
+                          styles.ColorTextGray
+                        }
+                        sx={{
+                          marginBottom: "0.5rem",
+                          textAlign:"center"
+                        }}
+                      >
+                       Verifica que el identificador ha sido ingresado correctamente
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Grid>
+              </Grid>
+            }
           </Container>
         </Box>
       </Layout>

@@ -24,109 +24,27 @@ import Modal from "@mui/material/Modal";
 import Skeleton from "@mui/material/Skeleton";
 import { format } from "date-fns";
 import fetchData from "../../src/utils/fetch";
-const PersonalizedText = createTheme({
-  components: {
-    // Name of the component
-    MuiInputBase: {
-      styleOverrides: {
-        // Name of the slot
-        root: {
-          "&.MuiInputBase-root": {
-            background: "none!important",
-            /*border:"none!important",*/
-            borderRadius: "2rem",
-            /* border:"3px solid #6817FF!important",*/
-            border: "none!important",
-            backgroundColor: "#ffffff!important",
-            padding: "0!important",
-          },
-          "&.MuiInputBase-root::after": {
-            background: "none!important",
-            border: "none!important",
-          },
-          "&.MuiInputBase-root::before": {
-            background: "none!important",
-            border: "none!important",
-          },
-          // Some CSS
-        },
-      },
-      defaultProps: {},
-    },
-  },
-});
+import { getDateFormat, getNumber, pagination, validate } from "../../components/imports/Functions";
+import {
+  getBuyer,
+  getCurrencyAmount,
+  getEnquiryPeriodEndDate,
+  getProcessAmount,
+  getProcessCurrency,
+  getProcessItems,
+  getProcessPliego,
+  getProcessTitle,
+  getProcurementMethodDetails,
+  getProcuringEntity,
+  getProcuringEntityContactEmail,
+  getProcuringEntityContactName,
+  getProcuringEntityContactTelephone,
+  getProcuringEntityType,
+  getTenderPeriodEndDate,
+} from "../../components/imports/ProcessFunctions";
 
-const PersonalizedTextSearch = createTheme({
-  components: {
-    // Name of the component
-    MuiInputBase: {
-      styleOverrides: {
-        // Name of the slot
-        root: {
-          /*"&.MuiInputBase-root":{
-              background: "none!important",
-              border:"none!important"
-            },*/
-          "&.MuiInputBase-root::after": {
-            background: "none!important",
-            border: "none!important",
-          },
-          "&.MuiInputBase-root::before": {
-            background: "none!important",
-            border: "none!important",
-          },
-          "&.MuiInputBase-root": {
-            background: "none!important",
-            border: "none!important",
-            borderRadius: "2rem",
-            backgroundColor: "#F8F8F8!important",
-          },
-          // Some CSS
-        },
-      },
-      defaultProps: {},
-    },
-  },
-});
 
-const PersonalizedFilterSearch = createTheme({
-  components: {
-    // Name of the component
-    MuiInputBase: {
-      styleOverrides: {
-        // Name of the slot
-        root: {
-          /*"&.MuiInputBase-root":{
-            background: "none!important",
-            border:"none!important"
-          },*/
-          "&.MuiInputBase-root::after": {
-            background: "none!important",
-            border: "none!important",
-          },
-          "&.MuiInputBase-root::before": {
-            background: "none!important",
-            border: "none!important",
-          },
-          "&.MuiInputBase-root": {
-            background: "none!important",
-            border: "none!important",
-            borderRadius: "2rem",
-            backgroundColor: "#F8F8F8!important",
-          },
-          // Some CSS
-        },
-      },
-      defaultProps: {},
-    },
-  },
-});
-const uocs = [
-  { texto: "UOC ANDE" },
-  { texto: "UOC XYZ" },
-  { texto: "UOC XY" },
-  { texto: "UOC XZ" },
-];
+
 const Question: NextPage = () => {
   const { query, isReady } = useRouter();
   var router = useRouter();
@@ -137,6 +55,7 @@ const Question: NextPage = () => {
     }
   }, [isReady,query]);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [notFound, setNotFound] = React.useState(false);
   const [isPreLoading, setIsPreLoading] = React.useState(false);
   const [openMessage, setOpenMessage] = React.useState(false);
   const [Message, setMessage] = React.useState("");
@@ -180,84 +99,6 @@ const Question: NextPage = () => {
           </span>
         );
     }
-  }
-  function getDateFormat(text: string) {
-    if (text) {
-      return format(new Date(text), "dd/MM/yyyy");
-    } else {
-      return "";
-    }
-  }
-  function getProcurementMethodDetails(processData: any) {
-    return processData?.tender?.procurementMethodDetails
-      ? processData?.tender?.procurementMethodDetails
-      : null;
-  }
-  function getProcessTitle(processData: any) {
-    return processData?.tender?.title
-      ? processData?.tender?.title
-      : processData?.planning?.budget?.description
-      ? processData?.planning?.budget?.description
-      : null;
-  }
-
-  function getBuyer(processData: any) {
-    return processData?.buyer?.name ? processData?.buyer?.name : null;
-  }
-
-  function getProcuringEntity(processData: any) {
-    return processData?.tender?.procuringEntity?.name
-      ? processData?.tender?.procuringEntity?.name
-      : null;
-  }
-  function getEnquiryPeriodEndDate(processData: any) {
-    return processData.tender?.enquiryPeriod?.endDate
-      ? processData.tender?.enquiryPeriod?.endDate
-      : null;
-  }
-  function getTenderPeriodEndDate(processData: any) {
-    return processData.tender?.tenderPeriod?.endDate
-      ? processData.tender?.tenderPeriod?.endDate
-      : null;
-  }
-  function getProcessAmount(processData: any) {
-    return processData?.tender?.value?.amount
-      ? getCurrencyAmount(processData?.tender?.value?.amount)
-      : processData?.planning?.budget?.amount?.amount
-      ? getCurrencyAmount(processData?.planning?.budget?.amount?.amount)
-      : null;
-  }
-  function getProcessCurrency(processData: any) {
-    return processData?.tender?.value?.currency
-      ? processData?.tender?.value?.currency
-      : processData?.planning?.budget?.amount?.currency
-      ? processData?.planning?.budget?.amount?.currency
-      : null;
-  }
-
-  function getProcessItems(processData: any) {
-    return processData?.tender?.items
-      ? processData?.tender?.items
-      : processData?.planning?.items
-      ? processData?.planning?.items
-      : [];
-  }
-  function getProcessPliego(processData: any) {
-    return processData?.tender?.id
-      ? `https://www.contrataciones.gov.py/licitaciones/convocatoria/${processData?.tender?.id}.html#pliego`
-      : "";
-  }
-  function getCurrencyAmount(digit: number) {
-    return new Intl.NumberFormat("es-PY", {
-      style: "currency",
-      currency: "PYG",
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-      currencyDisplay: "code",
-    })
-      .format(digit)
-      .replace("PYG", "")
-      .trim();
   }
 
   async function getProcess(ocid: any) {
@@ -316,12 +157,10 @@ const Question: NextPage = () => {
         getProcess(data?.ocid);
        
       } else {
-        setMessage("Consulta no encontrada");
-        setOpenMessage(true);
+        setNotFound(true);
       }
     } catch (error) {
-      setMessage("Consulta no encontrada");
-      setOpenMessage(true);
+      setNotFound(true);
       console.dir(error);
     } finally {
       setIsPreLoading(false);
@@ -343,7 +182,7 @@ const Question: NextPage = () => {
           <Container
             sx={{ paddingTop: { xs: "3rem" }, paddingBottom: { xs: "3rem" } }}
           >
-            <Grid container spacing={2}>
+            {(!notFound)&&<Grid container spacing={2}>
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <Box
                   className={styles.ElementContainer}
@@ -554,32 +393,7 @@ const Question: NextPage = () => {
                   </Grid>
                 </Box>
               </Grid>
-              {/*
-            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                <Box className={styles.ElementContainer } sx={{height:"100%"}}>
-                    <Grid container>
-                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                        <Typography variant="inherit" component="h1"  className={styles.ItemTitleElement + " "+ styles.ColorTextPrimaryA}>
-                        Respuesta
-                          </Typography>
-     
-                        </Grid>
-                        
-                       
-                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                     
-                        <Typography variant="inherit" component="p"  className={styles.ItemDescriptionElement+" "+styles.ColorTextGray+" "+styles.ItemDescriptionElementText} sx={{
-                            marginTop:"1rem"
-                        }}>
-                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        </Typography>
-                        </Grid>
-                       
-                       
-                      
-                    </Grid>
-                </Box>
-            </Grid>*/}
+      
 
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <Box className={styles.ElementContainer}>
@@ -1261,7 +1075,87 @@ const Question: NextPage = () => {
                   </Box>
                 </Box>
               </Grid>
-            </Grid>
+            </Grid>}
+            {
+              (notFound)&&<Grid container spacing={2}>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <Box
+               
+                  sx={{ height: "100%" }}
+                >
+                  <Grid container>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography
+                        variant="inherit"
+                        component="h1"
+                        className={
+                          styles.ItemTitleElement +
+                          " " +
+                          styles.ColorTextPrimaryA
+                        }
+                        sx={{
+                          textAlign:"center"
+                        }}
+                      >
+                        Consulta no Encontrada
+                      </Typography>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={12}
+                      md={12}
+                      lg={12}
+                      xl={12}
+                      sx={{ textAlign:"center",marginTop:"1rem" }}
+                    >
+                      
+                       <img
+                src="/images/icons/consultas.svg"
+                alt=""
+                className={styles.ImagenPanelItem}
+              />
+                    </Grid>
+
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography
+                        variant="inherit"
+                        component="h2"
+                        className={
+                          styles.ItemDescriptionElement + " " + styles.ColorText
+                        }
+                        sx={{
+                          marginBottom: "0.5rem",
+                          marginTop: "1rem",
+                          textAlign:"center"
+                        }}
+                      >
+                      #{query['id']}
+                      </Typography>
+                    </Grid>
+                    
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                      <Typography
+                        variant="inherit"
+                        component="h2"
+                        className={
+                          styles.ItemDescriptionElement +
+                          " " +
+                          styles.ColorTextGray
+                        }
+                        sx={{
+                          marginBottom: "0.5rem",
+                          textAlign:"center"
+                        }}
+                      >
+                       Verifica que el identificador ha sido ingresado correctamente
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Grid>
+              </Grid>
+            }
           </Container>
         </Box>
       </Layout>
