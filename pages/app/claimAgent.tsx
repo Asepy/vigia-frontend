@@ -2107,6 +2107,8 @@ onChange={(event, newValue) => {
                             <a
                               href={getProcessPliego(processData)}
                               className={styles.LinkedText}
+                              target="_blank"
+                              rel="noreferrer"
                             >
                               <span>
                                 Puedes obtener más información sobre este
