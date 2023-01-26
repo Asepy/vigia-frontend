@@ -280,6 +280,7 @@ const IdentifiedProcess: NextPage = () => {
                           href={getProcessURL(processData)}
                           className={styles.LinkText}
                           target="_blank"
+                          rel="noreferrer"
                         >
                           Click Aquí
                         </a>
@@ -924,6 +925,7 @@ const IdentifiedProcess: NextPage = () => {
                           href={getProcessPliego(processData)}
                           className={styles.LinkedText}
                           target="_blank"
+                          rel="noreferrer"
                         >
                           <span>
                             Pliego de Bases y Condiciones, Requisitos
