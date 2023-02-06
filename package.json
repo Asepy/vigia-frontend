@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@aws-amplify/ui-react": "^3.5.7",
+    "@ckeditor/ckeditor5-build-classic": "^36.0.0",
+    "@ckeditor/ckeditor5-react": "^5.0.6",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "^5.10.3",
@@ -35,6 +37,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@types/ckeditor__ckeditor5-build-classic": "^29.0.1",
     "@types/file-saver": "^2.0.5",
     "@types/isomorphic-fetch": "^0.0.36",
     "@types/node": "18.7.16",

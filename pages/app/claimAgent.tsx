@@ -29,8 +29,10 @@ import {
   getProcessAmount,
   getProcessCurrency,
   getProcessItems,
+  getProcessPlanningId,
   getProcessPliego,
   getProcessTitle,
+  getProcessURL,
   getProcurementMethodDetails,
   getProcuringEntity,
   getProcuringEntityContactEmail,
@@ -44,6 +46,7 @@ import {
   PersonalizedSelect,
   PersonalizedTextArea,
   PersonalizedTextSearch,
+  PersonalizedText,PersonalizedTextAutocomplete,PersonalizedTextKeywords
 } from "../../components/ui/DesignElements";
 import Layout from "../../components/ui/Layout/Layout";
 import { useAuth } from "../../src/contexts/auth-context";
@@ -60,7 +63,37 @@ import { Claim } from "../../src/interfaces/claim";
 import { Task } from "../../src/interfaces/task";
 import { RECLAMO } from "../../src/interfaces/type-claim-or-question";
 import fetchData from "../../src/utils/fetch";
+import Autocomplete from "@mui/material/Autocomplete";
+import Chip from "@mui/material/Chip";
+import { createFilterOptions } from "@mui/material/Autocomplete";
+import * as yup from "yup";
+import { ValidationError } from "yup";
 
+//import { CKEditor } from '@ckeditor/ckeditor5-react';
+//import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+//email: yup.string().required("Ingresa un Correo Electrónico").email("Ingresa un Correo Electrónico Válido"),
+let schemaMail = yup.object().shape({
+  
+  message: yup.string().required("Escribí el mensaje a enviar"),
+  subject: yup.string().required("ingresa el asunto del correo"),
+  to:yup.array().min(1,"Ingresa un Correo Electrónico").of(yup.string().email(({ value }) => `Para: ${value} no es un Correo Electrónico Válido`)),
+  cc:yup.array().of(yup.string().email(({ value }) => `CC: ${value} no es un Correo Electrónico Válido`)),
+  cco:yup.array().of(yup.string().email(({ value }) => `CCO: ${value} no es un Correo Electrónico Válido`)),
+  type_request: yup.string().required("Falta el tipo de consulta"),
+  type_mail: yup.string().required("Falta el tipo de correo"),
+  id: yup.string().required("Falta el identificador de la consulta"),
+  call: yup.string().required("Falta el identificador del llamado"),
+  ocid: yup.string().required("Falta el ocid"),
+});
+import { validateSchema } from "../../src/utils/schema";
+
+const filterOptions = createFilterOptions({
+  ignoreAccents: true,
+  ignoreCase: true,
+  trim: true,
+  limit: 10,
+});
 
 interface StateType {
   value: string;
@@ -114,6 +147,26 @@ const Claim: NextPage = () => {
   const [openModalState, setOpenModalState] = React.useState(false);
   const handleOpenModalState = () => setOpenModalState(true);
   const handleCloseModalState = () => setOpenModalState(false);
+
+  const [openModalMail, setOpenModalMail] = React.useState(false);
+  const handleOpenModalMail = () => setOpenModalMail(true);
+  const handleCloseModalMail = () => setOpenModalMail(false);
+
+
+
+  const [MailToState, setMailToState] = React.useState<Array<any>>([]);
+  const [MailToInputState, setMailToInputState] = React.useState("");
+  const [MailCCState, setMailCCState] = React.useState<Array<any>>([]);
+  const [MailCCInputState, setMailCCInputState] = React.useState("");
+  const [MailCCOState, setMailCCOState] = React.useState<Array<any>>([]);
+  const [MailCCOInputState, setMailCCOInputState] = React.useState("");
+  const [MailSubjectState, setMailSubjectState] = React.useState("");
+  const [MailMessageState, setMailMessageState] = React.useState("");
+  const [showCC, setShowCC] = React.useState(false);
+  const [showCCO, setShowCCO] = React.useState(false);
+  const [isLoadingSendMail, setIsLoadingSendMail] = React.useState(false);
+
+
   /*User Search Filters */
   const [UserClaimsPaginationState, setUserClaimsPaginationState]: any =
     React.useState({
@@ -153,6 +206,31 @@ const Claim: NextPage = () => {
       const data = await fetchData("getProcessDNCPOCID",{ ocid: ocid },"POST",false);
       if (!data.error) {
         setProcessData(data);
+        
+        if(getProcuringEntityContactEmail(data)){
+          setMailToState([getProcuringEntityContactEmail(data)])
+        };
+        setMailSubjectState(
+          `Reclamo, llamado ${getProcessPlanningId(data)}, VigiA ${query["id"]}`
+        );
+        setMailMessageState(
+        `Muy Buenas tardes estimado ${getProcuringEntityContactName(data)?getProcuringEntityContactName(data):''},
+
+Escribimos de parte del portal VigiA de la Asociación de Emprendedores de Paraguay (ASEPY), para canalizar el reclamo del usuario: ${process.env.NEXT_PUBLIC_FRONTEND_URL}/claims/claim/?id=${query["id"]} 
+
+En relación al llamado ${getProcessPlanningId(data)} de ${getProcuringEntity(data)}, disponible en el portal de la DNCP: ${getProcessURL(data)}
+
+
+De igual manera, este reclamo también fue presentado a través del SICP.
+
+Quedamos atentos a la respuesta en tiempo y forma, poniéndonos a disposición para cualquier otra eventualidad.
+`)
+
+        
+
+
+
+        getProcuringEntityContactEmail(processData)
 
       } else {
         setMessage("Llamado no encontrado");
@@ -272,6 +350,60 @@ const Claim: NextPage = () => {
     } finally {
       setIsPreLoading(false);
     }
+  }
+
+  async function SendMail(){
+
+    if(isLoadingSendMail){
+      return;
+    }
+    
+    let mailData={
+      call:getProcessPlanningId(processData),
+      ocid:claimData?.ocid,
+      message:MailMessageState,
+      subject:MailSubjectState,
+      to:MailToState,
+      cc:MailCCState,
+      cco:MailCCOState,
+      type_request:"RECLAMO",
+      type_mail:"CONTACTO_UOC",
+      id:claimData?.id
+    }
+    if (!validateSchema(schemaMail, mailData, setAlertMessage)) {
+      return;
+    }
+    setIsLoadingSendMail(true);
+    try {
+      const data = await fetchData("sendDirectMail",mailData,"POST",true);
+      if (!data.error ) {
+        console.dir(data)
+        setAlertMessage({
+          message: "Correo enviado con exito",
+          severity: "success",
+        });
+
+      } else {
+        console.dir(data)
+        setAlertMessage({
+          message: "Error al enviar el correo electronico",
+          severity: "error",
+        });
+      }
+      
+    } catch (error) {
+      setAlertMessage({
+        message: "Error al enviar el correo electronico",
+        severity: "error",
+      });
+      console.dir(error);
+    } finally {
+      setIsLoadingSendMail(false);
+      
+    }
+
+
+    console.dir(mailData)
   }
 
   async function updateClaimVisualization(claim:any) {
@@ -423,11 +555,406 @@ const Claim: NextPage = () => {
     <>
       <Head>
         <title>VigiA - Revisión Reclamo</title>
-        <meta name="description" content="Reclamo" />
+        <meta name="description" content="Revisión Reclamo" />
         <link rel="icon" href="/favicon.ico" />
 
       </Head>
       <Layout>
+      <Modal
+          open={openModalMail}
+          onClose={handleCloseModalMail}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          style={{
+            backdropFilter: "blur(2px)",
+            backgroundColor: "rgb(255, 255,255, 0.2)",
+          }}
+          className="animate fadeIn"
+        >
+          <Box className={styles.ModalStyle}>
+            <Box
+              className={styles.CloseModalButton}
+              onClick={handleCloseModalMail}
+            >
+              <CloseIcon className={styles.IconCloseModalButton} />
+            </Box>
+
+            
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              className={styles.TitleProcess}
+            >
+              Contactar UOC
+            </Typography>
+            <Grid container >
+                  <Grid item xs={6} sm={6} md={6} lg={6} xl={6} sx={{}}>
+                  <Box className={styles.InputTitle}>
+                  Para
+                    <span className={styles.ColorDanger}>*</span>
+                  </Box>
+                  </Grid>
+                  <Grid item xs={6} sm={6} md={6} lg={6} xl={6} sx={{textAlign:"right"}}>
+                  
+                  {(!showCC)&&<Box className={styles.InputTitle} sx={{cursor:"pointer",display:"inline-block"}} onClick={()=>{
+                    setShowCC(true);
+                  }}>
+                     &nbsp;
+                  Cc
+                  &nbsp;
+                  </Box>}
+                  {(!showCCO)&&<Box className={styles.InputTitle} sx={{cursor:"pointer",display:"inline-block"}} onClick={()=>{
+                    setShowCCO(true);
+                  }}>
+                    &nbsp;
+                  CCO
+                  &nbsp;
+                  </Box>}
+                  
+                  </Grid>
+            </Grid>
+            
+            <Autocomplete
+                            onChange={(event, newValue) => {
+                              if(!(newValue.length>10)){
+                                setMailToState(newValue);
+                                setMailToInputState("");
+                              }
+                              
+                              
+                            }}
+                            inputValue={MailToInputState}
+                            onInputChange={(event, newInputValue) => {
+                              const options = newInputValue.split(/[\s,]+/).filter((x:string) => {return (!MailToState.includes(x))&&x!=='';});
+                     
+                              if (options.length > 1 || (options.length==1 && /[\s,]+/g.test(newInputValue))) {
+                                let keywords=MailToState
+                                .concat(options)
+                                .map((x:string) =>{ return x.trim()})
+                                .filter((x:string) => {return x;});
+
+                                if(keywords.length<=10){
+                                  setMailToState(
+                                    keywords
+                                  );
+                                  
+                                }
+                                setMailToInputState("");
+                              } else {
+                                
+                                  setMailToInputState(newInputValue.replace(/[\s,]+/g,""));
+                                
+                                
+                              }
+                            }}
+                            onBlur={(event) => {
+                              
+                              const options = MailToInputState.split(/[\s,]+/).filter((x:string) => {return (!MailToState.includes(x))&&x!=='';});
+                            
+                              if (options.length >= 1 ) {
+                                let keywords=MailToState
+                                .concat(options)
+                                .map((x:string) =>{ return x.trim()})
+                                .filter((x:string) => {return x;});
+                                if(keywords.length<=10){
+                                  setMailToState(
+                                    keywords
+                                  );
+                                  
+                                }
+                                setMailToInputState("");
+                                
+                              } 
+                            }}
+                            value={MailToState}
+                            multiple
+                            id="size-small-filled-multi"
+                            size="small"
+                            filterOptions={filterOptions}
+                            options={[]}
+                            getOptionLabel={(option) => option}
+                            freeSolo
+                            renderTags={(value, getTagProps) =>
+                              value.map((option, index) => (
+                                <Chip
+                                  variant="outlined"
+                                  label={option}
+                                  size="small"
+                                  {...getTagProps({ index })}
+                                  className={styles.ChipAutoComplete}
+                                  key={index}
+                                />
+                              ))
+                            }
+                            renderInput={(params) => (
+                              <ThemeProvider theme={PersonalizedTextKeywords}>
+                                <TextField
+                                  {...params}
+                                  variant="filled"
+                                  label="Ingresa los destinatarios"
+                                  placeholder=""
+                                  className={styles.InputTextKeywords}
+                                />
+                              </ThemeProvider>
+                            )}
+                          />
+          
+            {
+              showCC&&<Box className={styles.InputTitle} sx={{cursor:"pointer"}}>
+               Cc
+              </Box>
+            }
+            {showCC&&<Autocomplete
+                            onChange={(event, newValue) => {
+                              if(!(newValue.length>10)){
+                                setMailCCState(newValue);
+                                setMailCCInputState("");
+                              }
+                              
+                              
+                            }}
+                            inputValue={MailCCInputState}
+                            onInputChange={(event, newInputValue) => {
+                              const options = newInputValue.split(/[\s,]+/).filter((x:string) => {return (!MailCCState.includes(x))&&x!=='';});
+                     
+                              if (options.length > 1 || (options.length==1 && /[\s,]+/g.test(newInputValue))) {
+                                let keywords=MailCCState
+                                .concat(options)
+                                .map((x:string) =>{ return x.trim()})
+                                .filter((x:string) => {return x;});
+
+                                if(keywords.length<=10){
+                                  setMailCCState(
+                                    keywords
+                                  );
+                                  
+                                }
+                                setMailCCInputState("");
+                              } else {
+                                
+                                  setMailCCInputState(newInputValue.replace(/[\s,]+/g,""));
+                                
+                                
+                              }
+                            }}
+                            onBlur={(event) => {
+                              
+                              const options = MailToInputState.split(/[\s,]+/).filter((x:string) => {return (!MailCCState.includes(x))&&x!=='';});
+                            
+                              if (options.length >= 1 ) {
+                                let keywords=MailCCState
+                                .concat(options)
+                                .map((x:string) =>{ return x.trim()})
+                                .filter((x:string) => {return x;});
+                                if(keywords.length<=10){
+                                  setMailCCState(
+                                    keywords
+                                  );
+                                  
+                                }
+                                setMailCCInputState("");
+                                
+                              } 
+                            }}
+                            value={MailCCState}
+                            multiple
+                            id="size-small-filled-multi"
+                            size="small"
+                            filterOptions={filterOptions}
+                            options={[]}
+                            getOptionLabel={(option) => option}
+                            freeSolo
+                            renderTags={(value, getTagProps) =>
+                              value.map((option, index) => (
+                                <Chip
+                                  variant="outlined"
+                                  label={option}
+                                  size="small"
+                                  {...getTagProps({ index })}
+                                  className={styles.ChipAutoComplete}
+                                  key={index}
+                                />
+                              ))
+                            }
+                            renderInput={(params) => (
+                              <ThemeProvider theme={PersonalizedTextKeywords}>
+                                <TextField
+                                  {...params}
+                                  variant="filled"
+                                  label="Ingresa los destinatarios"
+                                  placeholder=""
+                                  className={styles.InputTextKeywords}
+                                />
+                              </ThemeProvider>
+                            )}
+                          />}
+            {showCCO&&<Box className={styles.InputTitle} sx={{cursor:"pointer"}} onClick={()=>{
+              setShowCCO(true);
+            }}>
+             CCO
+            </Box>
+            }
+            {showCCO&&<Autocomplete
+                            onChange={(event, newValue) => {
+                              if(!(newValue.length>10)){
+                                setMailCCOState(newValue);
+                                setMailCCOInputState("");
+                              }
+                              
+                              
+                            }}
+                            inputValue={MailCCOInputState}
+                            onInputChange={(event, newInputValue) => {
+                              const options = newInputValue.split(/[\s,]+/).filter((x:string) => {return (!MailCCOState.includes(x))&&x!=='';});
+                     
+                              if (options.length > 1 || (options.length==1 && /[\s,]+/g.test(newInputValue))) {
+                                let keywords=MailCCOState
+                                .concat(options)
+                                .map((x:string) =>{ return x.trim()})
+                                .filter((x:string) => {return x;});
+
+                                if(keywords.length<=10){
+                                  setMailCCOState(
+                                    keywords
+                                  );
+                                  
+                                }
+                                setMailCCOInputState("");
+                              } else {
+                                
+                                  setMailCCOInputState(newInputValue.replace(/[\s,]+/g,""));
+                                
+                                
+                              }
+                            }}
+                            onBlur={(event) => {
+                              
+                              const options = MailToInputState.split(/[\s,]+/).filter((x:string) => {return (!MailCCOState.includes(x))&&x!=='';});
+                            
+                              if (options.length >= 1 ) {
+                                let keywords=MailCCOState
+                                .concat(options)
+                                .map((x:string) =>{ return x.trim()})
+                                .filter((x:string) => {return x;});
+                                if(keywords.length<=10){
+                                  setMailCCOState(
+                                    keywords
+                                  );
+                                  
+                                }
+                                setMailCCOInputState("");
+                                
+                              } 
+                            }}
+                            value={MailCCOState}
+                            multiple
+                            id="size-small-filled-multi"
+                            size="small"
+                            filterOptions={filterOptions}
+                            options={[]}
+                            getOptionLabel={(option) => option}
+                            freeSolo
+                            renderTags={(value, getTagProps) =>
+                              value.map((option, index) => (
+                                <Chip
+                                  variant="outlined"
+                                  label={option}
+                                  size="small"
+                                  {...getTagProps({ index })}
+                                  className={styles.ChipAutoComplete}
+                                  key={index}
+                                />
+                              ))
+                            }
+                            renderInput={(params) => (
+                              <ThemeProvider theme={PersonalizedTextKeywords}>
+                                <TextField
+                                  {...params}
+                                  variant="filled"
+                                  label="Ingresa los destinatarios"
+                                  placeholder=""
+                                  className={styles.InputTextKeywords}
+                                />
+                              </ThemeProvider>
+                            )}
+                          />}
+            <Box className={styles.InputTitle}>
+             Asunto
+              <span className={styles.ColorDanger}>*</span>
+            </Box>
+            <ThemeProvider theme={PersonalizedText}>
+              <TextField
+                label="Asunto del correo"
+                name="justify"
+                type="text"
+                variant="filled"
+                fullWidth
+                className={styles.InputText}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setMailSubjectState(e.target.value);
+                }}
+                value={MailSubjectState}
+              />
+            </ThemeProvider>
+            <Box className={styles.InputTitle}>
+              {" "}
+              Mensaje
+              <span className={styles.ColorDanger}>*</span>
+            </Box>
+            <ThemeProvider theme={PersonalizedTextArea}>
+              <TextField
+                label="Escribe el mensaje a enviar"
+                name="justify"
+                type="text"
+                variant="filled"
+                multiline
+                rows={3}
+                fullWidth
+                className={styles.InputText}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setMailMessageState(e.target.value);
+                }}
+                value={MailMessageState}
+              />
+            </ThemeProvider>
+          
+
+        
+
+            <Box
+              sx={{
+                width: "100%",
+                paddingBottom: "1rem",
+                paddingTop: "1rem",
+                height: "32px",
+              }}
+            >
+              {isLoadingSendMail && (
+                <LinearProgress className={styles.LoadingPrimary} />
+              )}
+            </Box>
+
+            <Box sx={{ textAlign: "right", mb: "1rem", mt: "1rem" }}>
+              <Button
+                title="Aceptar"
+                variant="contained"
+                disableElevation
+                className={styles.ButtonPrincipal}
+                onClick={async () => {
+                  await SendMail();
+                  handleCloseModalMail();
+                }}
+              >
+                Enviar
+              </Button>
+            </Box>
+          </Box>
+        </Modal>
+
+
+
+
         <Modal
           open={openModalState}
           onClose={handleCloseModalState}
@@ -2523,6 +3050,19 @@ onChange={(event, newValue) => {
                 }}
                 className={styles.MultipleButtons}
               >
+                <Button
+                  title="Contactar UOC"
+                  onClick={handleOpenModalMail}
+                  variant="contained"
+                  disableElevation
+                  className={
+                    styles.ButtonPrincipal + " " + styles.ButtonContrast_4
+                  }
+                >
+                  Contactar UOC
+                </Button>
+
+
                 <Button
                   title="Estado"
                   onClick={handleOpenModalState}
