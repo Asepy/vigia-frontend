@@ -68,7 +68,8 @@ import Chip from "@mui/material/Chip";
 import { createFilterOptions } from "@mui/material/Autocomplete";
 import * as yup from "yup";
 import { ValidationError } from "yup";
-
+import dynamic from 'next/dynamic'
+const Editor = dynamic(() => import('../../components/fields/Editor'), { ssr: false })
 //import { CKEditor } from '@ckeditor/ckeditor5-react';
 //import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
@@ -200,31 +201,50 @@ const Claim: NextPage = () => {
 
     }
   }
-  async function getProcess(ocid: any) {
+  async function getProcess(claimResponse:any) {
     setIsLoading(true);
     try {
-      const data = await fetchData("getProcessDNCPOCID",{ ocid: ocid },"POST",false);
+      const data = await fetchData("getProcessDNCPOCID",{ ocid: claimResponse?.ocid },"POST",false);
       if (!data.error) {
         setProcessData(data);
         
         if(getProcuringEntityContactEmail(data)){
-          setMailToState([getProcuringEntityContactEmail(data)])
+         setMailToState([getProcuringEntityContactEmail(data)])
         };
         setMailSubjectState(
           `Reclamo, llamado ${getProcessPlanningId(data)}, VigiA ${query["id"]}`
         );
         setMailMessageState(
-        `Muy Buenas tardes estimado ${getProcuringEntityContactName(data)?getProcuringEntityContactName(data):''},
-
-Escribimos de parte del portal VigiA de la Asociación de Emprendedores de Paraguay (ASEPY), para canalizar el reclamo del usuario: ${process.env.NEXT_PUBLIC_FRONTEND_URL}/claims/claim/?id=${query["id"]} 
-
-En relación al llamado ${getProcessPlanningId(data)} de ${getProcuringEntity(data)}, disponible en el portal de la DNCP: ${getProcessURL(data)}
-
-
-De igual manera, este reclamo también fue presentado a través del SICP.
-
-Quedamos atentos a la respuesta en tiempo y forma, poniéndonos a disposición para cualquier otra eventualidad.
-`)
+          `<p>Estimado ${getProcuringEntityContactName(data)?getProcuringEntityContactName(data):''}, 
+          <br>
+          <br>
+          Espero que este mail te encuentre bien, soy Cristian Sosa, director de la Asociación de Emprendedores de Paraguay (ASEPY) y coordinador de la Vigía, una plataforma que busca mejorar el proceso de compras públicas para las mipymes. 
+          <br>
+          <br>
+          En esta ocasión te escribo con relación a un reclamo en específico que nos acercaron sobre la Licitación ${getProcessPlanningId(data)} - ${getProcessTitle(data)} (${process.env.NEXT_PUBLIC_FRONTEND_URL}/claims/claim/?id=${claimResponse?.enlace}), a cargo de ${getProcuringEntity(data)}
+          <br>
+          <br>
+          <br>
+          Reclamo:
+          <br>
+          <br>
+          <b>
+          <i>
+          "${claimResponse?.reclamo}"
+          </i>
+          </b>
+          <br>
+          <br>
+          <br>
+          Igualmente, cumplo en informar que este reclamo ha sido ingresado al SICP para su canalización institucional correspondiente, por lo que la falta de respuesta puede devenir en una investigación que resuelva la anulación del presente procedimiento de contratación.
+          <br>
+          <br>
+          Sin otro motivo, me despido atentamente y quedo atento a la respuesta, así como también me pongo a disposición para cualquier consulta. 
+          
+          <br>
+          <br>
+          Saludos.</p>
+  `)
 
         
 
@@ -338,7 +358,7 @@ Quedamos atentos a la respuesta en tiempo y forma, poniéndonos a disposición p
           page: 1,
           pageSize: 5,
         });
-        getProcess(data?.ocid);
+        getProcess(data);
         updateClaimVisualization(data)
 
       } else {
@@ -902,7 +922,15 @@ Quedamos atentos a la respuesta en tiempo y forma, poniéndonos a disposición p
               Mensaje
               <span className={styles.ColorDanger}>*</span>
             </Box>
-            <ThemeProvider theme={PersonalizedTextArea}>
+            <Editor
+                    value={MailMessageState}
+                    onChange={ ( event:any, editor:any ) => {
+                        setMailMessageState(event) ; 
+                      } }
+                  />
+                {
+                  /*
+                   <ThemeProvider theme={PersonalizedTextArea}>
               <TextField
                 label="Escribe el mensaje a enviar"
                 name="justify"
@@ -918,6 +946,9 @@ Quedamos atentos a la respuesta en tiempo y forma, poniéndonos a disposición p
                 value={MailMessageState}
               />
             </ThemeProvider>
+                   */
+                }
+           
           
 
         

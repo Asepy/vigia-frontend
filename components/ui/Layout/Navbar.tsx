@@ -21,6 +21,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { Auth } from "aws-amplify";
 import { useAuth } from "../../../src/contexts/auth-context";
+import fetchData from "../../../src/utils/fetch";
 
 /*
 const Navbar: NextPage = () => {
@@ -129,6 +130,13 @@ const Navbar: NextPage = () => {
   }
   async function logout() {
     try {
+      /*deslogeo */
+      try{
+        const data: any|null = await fetchData("setLogout",{'login':user?.login},"POST",true);
+      }catch(e){
+  
+      }
+
       await Auth.signOut();/*{ global: true }*/
       signOut();
       router.push("/");

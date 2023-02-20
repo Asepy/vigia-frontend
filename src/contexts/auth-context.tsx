@@ -12,7 +12,7 @@ import fetchData from "../../src/utils/fetch";
 export type AuthProviderValue = {
   user: User | null;
   token: Token | null;
-  signIn: (data: CognitoUser) => void;
+  signIn: (data: CognitoUser,login?:number|string) => void;
   signOut: () => void;
   getActualUser:() => Promise<User | null>;
 };
@@ -57,9 +57,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     getActualUser(true);
   }, []);
 
-  const signIn = async (data: CognitoUser) => {
+  const signIn = async (data: CognitoUser,login?:number|string) => {
     const attributes = (data as any).attributes;
-    const user = await getFetchGetUserRoles(attributes);
+    const user = await getFetchGetUserRoles({...attributes, ...{login:login}});
     const session = data.getSignInUserSession();
     const token: Token = {
       username: user?.sub ?? "",
@@ -72,7 +72,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     return user;
   };
 
-  const signOut = () => {
+  const signOut = async () => {
+    
     setUser(null);
     setToken(null);
     user && user.signOut && user.signOut();
@@ -95,7 +96,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
           return await signIn(userCheck)
         }else{
           if(updateUser){
-            return await signIn(userCheck);
+            return await signIn(userCheck,user?.login);
           }
           return user;
         }

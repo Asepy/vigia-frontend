@@ -5,6 +5,7 @@ export interface User {
   given_name: string;
   sub: string;
   roles: Array<string>;
+  login?:number|string;
 }
 
 export interface Token {

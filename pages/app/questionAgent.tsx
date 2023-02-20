@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import styles from "../../styles/Login.module.scss";
+import styles from "../../styles/Global.module.scss";
 import Layout from "../../components/ui/Layout/Layout";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -62,6 +62,9 @@ import Chip from "@mui/material/Chip";
 import { createFilterOptions } from "@mui/material/Autocomplete";
 import * as yup from "yup";
 import { ValidationError } from "yup";
+import dynamic from 'next/dynamic'
+const Editor = dynamic(() => import('../../components/fields/Editor'), { ssr: false })
+
 let schemaMail = yup.object().shape({
   
   message: yup.string().required("Escribí el mensaje a enviar"),
@@ -102,6 +105,10 @@ const Question: NextPage = () => {
       getTasks();
     }
   }, [isReady]);
+  const isSSR = () => {
+    console.dir(typeof(window));
+    return typeof window === 'undefined';
+  }; 
   const { setAlertMessage } = useAlertContext();
   const [isLoading, setIsLoading] = React.useState(false);
   const [notFound, setNotFound] = React.useState(false);
@@ -183,10 +190,10 @@ const Question: NextPage = () => {
 
     }
   }
-  async function getProcess(ocid: any) {
+  async function getProcess(questionResponse:any) {
     setIsLoading(true);
     try {
-      const data = await fetchData("getProcessDNCPOCID",{ ocid: ocid },"POST",false);
+      const data = await fetchData("getProcessDNCPOCID",{ ocid:questionResponse?.ocid },"POST",false);
       if (!data.error) {
         setProcessData(data);
 
@@ -197,7 +204,37 @@ const Question: NextPage = () => {
           `Consulta, llamado ${getProcessPlanningId(data)}, VigiA ${query["id"]}`
         );
         setMailMessageState(
-        `Muy Buenas tardes estimado ${getProcuringEntityContactName(data)?getProcuringEntityContactName(data):''},
+        `<p>Estimado ${getProcuringEntityContactName(data)?getProcuringEntityContactName(data):''}, 
+        <br>
+        <br>
+        Espero que este mail te encuentre bien, soy Cristian Sosa, director de la Asociación de Emprendedores de Paraguay (ASEPY) y coordinador de la Vigía, una plataforma que busca mejorar el proceso de compras públicas para las mipymes. 
+        <br>
+        <br>
+        En esta ocasión te escribo con relación a una consulta específica que nos acercaron sobre la Licitación ${getProcessPlanningId(data)} - ${getProcessTitle(data)} (${process.env.NEXT_PUBLIC_FRONTEND_URL}/questions/question/?id=${questionResponse?.enlace}), a cargo de ${getProcuringEntity(data)}
+        <br>
+        <br>
+        <br>
+        Consulta:
+        <br>
+        <br>
+        <b>
+        <i>
+        "${questionResponse?.consulta}"
+        </i>
+        </b>
+        <br>
+        <br>
+        <br>
+        Igualmente, cumplo en informar que esta consulta ha sido ingresada al SICP para su canalización institucional correspondiente, por lo que la falta de respuesta puede devenir en una investigación que resuelva la anulación del presente procedimiento de contratación.
+        <br>
+        <br>
+        Sin otro motivo, me despido atentamente y quedo atento a la respuesta, así como también me pongo a disposición para cualquier consulta. 
+        
+        <br>
+        <br>
+        Saludos.</p>
+`);
+/*<p>Muy Buenas tardes estimado ${getProcuringEntityContactName(data)?getProcuringEntityContactName(data):''},
 
 Escribimos de parte del portal VigiA de la Asociación de Emprendedores de Paraguay (ASEPY), para canalizar la consulta del usuario: ${process.env.NEXT_PUBLIC_FRONTEND_URL}/claims/claim/?id=${query["id"]} 
 
@@ -207,7 +244,8 @@ En relación al llamado ${getProcessPlanningId(data)} de ${getProcuringEntity(da
 De igual manera, esta consulta también fue presentada a través del SICP.
 
 Quedamos atentos a la respuesta en tiempo y forma, poniéndonos a disposición para cualquier otra eventualidad.
-`)
+
+</p> */
       } else {
         setMessage("Llamado no encontrado");
         setOpenMessage(true);
@@ -418,7 +456,7 @@ Quedamos atentos a la respuesta en tiempo y forma, poniéndonos a disposición p
           page: 1,
           pageSize: 5,
         });
-        getProcess(data?.ocid);
+        getProcess(data);
         updateQuestionVisualization(data);
 
       } else {
@@ -884,7 +922,37 @@ Quedamos atentos a la respuesta en tiempo y forma, poniéndonos a disposición p
               Mensaje
               <span className={styles.ColorDanger}>*</span>
             </Box>
-            <ThemeProvider theme={PersonalizedTextArea}>
+            <Editor
+                    value={MailMessageState}
+                    onChange={ ( event:any, editor:any ) => {
+                        setMailMessageState(event) ; 
+                      } }
+                  />
+           {/*
+            {<NonSSRWrapper>
+                  {(!isSSR())&&<CKEditor
+                  editor={ClassicEditor}
+                  data={setMailMessageState}
+                  onChange={(event:any, editor:any) => {
+                    const data = editor?.getData();
+                    console.dir(data);
+                  }}
+                />}
+               
+                  {
+                <Editor
+                    value={setMailMessageState}
+                    onChange={ ( event:any, editor:any ) => {
+                        const data = editor.getData();
+                        console.log( { event, editor, data } );
+                    } }
+                  />}
+                </NonSSRWrapper>
+                }
+
+
+
+               <ThemeProvider theme={PersonalizedTextArea}>
               <TextField
                 label="Escribe el mensaje a enviar"
                 name="justify"
@@ -899,7 +967,8 @@ Quedamos atentos a la respuesta en tiempo y forma, poniéndonos a disposición p
                 }}
                 value={MailMessageState}
               />
-            </ThemeProvider>
+            </ThemeProvider>*/}
+            
           
 
         

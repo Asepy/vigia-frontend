@@ -7,7 +7,7 @@ import { validateSchema } from "../../../src/utils/schema";
 import { SignInProps } from "../interface";
 import { loginSchema } from "../schema";
 import SignInView from "./SignInView";
-
+import fetchData from "../../../src/utils/fetch";
 const SignIn = ({ form, onChange, setFormType,userAuth,setUserAuth }: SignInProps) => {
   const router = useRouter();
   const { signIn } = useAuth();
@@ -31,8 +31,20 @@ const SignIn = ({ form, onChange, setFormType,userAuth,setUserAuth }: SignInProp
         setAlertMessage("Debes cambiar tu contraseña");
         setFormType("password");
       } else {
-        signIn(user);
+        let login:string|number|undefined=undefined;
+        try{
+          const data: any|null = await fetchData("setLogin",{},"POST",true);
+          login = data?.id
+        }catch(e){
+
+        }
+        
+        await signIn(user, login);
+        /*logeo */
+       
         router.push("/app/panel");
+        
+        
       }
     } catch (err: any) {
       switch (err.code) {
