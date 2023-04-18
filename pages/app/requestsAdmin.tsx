@@ -40,12 +40,12 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { getStage } from '../../components/imports/ProcessFunctions';
 import CountUp from "react-countup";
 
-import * as FileSaver from 'file-saver';
-import XLSX from 'sheetjs-style';
+import { useDialogContext } from "../../src/contexts/dialog-context";
 const AppReportAgent: NextPage = () => {
-  const pageRoute:string="/app/reportAgent";
+  const pageRoute:string="/app/requestsAdmin";
   const { query, isReady } = useRouter();
   var router = useRouter();
+  const { setDialog } = useDialogContext();
   React.useEffect( ()  => {
     if(isReady){
       Pagination={
@@ -54,19 +54,14 @@ const AppReportAgent: NextPage = () => {
       };
       assignValues(query);
       getRequests();
-      getCountRequests();
     }
   }, [isReady,query]);
-  React.useEffect( ()  => {
-    if(isReady){
-      //getCountRequests();
-    }
-  }, [isReady]);
+  
 
   const [defaultText, setDefaultText] = React.useState('');
   const [defaultDate, setDefaultDate] = React.useState(format(new Date(), "yyyy-MM-dd"));
   const [isLoading, setIsLoading] = React.useState(false);
-  const [isLoadingDownload, setIsLoadingDownload] = React.useState(false);
+  const [isLoadingUpdate, setIsLoadingUpdate] = React.useState(false);
   const [openMessage, setOpenMessage] = React.useState(false);
 
   const [Requests, setRequests ] =React.useState([]);
@@ -166,6 +161,18 @@ const AppReportAgent: NextPage = () => {
     {value:'tender',name:'Llamado'},
     {value:'award',name:'Adjudicación'},
     {value:'contract',name:'Contrato'}],
+  },
+  {
+    name:'Habilitación',
+    id:'enabled',
+    group:[
+      'enabledE'
+    ],
+    type:'select',
+    options:[
+      {value:'0',name:'Deshabilitada'},
+    {value:'1',name:'Habilitada'}
+  ],
   },
   /*{
     name:'Estado de la consulta',
@@ -281,6 +288,14 @@ const AppReportAgent: NextPage = () => {
       
       group:'stage',
     },
+
+    {    
+      name:'Igual a',
+      field:'enabledE',
+      value:'',
+      
+      group:'enabled',
+    },
     {    
       name:'Igual a',
       field:'taskStatusE',
@@ -391,7 +406,7 @@ function assignValues(parameters:any){
     let filters=getFilters();
     try {
 
-    const data = await fetchData("getRequestsReport",{
+    const data = await fetchData("getRequestsAdmin",{
       ...filters
      },"POST",true);
     if((!data.error) ){
@@ -424,38 +439,6 @@ function assignValues(parameters:any){
      setIsLoading(false);
     }
   }
-  async function getFullRequests(){
-    
-    if(isLoadingDownload){
-      return;
-    }
-    setIsLoadingDownload(true);
-    let filters=getFilters();
-    filters['fullRecords']=true;
-    try {
-
-    const data = await fetchData("getRequestsReport",{
-      ...filters
-     },"POST",true);
-    if((!data.error) ){
-      if(data?.data?.length){
-        
-       downdloadXLSX(data?.data);
-      }else{
-        setAlertMessage({ message: "No hay solicitudes", severity: "info" });
-      }
-     
-    }else{
-      setAlertMessage({ message: "No hay solicitudes todavia", severity: "info" });
-    }
-    } catch (error) {
-      setAlertMessage({ message: "Aun no hay solicitudes", severity: "info" });
-      console.dir(error)
-    } finally {
-      setIsLoadingDownload(false)
-    }
-  }
-
   async function getCountRequests(){
     
 
@@ -497,19 +480,41 @@ function assignValues(parameters:any){
     } finally {
     }
   }
-  function downdloadXLSX(data:Array<any>){
-    const xlsxMimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-    const workSheet= XLSX.utils.json_to_sheet(data);
-    const workBook = { Sheets: {Solicitudes : workSheet}, SheetNames:['Solicitudes']};
-    const excelBuffer = XLSX.write(workBook,{bookType:"xlsx", type: "array"});
-    const downloadData = new Blob([excelBuffer], {type:xlsxMimeType});
-    FileSaver.saveAs(downloadData, `Solicitudes_VigiA.xlsx`)
+  async function updateRequest(enabled:string,link:string,type:string){
+    if(isLoadingUpdate){
+      return
+    }
+
+  
+    setIsLoadingUpdate(true);
+    try {
+    const data = await fetchData("updateEnabledRequest",{
+      "enabled":enabled,
+      "type":type,
+      "link":link
+     },"POST",true);
+    if((!data.error) ){
+      console.dir(data);
+      setAlertMessage({ message: "Solicitud actualizada con éxito", severity: "success" });
+      getRequests();
+
+    }else{
+      setAlertMessage({ message: "Error al actualizar la solicitud", severity: "info" });
+
+    }
+    } catch (error) {
+      setAlertMessage({ message: "Error al actualizar la solicitud", severity: "info" });
+      
+      console.dir(error)
+    } finally {
+     setIsLoadingUpdate(false);
+    }
   }
   return (
     <>
     
     <Head>
-        <title>VigiA - Reportes</title>
+        <title>VigiA - Administración de Solicitudes</title>
         <meta name="description" content="Reportes" />
         <link rel="icon" href="/favicon.ico" />
     </Head>
@@ -658,74 +663,10 @@ function assignValues(parameters:any){
       </Modal>
       <Container sx={{paddingTop:{xs:"3rem"},paddingBottom:{xs:"3rem"}}}>
       <Typography variant="inherit" component="h1"  className={styles.StartActionTitle + " "+ styles.ColorTextPrimaryA}>
-      Informe de Gestiones Realizadas
+      Administración de Solicitudes {isLoadingUpdate&&<CircularProgress size={25} />}
         </Typography>
      
-        <Box>
-        <Box className={styles.CounterReport}>
-        <Typography variant="inherit" component="h2"  className={styles.ReportCounterNumber+" "+styles.ColorTextGreenA}>
-        <CountUp
-                      start={0}
-                      end={totalResolved}
-                      duration={1}
-                      separator=","
-                    />
-        </Typography>
-        <Typography variant="inherit" component="h2" className={styles.ReportCounterDescription+" "+styles.ColorTextGray}>
-        <span  >Resueltos</span>
-        </Typography>
-          </Box>
-
-
-          <Box className={styles.CounterReport}>
-        <Typography variant="inherit" component="h2"  className={styles.ReportCounterNumber+" "+styles.ColorTextYellowA}>
-        <CountUp
-                      start={0}
-                      end={totalRequest}
-                      duration={1}
-                      separator=","
-                    />
-        </Typography>
-        <Typography variant="inherit" component="h2" className={styles.ReportCounterDescription+" "+styles.ColorTextGray}>
-        <span  >Pendientes</span>
-        </Typography>
-          </Box>
-
-
-
-
-          <Box className={styles.CounterReport}>
-        <Typography variant="inherit" component="h2"  className={styles.ReportCounterNumber+" "+styles.ColorTextPGrayA}>
-        <CountUp
-                      start={0}
-                      end={totalBack}
-                      duration={1}
-                      separator=","
-                    />
-        </Typography>
-        <Typography variant="inherit" component="h2" className={styles.ReportCounterDescription+" "+styles.ColorTextGray}>
-        <span  >Devueltos</span>
-        </Typography>
-          </Box>
-
-
-
-
-
-          <Box className={styles.CounterReport}>
-        <Typography variant="inherit" component="h2"  className={styles.ReportCounterNumber+" "+styles.ColorText}>
-        <CountUp
-                      start={0}
-                      end={total}
-                      duration={1}
-                      separator=","
-                    />
-        </Typography>
-        <Typography variant="inherit" component="h2" className={styles.ReportCounterDescription+" "+styles.ColorTextGray}>
-        <span  >Total</span>
-        </Typography>
-          </Box>
-        </Box>
+       
 
 
 
@@ -858,26 +799,7 @@ function assignValues(parameters:any){
           <Grid item xs={12} sm={4} md={4} lg={4} xl={4} sx={{
           
           }}>
-          <Box sx={{textAlign: {
-        xs:"center",
-        sm:"right",
-        display:"flex",
-        alignContent:"center",
-        justifyContent:"right"
-      }}} >
-        
-        <Box sx={{
-          display:"inline-block",
-          textAlign:"right"
-        }}>
-          {isLoadingDownload&&<CircularProgress size="38px" />} &nbsp;</Box>
-          <Button title="Descargar" 
-          variant="contained" disableElevation 
-          className={styles.ButtonPrincipal+" "+styles.ButtonContrast_3}
-          onClick={getFullRequests}
-          > 
-         Descargar</Button>
-          </Box>
+            
          
           </Grid>
           </Grid>
@@ -909,20 +831,20 @@ function assignValues(parameters:any){
                                 <th>Encargado</th>
                                 <th>Asignado</th>*/
                                 }
-                                <th></th>
+                                <th colSpan={2}></th>
                             </tr>
                         </thead>
                         <tbody>{
                           isLoading?
                           <tr>
-                            <td colSpan={8}>
+                            <td colSpan={9}>
                             <Box sx={{alignItems:"center",display:"flex",justifyContent:"center",textAlign:"center"}}>
                               <CircularProgress /> 
                               <div>&nbsp;Cargando..</div> 
                               </Box>
                             </td>
                           </tr>:((!Requests.length)&&(!isLoading)?<tr>
-                          <td data-label="" colSpan={8}><b>No se encontraron resultados</b></td>
+                          <td data-label="" colSpan={9}><b>No se encontraron resultados</b></td>
                           </tr>:Requests.map(
                               (Request:any,index:number)=>{
 
@@ -961,27 +883,54 @@ function assignValues(parameters:any){
                                 <td data-label="Encargado">DNCP</td>
                               <td data-label="Asignado">2022-05-15</td>*/
                               }
-                                <td data-label="">
+                                <td data-label="" style={{"textAlign":"center"}} colSpan={2}>
                                 
-                                  <Link
-                                    href={
-                                      `${Request.tipo=="RECLAMO"?"/app/claimAgent?id=":"/app/questionAgent?id="}${encodeURIComponent(Request.enlace)}`
-                                    }
-                                  >
-                                    <Button
+                                  {Request.habilitada==='1'&&<Button
                                       title="Revisar"
                                       variant="contained"
                                       disableElevation
                                       className={
                                         styles.ButtonPrincipal +
                                         " " +
-                                        styles.ButtonSmall
+                                        styles.ButtonSmall+
+                                        " "+
+                                        styles.ButtonContrast_4
                                       }
                                       sx={{ mr: 1 }}
+                                      onClick={
+                                        ()=>{
+                                          setDialog({title:"Deshabilitar Solicitud",body:`¿Esta seguro que desea deshabilitar la solicitud ${Request.enlace}, ${Request.tipo}?`,doTrue:()=>()=>{
+                                            updateRequest("0",Request.enlace,Request.tipo);                                          
+                                          }});
+                                        }
+                                      }
                                     >
-                                      Revisar
+                                      Deshabilitar
                                     </Button>
-                                  </Link>
+                                }
+                                {Request.habilitada==='0'&&<Button
+                                      title="Revisar"
+                                      variant="contained"
+                                      disableElevation
+                                      className={
+                                        styles.ButtonPrincipal +
+                                        " " +
+                                        styles.ButtonSmall+
+                                        " "
+                                      }
+                                      sx={{ mr: 1 }}
+                                      onClick={
+                                        ()=>{
+                                          setDialog({title:"Habilitar Solicitud",body:`¿Esta seguro que desea habilitar la solicitud ${Request.enlace}, ${Request.tipo}?`,doTrue:()=>()=>{
+                                            updateRequest("1",Request.enlace,Request.tipo);                                          
+                                          }});
+                                        }
+                                      }
+                                    >
+                                      Habilitar
+                                    </Button>
+                                }
+                                  
                                 
                                 </td>
                               </tr>

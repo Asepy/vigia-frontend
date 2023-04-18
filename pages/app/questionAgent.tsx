@@ -182,7 +182,8 @@ const Question: NextPage = () => {
 
     try{
       let data:Array<Task>|null =await fetchData("getTasksQuestions",{},"POST",false);
-      setRequestStates((data?data:[]));
+      
+      setRequestStates((data?data.filter((task)=>{ return task.name!=='REVISION'&&task.name!=='COMUNICACION'&&task.name!=='PROTESTA'}):[]));
     }
     catch(e){
       console.dir(e)
@@ -469,6 +470,21 @@ Quedamos atentos a la respuesta en tiempo y forma, poniéndonos a disposición p
       setIsPreLoading(false);
     }
   }
+  async function onlyGetQuestion(link: any) {
+    try {
+      const data = await fetchData("getQuestion",{ link: link },"POST",false);
+      if (!data.error) {
+        setQuestionData(data);
+
+      } else {
+        console.dir(data);
+      }
+    } catch (error) {
+      
+      console.dir(error);
+    } finally {
+    }
+  }
   async function updateQuestionVisualization(question:any) {
 
     if((!question.fecha_visualizacion===null)||!((user?.roles.includes('ASEPY'))||(user?.roles.includes('SUPERASEPY')))){
@@ -478,6 +494,7 @@ Quedamos atentos a la respuesta en tiempo y forma, poniéndonos a disposición p
     try {
       const data = await fetchData("updateQuestionStatusVisualization",{ link: question.enlace },"POST",true);
       if (!data.error ) {
+        onlyGetQuestion(query["id"]);
         
       } else {
         console.dir(data)
@@ -548,6 +565,7 @@ Quedamos atentos a la respuesta en tiempo y forma, poniéndonos a disposición p
           message: "Correo enviado con exito",
           severity: "success",
         });
+        onlyGetQuestion(query["id"]);
 
       } else {
         console.dir(data)
@@ -1027,7 +1045,7 @@ Quedamos atentos a la respuesta en tiempo y forma, poniéndonos a disposición p
               component="h2"
               className={styles.TitleProcess}
             >
-              Cambio de Estado
+              Resolución - Cambio de Estado
             </Typography>
             <Box className={styles.InputTitle}>
               {" "}
@@ -2696,7 +2714,7 @@ Quedamos atentos a la respuesta en tiempo y forma, poniéndonos a disposición p
                   Contactar UOC
                 </Button>
                 <Button
-                  title="Estado"
+                  title="Resolución"
                   onClick={handleOpenModalState}
                   variant="contained"
                   disableElevation
@@ -2704,7 +2722,7 @@ Quedamos atentos a la respuesta en tiempo y forma, poniéndonos a disposición p
                     styles.ButtonPrincipal + " " + styles.ButtonContrast_4
                   }
                 >
-                  Estado
+                  Resolución
                 </Button>
               </Grid>
             </Grid>}

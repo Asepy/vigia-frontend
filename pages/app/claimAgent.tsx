@@ -193,7 +193,7 @@ const Claim: NextPage = () => {
 
     try{
       let data:Array<Task>|null =await fetchData("getTasksClaims",{},"POST",false);
-      setRequestStates((data?data:[]));
+      setRequestStates((data?data.filter((task)=>{ return task.name!=='REVISION'&&task.name!=='COMUNICACION'&&task.name!=='PROTESTA'}):[]));
     }
     catch(e){
       console.dir(e)
@@ -371,6 +371,24 @@ const Claim: NextPage = () => {
       setIsPreLoading(false);
     }
   }
+  async function onlyGetClaim(link: any) {
+    
+    try {
+      const data = await fetchData("getClaim",{ link: link },"POST",false);
+      if (!data.error ) {
+        setClaimData(data);
+        
+
+      } else {
+        console.dir(data);
+      }
+    } catch (error) {
+      
+      console.dir(error);
+    } finally {
+      
+    }
+  }
 
   async function SendMail(){
 
@@ -402,6 +420,9 @@ const Claim: NextPage = () => {
           message: "Correo enviado con exito",
           severity: "success",
         });
+        onlyGetClaim(query["id"]);
+
+
 
       } else {
         console.dir(data)
@@ -435,7 +456,7 @@ const Claim: NextPage = () => {
     try {
       const data = await fetchData("updateClaimStatusVisualization",{ link: claim.enlace },"POST",true);
       if (!data.error ) {
-        
+        onlyGetClaim(query["id"]);
       } else {
         console.dir(data)
       }
@@ -1011,7 +1032,7 @@ const Claim: NextPage = () => {
               component="h2"
               className={styles.TitleProcess}
             >
-              Cambio de Estado
+              Resolución - Cambio de Estado
             </Typography>
             <Box className={styles.InputTitle}>
               {" "}
@@ -3095,7 +3116,7 @@ onChange={(event, newValue) => {
 
 
                 <Button
-                  title="Estado"
+                  title="Resolución"
                   onClick={handleOpenModalState}
                   variant="contained"
                   disableElevation
@@ -3103,7 +3124,7 @@ onChange={(event, newValue) => {
                     styles.ButtonPrincipal + " " + styles.ButtonContrast_4
                   }
                 >
-                  Estado
+                  Resolución
                 </Button>
               </Grid>
             </Grid>}
