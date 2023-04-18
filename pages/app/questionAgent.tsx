@@ -524,6 +524,7 @@ Quedamos atentos a la respuesta en tiempo y forma, poniéndonos a disposición p
           message: "Cambio de estado de tarea exitoso",
           severity: "success",
         });
+        onlyGetQuestion(query["id"]);
       } else {
         setAlertMessage("Error al cambiar de estado de tarea");
       }

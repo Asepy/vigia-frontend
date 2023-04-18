@@ -582,6 +582,7 @@ const Claim: NextPage = () => {
           message: "Cambio de estado de tarea exitoso",
           severity: "success",
         });
+        onlyGetClaim(query["id"]);
       } else {
         setAlertMessage("Error al cambiar de estado de tarea");
       }
