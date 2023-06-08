@@ -674,7 +674,7 @@ function getFiltersString(parameters:any){
            
            <Box className={styles.SearchContainerResult} key={index}>
            <Grid container>
-           <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
+           <Grid item xs={12} sm={6} md={6} lg={6} xl={6} sx={{textAlign:{xs:"right",sm:"left"}}}>
            <Typography variant="inherit" sx={{cursor:"pointer"}} component="p" className={styles.ProcessPropertyText+" "+styles.ResultProcessTitle} >
            <span>Llamado: </span>
            <Link href={`/identifiedProcess?id=${encodeURIComponent(getProcessPlanningId(processData)) }`} >
@@ -694,13 +694,13 @@ function getFiltersString(parameters:any){
            <Typography variant="inherit" component="p" className={styles.ProcessEntity+" "+styles.MiniProcessEntity} >
            <span>
         <span>
-          {getBuyer(processData)?getBuyer(processData):'Comprador no disponible'}
+          {getBuyer(processData)?<span> <b>Entidad compradora:&nbsp;</b>{getBuyer(processData)}</span>:'Comprador no disponible'}
           </span>
           {
             getProcuringEntity(processData)?<span>
             <span className={styles.LineDivisor}></span>
             <span>
-            {getProcuringEntity(processData)}
+            <b>UOC:&nbsp;</b>{getProcuringEntity(processData)}
             </span>
             </span>:null
           }
@@ -710,14 +710,15 @@ function getFiltersString(parameters:any){
         </span>
            </Typography>
            </Grid>
+           
            {
-           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+           <Grid item xs={12} sm={12} md={12} lg={12} xl={12} sx={{marginTop:"1rem"}}>
            <Typography variant="inherit" component="p" className={styles.ProcessEntity+" "+styles.ResultProcessDescription} >
           <b>Título: {getProcessTitle(processData)}</b> 
            </Typography>
            </Grid>
           }
-           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+           <Grid item xs={12} sm={12} md={12} lg={12} xl={12} sx={{marginTop:"1rem",marginBottom:"1rem"}}>
            <Typography variant="inherit" component="p" className={styles.ProcessEntity+" "+styles.ResultProcessDescription} >
           {getMainProcurementCategoryDetails(processData)}
            </Typography>

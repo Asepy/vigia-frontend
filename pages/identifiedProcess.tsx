@@ -32,7 +32,8 @@ import {
   getProcessFaceClaim,
   checkProcessClaim,
   checkProcessEnquiry,
-  getProcessURL
+  getProcessURL,
+  getProcessSubmissionMethodDetails
 } from "../components/imports/ProcessFunctions";
 //import {} from '@formatjs/intl-numberformat/polyfill';
 
@@ -358,13 +359,13 @@ const IdentifiedProcess: NextPage = () => {
                   <span>
                     <span>
                       {getBuyer(processData)
-                        ? getBuyer(processData)
+                        ? <span> <b>Entidad compradora:&nbsp;</b>{getBuyer(processData)}</span>
                         : "Comprador no disponible"}
                     </span>
                     {getProcuringEntity(processData) ? (
                       <span>
                         <span className={styles.LineDivisor}></span>
-                        <span>{getProcuringEntity(processData)}</span>
+                        <span><b>UOC:&nbsp;</b>{getProcuringEntity(processData)}</span>
                       </span>
                     ) : null}
                   </span>
@@ -432,9 +433,9 @@ const IdentifiedProcess: NextPage = () => {
                       className={styles.ItemsContainer}
                     >
                       <Box className={styles.ItemsSubContainer}>
-                        <Box className={styles.ItemsSubContainer2}>
+                        <Box className={styles.ItemsSubContainer2}  sx={{ minWidth:{xs:"unset!important",sm:"unset!important",md:"600px"}}}>
                           {isLoading ? (
-                            <Grid container>
+                            <Grid container sx={{display:{xs:"none",sm:"none",md:"flex"}}}>
                               <Grid
                                 item
                                 xs={4}
@@ -487,7 +488,8 @@ const IdentifiedProcess: NextPage = () => {
                             </Grid>
                           ) : null}
                           {getProcessItems(processData).length ? (
-                            <Grid container>
+                            <Grid >
+                              <Grid container sx={{display:{xs:"none",sm:"none",md:"flex"}}}>
                               <Grid
                                 item
                                 xs={4}
@@ -537,16 +539,20 @@ const IdentifiedProcess: NextPage = () => {
                                   component="h6"
                                   className={styles.ItemsContainerTitle}
                                 >
-                                  Monto
+                                  
+                                  <b>Monto</b>
                                 </Typography>
                               </Grid>
+                              </Grid>
+                              
                             </Grid>
                           ) : null}
                           <Box className={styles.ItemsScroll}>
                             {isLoading
                               ? [1, 2, 3].map((item, index) => {
                                   return (
-                                    <Grid container key={index}>
+                                    <Grid key={index}>
+                                      <Grid container sx={{display:{xs:"none",sm:"none",md:"flex"}}}>
                                       <Grid
                                         item
                                         xs={4}
@@ -612,13 +618,96 @@ const IdentifiedProcess: NextPage = () => {
                                         </div>
                                       </Grid>
                                     </Grid>
+                                    <Grid container sx={{display:{xs:"flex",sm:"flex",md:"none"}}}>
+                                    <Grid item xs={4} sm={4} md={4} lg={4} xl={4} sx={{}} className={styles.ItemsContainerTitle} >
+                                        <div className={styles.ItemsContainerText} >
+                                          <Skeleton
+                                            variant="text"
+                                            sx={{
+                                              fontSize: "1rem",
+                                              width: "75%",
+                                            }}
+                                          />
+                                        </div>
+                                      </Grid>
+                                    <Grid item xs={8} sm={8} md={8} lg={8} xl={8} sx={{}} className={styles.ItemsContainerTitle} >
+                                        <div className={styles.ItemsContainerText} >
+                                          <Skeleton
+                                            variant="text"
+                                            sx={{
+                                              fontSize: "1rem",
+                                              width: "75%",
+                                            }}
+                                          />
+                                        </div>
+                                      </Grid>
+                                      <Grid item xs={4} sm={4} md={4} lg={4} xl={4} sx={{}} className={styles.ItemsContainerTitle} >
+                                        <div className={styles.ItemsContainerText} >
+                                          <Skeleton
+                                            variant="text"
+                                            sx={{
+                                              fontSize: "1rem",
+                                              width: "75%",
+                                            }}
+                                          />
+                                        </div>
+                                      </Grid>
+                                    <Grid item xs={8} sm={8} md={8} lg={8} xl={8} sx={{}} className={styles.ItemsContainerTitle} >
+                                        <div className={styles.ItemsContainerText} >
+                                          <Skeleton
+                                            variant="text"
+                                            sx={{
+                                              fontSize: "1rem",
+                                              width: "75%",
+                                            }}
+                                          />
+                                        </div>
+                                      </Grid>
+                                      <Grid item xs={4} sm={4} md={4} lg={4} xl={4} sx={{}} className={styles.ItemsContainerTitle} >
+                                        <div className={styles.ItemsContainerText} >
+                                          <Skeleton
+                                            variant="text"
+                                            sx={{
+                                              fontSize: "1rem",
+                                              width: "75%",
+                                            }}
+                                          />
+                                        </div>
+                                      </Grid>
+                                    <Grid item xs={8} sm={8} md={8} lg={8} xl={8} sx={{}} className={styles.ItemsContainerTitle} >
+                                        <div className={styles.ItemsContainerText} >
+                                          <Skeleton
+                                            variant="text"
+                                            sx={{
+                                              fontSize: "1rem",
+                                              width: "75%",
+                                            }}
+                                          />
+                                        </div>
+                                      </Grid>
+                                      <Grid
+                                      item
+                                      xs={12}
+                                      sm={12}
+                                      md={12}
+                                      lg={12}
+                                      xl={12}
+                                    >
+                                      <Box
+                                        className={styles.ItemsDivisor}
+                                      ></Box>
+                                    </Grid>
+                                    </Grid>
+                                    </Grid>
+                                    
                                   );
                                 })
                               : null}
                             {getProcessItems(processData).map(
                               (item: any, index: number) => {
                                 return (
-                                  <Grid container key={index}>
+                                  <Grid key={index}>
+                                    <Grid container sx={{display:{xs:"none",sm:"none",md:"flex"}}}>
                                     <Grid
                                       item
                                       xs={4}
@@ -628,6 +717,7 @@ const IdentifiedProcess: NextPage = () => {
                                       xl={4}
                                       sx={{}}
                                     >
+                                      
                                       <Typography
                                         variant="h6"
                                         component="h6"
@@ -715,6 +805,103 @@ const IdentifiedProcess: NextPage = () => {
                                       ></Box>
                                     </Grid>
                                   </Grid>
+
+
+                                    <Grid container sx={{display:{xs:"flex",sm:"flex",md:"none"}}}>
+                                    <Grid item xs={4} sm={4} md={4} lg={4} xl={4} sx={{}} className={styles.ItemsContainerTitle} >
+                                        <Typography
+                                      variant="h6"
+                                      component="h6"
+                                      className={styles.ItemsContainerTitle}
+                                    >
+                                      <b>Ítem</b>
+                                    </Typography>
+                                      </Grid>
+                                    <Grid item xs={8} sm={8} md={8} lg={8} xl={8} sx={{}} className={styles.ItemsContainerTitle} >
+                                        <Typography
+                                        variant="h6"
+                                        component="h6"
+                                        className={styles.ItemsContainerText}
+                                      >
+                                        {item.description}
+                                      </Typography>
+                                      </Grid>
+
+                                      <Grid item xs={4} sm={4} md={4} lg={4} xl={4} sx={{}} className={styles.ItemsContainerTitle} >
+                                      <Typography
+                                  variant="h6"
+                                  component="h6"
+                                  className={styles.ItemsContainerTitle}
+                                >
+                                  <b>Cantidad</b>
+                                </Typography>
+                                      </Grid>
+                                    <Grid item xs={8} sm={8} md={8} lg={8} xl={8} sx={{}} className={styles.ItemsContainerTitle} >
+                                    <Typography
+                                        variant="h6"
+                                        component="h6"
+                                        className={styles.ItemsContainerText}
+                                      >
+                                        {item?.quantity ? item.quantity : "N/D"}{" "}
+                                        &nbsp;
+                                        <span className={styles.ColorTextDark}>
+                                          <b>{item?.unit?.id}</b>
+                                        </span>
+                                      </Typography>
+                                      </Grid>
+
+
+                                      <Grid item xs={4} sm={4} md={4} lg={4} xl={4} sx={{}} className={styles.ItemsContainerTitle} >
+                                      <Typography
+                                  variant="h6"
+                                  component="h6"
+                                  className={styles.ItemsContainerTitle}
+                                >
+                                  
+                                  <b>Monto</b>
+                                </Typography>
+                                      </Grid>
+                                    <Grid item xs={8} sm={8} md={8} lg={8} xl={8} sx={{}} className={styles.ItemsContainerTitle} >
+                                    <Typography
+                                        variant="h6"
+                                        component="h6"
+                                        className={
+                                          styles.ItemsContainerTextAmount
+                                        }
+                                      >
+                                        <span>
+                                          {
+                                            item?.unit?.value?.amount
+                                              ? getCurrencyAmount(
+                                                  item?.unit?.value?.amount
+                                                )
+                                              : "N/D"
+                                            /*conformToMask(item?.unit?.value?.amount,MoneyMask).conformedValue*/
+                                          }
+                                        </span>
+                                        &nbsp;
+                                        <span className={styles.ColorTextDark}>
+                                          {item?.unit?.value?.currency
+                                            ? item?.unit?.value?.currency
+                                            : ""}
+                                        </span>
+                                      </Typography>
+                                      </Grid>
+                                      <Grid
+                                      item
+                                      xs={12}
+                                      sm={12}
+                                      md={12}
+                                      lg={12}
+                                      xl={12}
+                                    >
+                                      <Box
+                                        className={styles.ItemsDivisor}
+                                      ></Box>
+                                    </Grid>
+                                    </Grid>
+                                  </Grid>
+                                  
                                 );
                               }
                             )}
@@ -898,7 +1085,40 @@ const IdentifiedProcess: NextPage = () => {
                   </Grid>
                 </Grid>
                 <Grid container sx={{ marginBottom: "1rem" }}>
-                  <Grid item xs={2} sm={1} md={1} lg={1} xl={1} sx={{}}>
+                <Grid item xs={2} sm={1} md={1} lg={1} xl={1} sx={{alignItems:"center",display:"flex"}}>
+                    <img
+                      src="/images/icons/proceso/detalle_ofertas.svg"
+                      alt=""
+                      className={styles.ImageProcessProperty}
+                    />
+                  </Grid><Grid
+                    item
+                    xs={10}
+                    sm={11}
+                    md={11}
+                    lg={11}
+                    xl={11}
+                    sx={{ alignItems: "center", display: "flex" }}
+                  >
+                    <Typography
+                      variant="inherit"
+                      component="p"
+                      className={styles.ProcessPropertyText}
+                      sx={{ paddingLeft: "0.2rem" }}
+                    >
+                      {getProcessSubmissionMethodDetails(processData) ? (
+                          <span>
+                          {getProcessSubmissionMethodDetails(processData)}
+                          </span>
+                    
+                      ) : (
+                        "Detalles de Entrega no disponibles"
+                      )}
+                    </Typography>
+                  </Grid>
+
+
+                  <Grid item xs={2} sm={1} md={1} lg={1} xl={1} sx={{alignItems:"center",display:"flex"}}>
                     <img
                       src="/images/icons/proceso/pliego.svg"
                       alt=""
@@ -907,7 +1127,7 @@ const IdentifiedProcess: NextPage = () => {
                   </Grid>
                   <Grid
                     item
-                    xs={4}
+                    xs={10}
                     sm={5}
                     md={5}
                     lg={5}
@@ -937,7 +1157,7 @@ const IdentifiedProcess: NextPage = () => {
                       )}
                     </Typography>
                   </Grid>
-                  <Grid item xs={6} sm={6} md={6} lg={6} xl={6} sx={{}}>
+                  <Grid item xs={12} sm={6} md={6} lg={6} xl={6} sx={{marginTop:{xs:"1rem",sm:"0"}}}>
                     
                     
                     {(formState=="question"||formState=="normal")&&<Grid container>

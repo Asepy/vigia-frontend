@@ -104,6 +104,9 @@ export function getProcuringEntityId(processData:any){
   export function getProcessPliego(processData:any){
     return (processData?.tender?.id)?`https://www.contrataciones.gov.py/licitaciones/convocatoria/${(processData?.tender?.id)}.html#pliego`:'';
   }
+  export function getProcessSubmissionMethodDetails(processData:any){
+    return (processData?.tender?.submissionMethodDetails)?processData?.tender?.submissionMethodDetails:'';
+  }
   export function getProcessURL(processData:any){
     return (processData?.tender?.id)?`https://www.contrataciones.gov.py/licitaciones/convocatoria/${(processData?.tender?.id)}.html`:'';
   }

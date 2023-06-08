@@ -242,6 +242,43 @@ const PanelAgent = () => {
           </Grid>
         </Link>
                   }
+                  {
+                    <Link href="/app/requestsAdmin">
+                    <Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
+                      <Box
+                        className={
+                          styles.ElementContainer +
+                          " " +
+                          styles.ClickItem +
+                          " " +
+                          styles.ClickItem2
+                        }
+                        sx={{ height: "100%" }}
+                      >
+                        <img
+                          src="/images/icons/procesos.svg"
+                          alt=""
+                          className={styles.ImagenPanelItem}
+                        />
+                        <Typography
+                          variant="inherit"
+                          component="h2"
+                          className={
+                            styles.ItemDescriptionElement + " " + styles.ColorTextPrimaryA
+                          }
+                          sx={{
+                            marginBottom: "0.5rem",
+                            marginTop: "0.5rem",
+                            textAlign: "center",
+                          }}
+                        >
+                          Solicitudes
+                        </Typography>
+                      
+                      </Box>
+                    </Grid>
+                  </Link>
+                  }
         
 
        

@@ -545,7 +545,7 @@ const OpportunitiesForm: NextPage = () => {
                                   component="p"
                                   className={styles.ItemsContainerText}
                                 >
-                                  {data.name}
+                                  {data.name.split("-")?.[1]?.trim()}
                                 </Typography>
                               </Grid>
                               <Grid
