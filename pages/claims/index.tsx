@@ -91,7 +91,7 @@ const Claims: NextPage = () => {
         router.push(
           `/identifiedProcess?id=${encodeURIComponent(
             formState.id
-          )}&state=claim`
+          )}&state=claim&from=claim`
         );
       } else {
         setMessage("Llamado no encontrado, puedes utilizar la busqueda");

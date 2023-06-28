@@ -84,7 +84,7 @@ const IdentifiedProcess: NextPage = () => {
       setOpenMessage(true);
     }
   }
-  async function getProcess(id: any) {
+  async function getProcess(id: any,query:any) {
     if (isLoading) {
       return;
     }
@@ -97,6 +97,9 @@ const IdentifiedProcess: NextPage = () => {
         setProcessData(data);
 
         getProcessFaceEnquiry(data);
+        
+        saveProcessView(data,query,0)
+
       } else {
         setMessage("Llamado no encontrado, puedes utilizar la busqueda");
         setOpenMessage(true);
@@ -110,10 +113,25 @@ const IdentifiedProcess: NextPage = () => {
     }
   }
 
+  async function saveProcessView(data:any,query:any,click:number){
+    try{
+      let saveData = await fetchData("saveProcessView",{
+        call: getProcessPlanningId(data),
+        ocid: data?.ocid,
+        title: getProcessTitle(data),
+        from:query['from'],
+        click:click
+      },"POST",true);
+      
+      }catch(e){
+  
+      }
+  }
+
   React.useEffect(() => {
     if (isReady) {
 
-      getProcess(query["id"]);
+      getProcess(query["id"],query);
       switch (query["state"]) {
         case "claim":
           setFormState("claim");
@@ -171,6 +189,7 @@ const IdentifiedProcess: NextPage = () => {
       ocid: processData?.ocid,
       status: likeState ? 0 : 1,
       title: getProcessTitle(processData),
+      from: query['from']
     };
     try {
       let data: any = await fetchData("addLike",params,"POST",true);
@@ -334,7 +353,7 @@ const IdentifiedProcess: NextPage = () => {
                   className={
                     styles.LikeButton + " " + (likeState ? styles.Liked : "")
                   }
-                  onClick={addLike}
+                  onClick={()=>{addLike();saveProcessView(processData,query,1);}}
                 />
               )}
               <h1 className={styles.TitleProcess}>
@@ -1147,7 +1166,9 @@ const IdentifiedProcess: NextPage = () => {
                           target="_blank"
                           rel="noreferrer"
                         >
-                          <span>
+                          <span
+                          onClick={()=>{saveProcessView(processData,query,1);}}
+                          >
                             Pliego de Bases y Condiciones, Requisitos
                             Fundamentales
                           </span>

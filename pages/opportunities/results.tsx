@@ -224,9 +224,9 @@ async function getOpportunitiesConfig(){
 async function getOpportunities(params:any){
   
 
-  
+    let filters=getFilters();
     try{
-      let filters=getFilters();
+      
       let data:any = await fetchData("getOpportunities",{...params,...{page:filters.page}},"POST",false); 
       if(data.total&&data.data){
         setResultsState(data.data)
@@ -255,10 +255,20 @@ async function getOpportunities(params:any){
     finally{
       setIsLoading(false);
     }
+    saveSearchOpportunities({...params,...{page:filters.page}})
   
 
 
     
+}
+async function saveSearchOpportunities(filters:any){
+  try{
+    let saveData = await fetchData("saveSearchOpportunities",{
+      ...filters
+      },"POST",true);
+    }catch(e){
+
+    }
 }
   return (
     <>
@@ -409,7 +419,7 @@ async function getOpportunities(params:any){
             <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
             <Typography variant="inherit" sx={{cursor:"pointer"}} component="p" className={styles.ProcessPropertyText+" "+styles.ResultProcessTitle} >
             <span>Llamado: </span>
-            <Link href={`/identifiedProcess?id=${encodeURIComponent(getProcessPlanningId(processData)) }`} >
+            <Link href={`/identifiedProcess?id=${encodeURIComponent(getProcessPlanningId(processData)) }&from=opportunity`} >
               <a> <span className={styles.ColorText+" "+styles.ProcessID}>{getProcessPlanningId(processData)}</span></a>
             
            </Link>

@@ -21,6 +21,7 @@ const Home: NextPage = () => {
   const [totalClaims, setTotalClaims] = React.useState(0);
   const [totalQuestions, setTotalQuestions] = React.useState(0);
   const [totalRequest, setTotalRequests] = React.useState(0);
+  const [totalFind, setTotalFind] = React.useState(0);
   React.useEffect(() => {
     if (isReady) {
     }
@@ -40,6 +41,7 @@ const Home: NextPage = () => {
       setTotalClaims(getNumber(data?.reclamos_resueltos));
       setTotalQuestions(getNumber(data?.consultas_resueltas));
       setTotalRequests(getNumber(data?.solicitudes_en_proceso));
+      setTotalFind(getNumber(data?.oportunidades_encontradas))
     } catch (e) {}
   }
 
@@ -165,7 +167,7 @@ const Home: NextPage = () => {
           sx={{ padding: "20px 0 20px 0" }}
         >
           <Grid container>
-            <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+            <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
               <Grid container>
                 <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
                   <img
@@ -208,7 +210,7 @@ const Home: NextPage = () => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+            <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
               <Grid container>
                 <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
                   <img
@@ -251,7 +253,7 @@ const Home: NextPage = () => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+            <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
               <Grid container>
                 <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
                   <img
@@ -290,6 +292,49 @@ const Home: NextPage = () => {
                     sx={{ textAlign: { xs: "center", sm: "left" } }}
                   >
                     Gestiones en Proceso
+                  </Box>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
+              <Grid container>
+                <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
+                  <img
+                    src="/images/busquedas.svg"
+                    alt=""
+                    style={{
+                      width: "80%",
+                      maxWidth: "150px",
+                      margin: "0 auto",
+                      display: "block",
+                    }}
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  md={6}
+                  lg={6}
+                  xl={6}
+                  className={styles.CounterContainer}
+                >
+                  <Box
+                    className={styles.CounterNumber}
+                    sx={{ textAlign: { xs: "center", sm: "left" } }}
+                  >
+                    <CountUp
+                      start={0}
+                      end={totalFind}
+                      duration={1}
+                      separator=","
+                    />
+                  </Box>
+                  <Box
+                    className={styles.CounterDescription}
+                    sx={{ textAlign: { xs: "center", sm: "left" } }}
+                  >
+                    Oportunidades Descubiertas
                   </Box>
                 </Grid>
               </Grid>

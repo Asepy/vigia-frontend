@@ -91,7 +91,7 @@ const Questions: NextPage = () => {
         router.push(
           `/identifiedProcess?id=${encodeURIComponent(
             formState.id
-          )}&state=question`
+          )}&state=question&from=question`
         );
       } else {
         setMessage("Llamado no encontrado, puedes utilizar la busqueda");

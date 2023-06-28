@@ -372,9 +372,9 @@ function getFiltersString(parameters:any){
 
     setIsLoading(true);
     setNoResults(false);
-
+    let filters=getFilters();
     try{
-      let filters=getFilters();
+      
       let data = await fetchData("searchProcessDNCP",{
         ...filters
        },"POST",true);
@@ -398,6 +398,17 @@ function getFiltersString(parameters:any){
     }finally{
       setIsLoading(false);
     }
+    saveSearch(filters)
+    
+  }
+  async function saveSearch(filters:any){
+    try{
+      let saveData = await fetchData("saveSearch",{
+        ...filters
+        },"POST",true);
+      }catch(e){
+
+      }
   }
   return (
     <>
@@ -677,7 +688,7 @@ function getFiltersString(parameters:any){
            <Grid item xs={12} sm={6} md={6} lg={6} xl={6} sx={{textAlign:{xs:"right",sm:"left"}}}>
            <Typography variant="inherit" sx={{cursor:"pointer"}} component="p" className={styles.ProcessPropertyText+" "+styles.ResultProcessTitle} >
            <span>Llamado: </span>
-           <Link href={`/identifiedProcess?id=${encodeURIComponent(getProcessPlanningId(processData)) }`} >
+           <Link href={`/identifiedProcess?id=${encodeURIComponent(getProcessPlanningId(processData)) }&from=search`} >
             <a>
             <span className={styles.ColorText+" "+styles.ProcessID}>{getProcessPlanningId(processData)}</span>
             </a>
