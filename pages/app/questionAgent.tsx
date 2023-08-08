@@ -183,7 +183,7 @@ const Question: NextPage = () => {
     try{
       let data:Array<Task>|null =await fetchData("getTasksQuestions",{},"POST",false);
       
-      setRequestStates((data?data.filter((task)=>{ return task.name!=='REVISION'&&task.name!=='COMUNICACION'&&task.name!=='PROTESTA'}):[]));
+      setRequestStates((data?data.filter((task)=>{ return task.name!=='REVISION'/*&&task.name!=='COMUNICACION'*/&&task.name!=='PROTESTA'}):[]));
     }
     catch(e){
       console.dir(e)
