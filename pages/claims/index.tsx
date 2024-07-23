@@ -85,7 +85,7 @@ const Claims: NextPage = () => {
     setIsLoading(true);
     try {
       
-      const data = await fetchData("getProcessDNCP",{ id: formState.id },"POST",false);
+      const data = await fetchData("checkProcessDNCP",{ id: formState.id },"POST",false);
 
       if (!data.error) {
         router.push(
