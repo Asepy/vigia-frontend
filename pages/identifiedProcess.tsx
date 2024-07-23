@@ -14,6 +14,7 @@ import Modal from "@mui/material/Modal";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
+import ifetch from "isomorphic-fetch";
 import {
   getProcessTitle,
   getProcessAmount,
@@ -67,7 +68,7 @@ const IdentifiedProcess: NextPage = () => {
 
   const [processData, setProcessData]: any = React.useState({});
   const [items, setItems] = React.useState([]);
-
+  const [isMIPYME, setIsMIPYME] = React.useState(false);
   function claim(){
     if(checkProcessClaim(processData)){
       router.push("/claims/form?id=" + encodeURIComponent(getProcessId()));
@@ -95,10 +96,24 @@ const IdentifiedProcess: NextPage = () => {
       const data = await fetchData("getProcessDNCP",{ id: id },"POST",false);
       if (!data.error) {
         setProcessData(data);
+        console.dir(data)
+        
 
         getProcessFaceEnquiry(data);
         
-        saveProcessView(data,query,0)
+        saveProcessView(data,query,0);
+        //getMIPYME(data?.tender?.id);
+
+        if(data?.tender?.suitability?.some((data:any)=>{
+          return ["True","TRUE",true].includes(data?.sme)
+  
+        })){
+          setIsMIPYME(true);
+        }else{
+          setIsMIPYME(false);
+        }
+
+        
 
       } else {
         setMessage("Llamado no encontrado, puedes utilizar la busqueda");
@@ -111,6 +126,29 @@ const IdentifiedProcess: NextPage = () => {
     } finally {
       setIsLoading(false);
     }
+  }
+
+  async function getMIPYME(tenderId: any) {
+    //https://www.contrataciones.gov.py/licitaciones/convocatoria/438170-mantenimiento-aberturas-edificios-patrimoniales-bnf-casa-matriz-alrededores-sbe-1.html
+
+    try{
+      let data = await fetchData("checkProcessMIPYME",{
+        tenderId: tenderId,
+        
+      },"POST",true);
+      if(data?.MIPYME
+        ){
+          setIsMIPYME(true);
+          
+        }else{setIsMIPYME(false);}
+
+    }
+    catch(error){
+      
+      setIsMIPYME(false);
+    }
+    
+    
   }
 
   async function saveProcessView(data:any,query:any,click:number){
@@ -390,6 +428,45 @@ const IdentifiedProcess: NextPage = () => {
                   </span>
                 )}
               </h2>
+              {
+                isMIPYME && (
+                  <Grid container sx={{ marginBottom: "1rem" }}>
+                  <Grid item xs={2} sm={1} md={1} lg={1} xl={1} sx={{}}>
+                  <img
+                      src="/images/icons/proceso/pyme.svg"
+                      alt=""
+                      className={styles.ImageProcessProperty}
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={10}
+                    sm={11}
+                    md={11}
+                    lg={11}
+                    xl={11}
+                    sx={{ alignItems: "center", display: "flex" }}
+                  >
+                     <Typography
+                  variant="inherit"
+                  component="p"
+                  className={styles.ProcessPropertyText}
+                  sx={{ paddingLeft: "0.2rem" }}
+                >
+                  <b>
+                  Accesible para MIPYMES
+                  </b>
+                </Typography>
+
+
+                  </Grid>
+                    
+                 
+                  </Grid>
+                  
+                )
+
+              }
               <Box>
                 <Grid container sx={{ marginBottom: "1rem" }}>
                   <Grid item xs={2} sm={1} md={1} lg={1} xl={1} sx={{}}>
@@ -788,8 +865,13 @@ const IdentifiedProcess: NextPage = () => {
                                       <Typography
                                         variant="h6"
                                         component="h6"
-                                        className={
-                                          styles.ItemsContainerTextAmount
+                                        
+                                        className={[
+                                          styles.ItemsContainerTextAmount/*,
+                                          styles.ContractorItemsContainerTextAmount*/
+                                          
+                                        ].join(' ')
+                                          
                                         }
                                       >
                                         <span>
@@ -799,9 +881,11 @@ const IdentifiedProcess: NextPage = () => {
                                                   item?.unit?.value?.amount
                                                 )
                                               : "N/D"
-                                            /*conformToMask(item?.unit?.value?.amount,MoneyMask).conformedValue*/
+                                            /*conformToMask(item?.unit?.value?.amount,MoneyMask).conformedValue */
                                           }
                                         </span>
+                                        
+                                     
                                         &nbsp;
                                         <span className={styles.ColorTextDark}>
                                           {item?.unit?.value?.currency
@@ -884,8 +968,12 @@ const IdentifiedProcess: NextPage = () => {
                                     <Typography
                                         variant="h6"
                                         component="h6"
-                                        className={
-                                          styles.ItemsContainerTextAmount
+                                        className={[
+                                          styles.ItemsContainerTextAmount/*,
+                                          styles.ContractorItemsContainerTextAmount*/
+                                          
+                                        ].join(' ')
+                                          
                                         }
                                       >
                                         <span>
@@ -942,8 +1030,24 @@ const IdentifiedProcess: NextPage = () => {
                           <Typography
                             variant="h6"
                             component="h6"
-                            className={styles.ItemsContainerTextAmountTotal}
+                            className={[
+                              styles.ItemsContainerTextAmountTotal,
+                              //styles.ContractorItemsContainerTextAmountTotal
+                              
+                            ].join(' ')
+                              
+                            }
                           >
+                          {
+                              false&&<Box className={styles.ContractorTooltip}> 
+                              <Typography
+                            variant="h6"
+                            component="h6" >
+                              Este proceso cuenta con un sobreprecio
+                            </Typography>
+                            
+                              </Box>
+                            }
                             {isLoading ? (
                               <Skeleton
                                 variant="text"

@@ -59,7 +59,7 @@ import MenuItem from "@mui/material/MenuItem";
 
 import { CircularProgress, LinearProgress } from "@mui/material";
 import { useAlertContext } from "../../src/contexts/alert-context";
-import { Claim } from "../../src/interfaces/claim";
+import { type Claim } from "../../src/interfaces/claim";
 import { Task } from "../../src/interfaces/task";
 import { RECLAMO } from "../../src/interfaces/type-claim-or-question";
 import fetchData from "../../src/utils/fetch";

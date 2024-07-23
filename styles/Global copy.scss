@@ -550,6 +550,20 @@ outline: none;
     font-weight: 800;
     font-size: 1.1rem;
 }
+
+
+.ItemsContainerTextAmount.contractor{
+    color:$gray-tertiary;
+    background-color: #4806C1;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+}
+.ItemsContainerTextAmountTotal.contractor{
+    color:$secondary-color_2;
+    background-color: #4806C1;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+}
 .ItemsContainerDivisor{
     margin-top: 1rem;
     margin-bottom: 1rem;

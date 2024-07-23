@@ -29,6 +29,7 @@ import { useRouter } from 'next/router';
 
 import {pagination,validate,validateString,getString,getNumber,getDateFormat,likeText} from  '../components/imports/Functions';
 import {mainProcurementCategoryDetails} from  '../components/imports/StaticData';
+import {allMainProcurementCategoryDetails} from  '../components/imports/StaticData';
 import { ResetTvOutlined } from '@mui/icons-material';
 
 import { getProcessTitle, getProcessAmount, getProcessCurrency,
@@ -154,12 +155,14 @@ const Search: NextPage = () => {
       type:'select',
       search:"",
       options:[
-        ...mainProcurementCategoryDetails
+        ...allMainProcurementCategoryDetails.map((data:any)=>{
+          return {name: data.mainProcurementCategoryDetails,value:data.mainProcurementCategoryDetails}
+        })
           
     ]
     },
     {    
-      name:'Contratante',
+      name:'Convocante',
       field:'entity',
       value:'',
       type:'select',
