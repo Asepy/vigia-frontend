@@ -7,4 +7,5 @@ export interface ProfileForm {
   password: string;
   confirmPassword: string;
   clave: string;
+  notifications:string;
 }

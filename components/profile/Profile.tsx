@@ -9,7 +9,7 @@ import { validateSchema } from "../../src/utils/schema";
 import { ProfileForm } from "./interface";
 import ProfileView from "./ProfileView";
 import { profileSchema } from "./schema";
-
+import fetchData from "../../src/utils/fetch";
 const Profile = () => {
   const router = useRouter();
   const { setLoading } = useLoading();
@@ -24,6 +24,7 @@ const Profile = () => {
     password: "",
     confirmPassword: "",
     clave: "",
+    notifications:""
   });
 
   React.useEffect(() => {
@@ -36,11 +37,13 @@ const Profile = () => {
       password: "",
       confirmPassword: "",
       clave: "",
+      notifications: user?.notifications ??  "SI"
     });
   }, [user]);
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm({ ...form, [e.target.name]: e.target.value });
+  
   }
 
   async function updateProfile() {
@@ -70,11 +73,21 @@ const Profile = () => {
       if (form.oldPassword && form.password && form.confirmPassword) {
         await Auth.changePassword(userAuth, form.oldPassword, form.password);
       }
+
+      const data:any|null = await fetchData("setNotifications",{notification:form.notifications},"POST",true);
+      
+      console.dir('notificaciones actualizadas')
+      console.dir(data)
+  
       
       const currentUser = await Auth.currentAuthenticatedUser();
       if (currentUser) {
         signIn(currentUser);
       }
+
+      
+      
+    
       setAlertMessage({
         message: "Datos actualizados correctamente",
         severity: "success",

@@ -33,8 +33,10 @@ async function getFetchGetUserRoles(usr: User | null): Promise<User | null> {
   try {
     if (usr) {
       const user = { ...usr };
-      const data: Array<string>|null = await fetchData("getUserRoles",{},"POST",true);
-      user.roles = data?data:[];
+      //const data: Array<string>|null = await fetchData("getUserRoles",{},"POST",true);
+      const data:any|null = await fetchData("getUser",{},"POST",true);
+      user.roles = data?.roles?data.roles:[];
+      user.notifications=data?.notications ?? 'SI';
       return user;
     }
   } catch (e) {

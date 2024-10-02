@@ -16,6 +16,13 @@ import PasswordField from "../fields/PasswordField";
 import BoxContainer from "../ui/BoxContainer";
 import { ProfileForm } from "./interface";
 
+
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import Radio from '@mui/material/Radio';
+
 const comidas = [
   { texto: "Sandwich" },
   { texto: "Catering" },
@@ -85,6 +92,29 @@ const ProfileView = ({ form, onChange, updateProfile }: ProfileViewProps) => {
           </Grid> */}
           <Grid item xs={12} sm={6} md={6} lg={6} xl={6}></Grid>
         </Grid>
+        <Typography
+          variant="inherit"
+          component="h2"
+          className={styles.StartActionSubTitle + " " + styles.ColorTextGray}
+          sx={{ marginBottom: "0rem" }}
+        >
+          Notificaciones de Oportunidades
+        </Typography>
+        <Grid  item xs={12}  sm={6} md={12} lg={12} xl={12}>
+            <RadioGroup
+            row
+            aria-labelledby="group"
+            name="notifications"
+            value={form.notifications}
+            onChange={onChange}
+          >
+            <FormControlLabel value="SI" control={<Radio />} label="Accesibles para MIPYMES" />
+            <FormControlLabel value="TODAS" control={<Radio />} label="Todas" />
+            <FormControlLabel value="NINGUNA" control={<Radio />} label="Ninguna" />
+          </RadioGroup>
+        </Grid>
+
+
         <Typography
           variant="inherit"
           component="h2"

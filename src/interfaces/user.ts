@@ -6,6 +6,7 @@ export interface User {
   sub: string;
   roles: Array<string>;
   login?:number|string;
+  notifications:string;
 }
 
 export interface Token {

@@ -5,6 +5,7 @@ export const profileSchema = yup.object().shape({
   names: yup.string().required("Ingresa tu nombre"),
   lastNames: yup.string().required("Ingresa tu apellido"),
   email,
+  notifications:yup.string().required("Ingresa la configuracion de tus notificaciones"),
   // clave: yup.string().required("Ingresa una palabra clave"),
   oldPassword: yup.string(),
   password: yup.string().when(["oldPassword"], (oldPassword, schema) => {
