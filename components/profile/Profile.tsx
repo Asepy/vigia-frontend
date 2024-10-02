@@ -28,8 +28,7 @@ const Profile = () => {
   });
 
   React.useEffect(() => {
-    console.dir('use effect profile')
-    console.dir(user)
+    
     setForm({
       names: user?.given_name ?? "",
       lastNames: user?.family_name ?? "",
@@ -77,9 +76,7 @@ const Profile = () => {
       }
 
       const data:any|null = await fetchData("setNotifications",{notification:form.notifications},"POST",true);
-      
-      console.dir('notificaciones actualizadas')
-      console.dir(data)
+
   
       
       const currentUser = await Auth.currentAuthenticatedUser();
