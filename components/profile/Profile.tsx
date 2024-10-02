@@ -28,6 +28,8 @@ const Profile = () => {
   });
 
   React.useEffect(() => {
+    console.dir('use effect profile')
+    console.dir(user)
     setForm({
       names: user?.given_name ?? "",
       lastNames: user?.family_name ?? "",
