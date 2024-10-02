@@ -12,7 +12,7 @@ import { profileSchema } from "./schema";
 import fetchData from "../../src/utils/fetch";
 const Profile = () => {
   const router = useRouter();
-  const { setLoading } = useLoading();
+  const { setLoading,loading } = useLoading();
   const { setAlertMessage } = useAlertContext();
   const { user, signIn } = useAuth();
   const [form, setForm] = React.useState<ProfileForm>({
@@ -127,6 +127,7 @@ const Profile = () => {
       form={form}
       onChange={onChange}
       updateProfile={updateProfile}
+      loading={loading}
     />
   );
 };

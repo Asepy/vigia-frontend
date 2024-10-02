@@ -359,6 +359,14 @@
   text-align: center !important;
 }
 
+.labelRadio{
+  font-family: "Poppins", sans-serif !important;
+  color: $gray-tertiary !important;
+}
+.labelRadio *{
+  font-family: "Poppins", sans-serif !important;
+}
+
 .NotificationNumber {
   min-width: 40px !important;
   height: 40px !important;

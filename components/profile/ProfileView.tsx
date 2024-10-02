@@ -38,9 +38,10 @@ const comidas = [
 interface ProfileViewProps extends OnChangeProps {
   form: ProfileForm;
   updateProfile: () => void;
+  loading?:boolean;
 }
 
-const ProfileView = ({ form, onChange, updateProfile }: ProfileViewProps) => {
+const ProfileView = ({ form, onChange, updateProfile,loading=false }: ProfileViewProps) => {
   return (
     <BoxContainer
       sx={{ paddingTop: { xs: "6rem" }, paddingBottom: { xs: "6rem" } }}
@@ -108,9 +109,30 @@ const ProfileView = ({ form, onChange, updateProfile }: ProfileViewProps) => {
             value={form.notifications}
             onChange={onChange}
           >
-            <FormControlLabel value="SI" control={<Radio />} label="Accesibles para MIPYMES" />
-            <FormControlLabel value="TODAS" control={<Radio />} label="Todas" />
-            <FormControlLabel value="NINGUNA" control={<Radio />} label="Ninguna" />
+            <FormControlLabel value="SI" control={<Radio 
+            sx={{
+              color: '#6817FF',
+              '&.Mui-checked': {
+                color: '#6817FF',
+              },
+            }}
+            />} label="Accesibles para MIPYMES" className={styles.labelRadio}/>
+            <FormControlLabel value="TODAS" control={<Radio 
+            sx={{
+              color: '#6817FF',
+              '&.Mui-checked': {
+                color: '#6817FF',
+              },
+            }}
+            />} label="Todas"  className={styles.labelRadio}/>
+            <FormControlLabel value="NINGUNA" control={<Radio 
+            sx={{
+              color: '#6817FF',
+              '&.Mui-checked': {
+                color: '#6817FF',
+              },
+            }}
+            />} label="Ninguna"  className={styles.labelRadio}/>
           </RadioGroup>
         </Grid>
 
@@ -340,6 +362,7 @@ const ProfileView = ({ form, onChange, updateProfile }: ProfileViewProps) => {
                 styles.ButtonPrincipal + " " + styles.ButtonContrast_3
               }
               onClick={updateProfile}
+              disabled={loading}
             >
               Guardar
             </Button>

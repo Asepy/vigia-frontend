@@ -36,7 +36,7 @@ async function getFetchGetUserRoles(usr: User | null): Promise<User | null> {
       //const data: Array<string>|null = await fetchData("getUserRoles",{},"POST",true);
       const data:any|null = await fetchData("getUser",{},"POST",true);
       user.roles = data?.roles?data.roles:[];
-      user.notifications=data?.notications ?? 'SI';
+      user.notifications=data?.notifications ?? 'SI';
       return user;
     }
   } catch (e) {
