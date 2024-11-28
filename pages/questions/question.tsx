@@ -32,7 +32,7 @@ import {
   getProcessAmount,
   getProcessCurrency,
   getProcessItems,
-  getProcessPliego,
+  getProcessPliegoSlug,
   getProcessTitle,
   getProcurementMethodDetails,
   getProcuringEntity,
@@ -67,6 +67,7 @@ const Question: NextPage = () => {
   const [processData, setProcessData] = React.useState({});
   const [questionData, setQuestionData] = React.useState({});
   const [items, setItems] = React.useState([]);
+  const [DNCPData,setDNCPData] = React.useState<any>(null);
   function getStatusRequest(obj: any | null) {
     switch (obj?.tarea_estado) {
       case "ENVIADO":
@@ -100,7 +101,23 @@ const Question: NextPage = () => {
         );
     }
   }
-
+  async function getSlug(id: any) {
+    try {
+     
+      const data = await fetchData("getSlugDNCP",{ id: id },"POST",false);
+      if (!data.error) {
+        setDNCPData(data);
+      }else{
+        setDNCPData(null);
+      }
+      
+    } catch (error) {
+      setDNCPData(null);
+      console.dir(error);
+    } finally {
+      
+    }
+  }
   async function getProcess(ocid: any) {
     setIsLoading(true);
     try {
@@ -155,6 +172,7 @@ const Question: NextPage = () => {
       if (!data.error) {
         setQuestionData(data);
         getProcess(data?.ocid);
+        getSlug(data?.llamado);
        
       } else {
         setNotFound(true);
@@ -1020,9 +1038,9 @@ const Question: NextPage = () => {
                           className={styles.ProcessPropertyText}
                           sx={{ paddingLeft: "0.2rem" }}
                         >
-                          {getProcessPliego(processData) ? (
+                          {getProcessPliegoSlug(DNCPData) ? (
                             <a
-                              href={getProcessPliego(processData)}
+                              href={getProcessPliegoSlug(DNCPData)}
                               className={styles.LinkedText}
                               target="_blank"
                               rel="noreferrer"

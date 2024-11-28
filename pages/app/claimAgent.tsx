@@ -30,9 +30,9 @@ import {
   getProcessCurrency,
   getProcessItems,
   getProcessPlanningId,
-  getProcessPliego,
+  getProcessPliegoSlug,
   getProcessTitle,
-  getProcessURL,
+  
   getProcurementMethodDetails,
   getProcuringEntity,
   getProcuringEntityContactEmail,
@@ -166,6 +166,7 @@ const Claim: NextPage = () => {
   const [showCC, setShowCC] = React.useState(false);
   const [showCCO, setShowCCO] = React.useState(false);
   const [isLoadingSendMail, setIsLoadingSendMail] = React.useState(false);
+  const [DNCPData,setDNCPData] = React.useState<any>(null);
 
 
   /*User Search Filters */
@@ -199,6 +200,23 @@ const Claim: NextPage = () => {
       console.dir(e)
     }finally{
 
+    }
+  }
+  async function getSlug(id: any) {
+    try {
+     
+      const data = await fetchData("getSlugDNCP",{ id: id },"POST",false);
+      if (!data.error) {
+        setDNCPData(data);
+      }else{
+        setDNCPData(null);
+      }
+      
+    } catch (error) {
+      setDNCPData(null);
+      console.dir(error);
+    } finally {
+      
     }
   }
   async function getProcess(claimResponse:any) {
@@ -359,6 +377,7 @@ const Claim: NextPage = () => {
           pageSize: 5,
         });
         getProcess(data);
+        getSlug(data?.llamado)
         updateClaimVisualization(data)
 
       } else {
@@ -2683,9 +2702,9 @@ onChange={(event, newValue) => {
                           className={styles.ProcessPropertyText}
                           sx={{ paddingLeft: "0.2rem" }}
                         >
-                          {getProcessPliego(processData) ? (
+                          {getProcessPliegoSlug(DNCPData) ? (
                             <a
-                              href={getProcessPliego(processData)}
+                              href={getProcessPliegoSlug(DNCPData)}
                               className={styles.LinkedText}
                               target="_blank"
                               rel="noreferrer"

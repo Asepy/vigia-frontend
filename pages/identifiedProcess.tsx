@@ -28,12 +28,12 @@ import {
   getMainProcurementCategoryDetails,
   getProcessItems,
   getProcessFaceEnquiry,
-  getProcessPliego,
+  getProcessPliegoSlug,
   getCurrencyAmount,
   getProcessFaceClaim,
   checkProcessClaim,
   checkProcessEnquiry,
-  getProcessURL,
+  getProcessURLSlug,
   getProcessSubmissionMethodDetails
 } from "../components/imports/ProcessFunctions";
 //import {} from '@formatjs/intl-numberformat/polyfill';
@@ -69,6 +69,7 @@ const IdentifiedProcess: NextPage = () => {
   const [processData, setProcessData]: any = React.useState({});
   const [items, setItems] = React.useState([]);
   const [isMIPYME, setIsMIPYME] = React.useState(false);
+  const [DNCPData,setDNCPData] = React.useState<any>(null);
   function claim(){
     if(checkProcessClaim(processData)){
       router.push("/claims/form?id=" + encodeURIComponent(getProcessId()));
@@ -127,6 +128,23 @@ const IdentifiedProcess: NextPage = () => {
       setIsLoading(false);
     }
   }
+  async function getSlug(id: any) {
+    try {
+     
+      const data = await fetchData("getSlugDNCP",{ id: id },"POST",false);
+      if (!data.error) {
+        setDNCPData(data);
+      }else{
+        setDNCPData(null);
+      }
+      
+    } catch (error) {
+      setDNCPData(null);
+      console.dir(error);
+    } finally {
+      
+    }
+  }
 
   async function getMIPYME(tenderId: any) {
     //https://www.contrataciones.gov.py/licitaciones/convocatoria/438170-mantenimiento-aberturas-edificios-patrimoniales-bnf-casa-matriz-alrededores-sbe-1.html
@@ -170,6 +188,7 @@ const IdentifiedProcess: NextPage = () => {
     if (isReady) {
 
       getProcess(query["id"],query);
+      getSlug(query["id"]);
       switch (query["state"]) {
         case "claim":
           setFormState("claim");
@@ -330,12 +349,12 @@ const IdentifiedProcess: NextPage = () => {
                     sx={{ mt: 2 }}
                     className={styles.ImageLikeDescription}
                   >
-                    {getProcessURL(processData) ? (
+                    {getProcessURLSlug(DNCPData) ? (
                       <>
                         Puedes participar directamente ingresando al sitio de la
                         DNCP{" "}
                         <a
-                          href={getProcessURL(processData)}
+                          href={getProcessURLSlug(DNCPData)}
                           className={styles.LinkText}
                           target="_blank"
                           rel="noreferrer"
@@ -1263,9 +1282,9 @@ const IdentifiedProcess: NextPage = () => {
                       className={styles.ProcessPropertyText}
                       sx={{ paddingLeft: "0.2rem" }}
                     >
-                      {getProcessPliego(processData) ? (
+                      {getProcessPliegoSlug(DNCPData) ? (
                         <a
-                          href={getProcessPliego(processData)}
+                          href={getProcessPliegoSlug(DNCPData)}
                           className={styles.LinkedText}
                           target="_blank"
                           rel="noreferrer"

@@ -101,15 +101,113 @@ export function getProcuringEntityId(processData:any){
   export function getProcessItems(processData:any){
     return (processData?.tender?.items)?(processData?.tender?.items):((processData?.planning?.items)?(processData?.planning?.items):[]);
   }
-  export function getProcessPliego(processData:any){
-    return (processData?.tender?.id)?`https://www.contrataciones.gov.py/licitaciones/convocatoria/${(processData?.tender?.id)}.html#pliego`:'';
+  
+  export function getProcessPliegoSlug(DNCPData:any){
+    return (DNCPData)?`${getProcessURLSlug(DNCPData)}#pliego`:'';
   }
   export function getProcessSubmissionMethodDetails(processData:any){
     return (processData?.tender?.submissionMethodDetails)?processData?.tender?.submissionMethodDetails:'';
   }
-  export function getProcessURL(processData:any){
-    return (processData?.tender?.id)?`https://www.contrataciones.gov.py/licitaciones/convocatoria/${(processData?.tender?.id)}.html`:'';
+  
+  export function getProcessURLSlug(DNCPData:any){
+
+    if(!DNCPData){
+      return '';
+    }
+    return `https://www.contrataciones.gov.py/${getURLPrePath(DNCPData)}${getURLPostPath(DNCPData)}/${getURLSlugPath(DNCPData)}.html`;
   }
+
+
+
+  /**
+ * Obtiene el prefijo de la url de la informacion de un llamado
+ * @param {*} processData JSON de un llamado del CSV del listado de Busqueda de licitaciones de la DNCP
+ * @returns {string}
+ */
+function getURLPrePath(processData:any){
+  switch(processData.tipo_licitacion){
+      case 'tradicional':
+          return 'licitaciones';
+      case 'convenio':
+          return 'convenios-marco';
+      case 'precalificacion':
+          return 'licitaciones';
+      case 'licitacion_sin_difusion':
+          return 'sin-difusion-convocatoria';
+      default:
+          return 'licitaciones';
+  }
+}
+
+export function getString(string:any){
+  if(string!==null&&string!==undefined){
+      return string.toString();
+  }else{
+      return '';
+  }
+}
+export function validateString(string:any){
+  string=getString(string);
+  if(!(string==='')){
+      return true
+  }else{
+      return false;
+  }
+}
+/**
+* Obtiene el sufijo de la url de la informacion de un llamado
+* @param {*} processData JSON de un llamado del CSV del listado de Busqueda de licitaciones de la DNCP
+* @returns {string}
+*/
+function getURLPostPath(processData:any){
+  switch(processData.tipo_licitacion){
+      case 'tradicional':
+          return  processData?.convocatoria_slug?'/convocatoria':(processData?.planificacion_slug?'/planificacion':'/adjudicacion');
+      case 'convenio':
+          return '/convocatoria';
+      case 'precalificacion':
+          return '/precalificacion'
+      case 'licitacion_sin_difusion':
+          return (['CE - CVE con difusión previa'].includes(processData?.tipo_procedimiento)&&validateString(processData.adjudicacion_slug)?'/excepcion_adj':'');
+      default:
+          return '/convocatoria';
+  }
+}
+
+
+/**
+* Obtiene el primer slug de un llamado para consultar su informacion
+* @param {*} processData JSON de un llamado del CSV del listado de Busqueda de licitaciones de la DNCP
+* @returns {string}
+*/
+function getURLSlugPath(processData:any){
+  return getSlug(processData).split(',')[0];
+}
+
+
+
+/**
+* Obtiene el slug de un llamado para consultar su informacion
+* @param {*} processData JSON de un llamado del CSV del listado de Busqueda de licitaciones de la DNCP
+* @returns {string}
+*/
+function getSlug(processData:any){
+  switch(processData.tipo_licitacion){
+      case 'tradicional':
+          return processData.convocatoria_slug?processData.convocatoria_slug:(processData.planificacion_slug?processData.planificacion_slug:processData.adjudicacion_slug);
+      case 'convenio':
+          return processData.convocatoria_slug;
+      case 'precalificacion':
+          return processData.precalificacion_slug;
+      case 'licitacion_sin_difusion':
+          return processData.adjudicacion_slug?processData.adjudicacion_slug:processData.planificacion_slug;
+      default:
+          return processData.convocatoria_slug;
+  }
+}
+
+
+
   export function getCurrencyAmount(digit:number){
     return new Intl.NumberFormat('es-PY', { style: 'currency', currency: 'PYG',minimumFractionDigits: 2,
     maximumFractionDigits: 2, currencyDisplay: 'code'}).format(digit).replace('PYG','').trim();

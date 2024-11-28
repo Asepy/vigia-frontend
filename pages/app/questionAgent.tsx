@@ -37,7 +37,7 @@ import {
   getProcessAmount,
   getProcessCurrency,
   getProcessItems,
-  getProcessPliego,
+  getProcessPliegoSlug,
   getProcessTitle,
   getProcurementMethodDetails,
   getProcuringEntity,
@@ -46,8 +46,7 @@ import {
   getProcuringEntityContactTelephone,
   getProcuringEntityType,
   getTenderPeriodEndDate,
-  getProcessPlanningId,
-  getProcessURL
+  getProcessPlanningId
 } from "../../components/imports/ProcessFunctions";
 import { useAuth } from "../../src/contexts/auth-context";
 
@@ -178,6 +177,7 @@ const Question: NextPage = () => {
       },
     ]
   );
+  const [DNCPData,setDNCPData] = React.useState<any>(null);
   async function getTasks(){
 
     try{
@@ -189,6 +189,23 @@ const Question: NextPage = () => {
       console.dir(e)
     }finally{
 
+    }
+  }
+  async function getSlug(id: any) {
+    try {
+     
+      const data = await fetchData("getSlugDNCP",{ id: id },"POST",false);
+      if (!data.error) {
+        setDNCPData(data);
+      }else{
+        setDNCPData(null);
+      }
+      
+    } catch (error) {
+      setDNCPData(null);
+      console.dir(error);
+    } finally {
+      
     }
   }
   async function getProcess(questionResponse:any) {
@@ -239,7 +256,7 @@ const Question: NextPage = () => {
 
 Escribimos de parte del portal VigiA de la Asociación de Emprendedores de Paraguay (ASEPY), para canalizar la consulta del usuario: ${process.env.NEXT_PUBLIC_FRONTEND_URL}/claims/claim/?id=${query["id"]} 
 
-En relación al llamado ${getProcessPlanningId(data)} de ${getProcuringEntity(data)}, disponible en el portal de la DNCP: ${getProcessURL(data)}
+En relación al llamado ${getProcessPlanningId(data)} de ${getProcuringEntity(data)}, disponible en el portal de la DNCP: ${getProcessURLSlug(data)}
 
 
 De igual manera, esta consulta también fue presentada a través del SICP.
@@ -458,6 +475,7 @@ Quedamos atentos a la respuesta en tiempo y forma, poniéndonos a disposición p
           pageSize: 5,
         });
         getProcess(data);
+        getSlug(data?.llamado);
         updateQuestionVisualization(data);
 
       } else {
@@ -2283,9 +2301,9 @@ Quedamos atentos a la respuesta en tiempo y forma, poniéndonos a disposición p
                           className={styles.ProcessPropertyText}
                           sx={{ paddingLeft: "0.2rem" }}
                         >
-                          {getProcessPliego(processData) ? (
+                          {getProcessPliegoSlug(DNCPData) ? (
                             <a
-                              href={getProcessPliego(processData)}
+                              href={getProcessPliegoSlug(DNCPData)}
                               className={styles.LinkedText}
                               target="_blank"
                               rel="noreferrer"
