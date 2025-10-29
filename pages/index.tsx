@@ -22,6 +22,10 @@ const Home: NextPage = () => {
   const [totalQuestions, setTotalQuestions] = React.useState(0);
   const [totalRequest, setTotalRequests] = React.useState(0);
   const [totalFind, setTotalFind] = React.useState(0);
+  totalClaims;
+  totalQuestions;
+  totalRequest;
+  totalFind;
   React.useEffect(() => {
     if (isReady) {
     }
@@ -29,7 +33,7 @@ const Home: NextPage = () => {
   }, [isReady, user]);
   React.useEffect(() => {
     if (isReady) {
-      getFetchGetCountRequestIndex();
+      //getFetchGetCountRequestIndex();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isReady]);
@@ -44,6 +48,7 @@ const Home: NextPage = () => {
       setTotalFind(getNumber(data?.oportunidades_encontradas))
     } catch (e) {}
   }
+  getFetchGetCountRequestIndex;
 
   return (
     <>
@@ -58,12 +63,15 @@ const Home: NextPage = () => {
         <Box
           className={styles.BackgroundPrincipal}
           sx={{
-            minHeight: { sm: "unset", md: "calc( 100vh - 114px - 150px)" },
+            minHeight: { sm: "unset", md: "calc( 100vh - 64px)" },
+            //remove-counters  minHeight: { sm: "unset", md: "calc( 100vh - 114px - 150px)" },
           }}
         >
           <Grid container>
             <Grid item xs={12} sm={12} md={6} lg={6} xl={6} sx={{}}>
-              <Box style={{ padding: "2rem" }}>
+              <Box sx={{ padding: "2rem" , paddingTop: { md:"6rem"}
+                //remove-counter
+               }}>
                 <img
                   src="/images/logos/vigia_texto_blanco.svg"
                   alt="VigiA"
@@ -142,7 +150,9 @@ const Home: NextPage = () => {
               xl={6}
               className={styles.BackgroundPrincipalVector}
               sx={{
-                minHeight: { sm: "unset", md: "calc( 100vh - 114px - 150px)" },
+                minHeight: { sm: "unset", md: "calc( 100vh - 64px )" 
+                  //remove-counter md: "calc( 100vh - 114px - 150px)" 
+                },
                 flexDirection: "row",
                 display: "flex",
                 alignItems: "flex-end",
@@ -161,8 +171,8 @@ const Home: NextPage = () => {
             </Grid>
           </Grid>
         </Box>
-
-        <Box
+{/*INICIO CONTADORES */}
+      {/*  <Box
           className={styles.BackgroundCounters}
           sx={{ padding: "20px 0 20px 0" }}
         >
@@ -349,6 +359,7 @@ const Home: NextPage = () => {
             style={{ width: "100%", display: "block" }}
           />
         </Box>
+        *}
         {/*FIN CONTADORES */}
 
         <Box className={styles.LightBackground}>
